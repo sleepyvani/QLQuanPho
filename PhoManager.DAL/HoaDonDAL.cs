@@ -9,9 +9,9 @@ namespace PhoManager.DAL
     {
         public int TaoHoaDon(HoaDonDTO hoaDon)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
-                var entity = new HoaDonEntity
+                var entity = new HoaDon
                 {
                     MaBan = hoaDon.MaBan,
                     MaNV = hoaDon.MaNV,
@@ -33,9 +33,9 @@ namespace PhoManager.DAL
 
         public bool ThemChiTietHoaDon(ChiTietHoaDonDTO chiTiet)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
-                var entity = new ChiTietHoaDonEntity
+                var entity = new ChiTietHoaDon
                 {
                     MaHD = chiTiet.MaHD,
                     MaMon = chiTiet.MaMon,
@@ -55,7 +55,7 @@ namespace PhoManager.DAL
 
         public HoaDonDTO LayHoaDonTheoMa(int maHD)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 var result = (from hd in db.HoaDons
                               join b in db.BanAns on hd.MaBan equals b.MaBan
@@ -75,7 +75,7 @@ namespace PhoManager.DAL
 
         public HoaDonDTO LayHoaDonChuaThanhToanTheoBan(int maBan)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 var result = (from hd in db.HoaDons
                               join b in db.BanAns on hd.MaBan equals b.MaBan
@@ -96,7 +96,7 @@ namespace PhoManager.DAL
 
         public List<ChiTietHoaDonDTO> LayChiTietHoaDon(int maHD)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 return LayChiTietHoaDon(db, maHD);
             }
@@ -104,7 +104,7 @@ namespace PhoManager.DAL
 
         public bool CapNhatHoaDon(HoaDonDTO hoaDon)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 var entity = db.HoaDons.SingleOrDefault(h => h.MaHD == hoaDon.MaHD);
                 if (entity == null)
@@ -128,7 +128,7 @@ namespace PhoManager.DAL
 
         public bool XoaChiTietHoaDon(int maCTHD)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 var entity = db.ChiTietHoaDons.SingleOrDefault(ct => ct.MaCTHD == maCTHD);
                 if (entity == null)
@@ -144,7 +144,7 @@ namespace PhoManager.DAL
 
         public List<HoaDonDTO> LayDanhSachHoaDon(DateTime tuNgay, DateTime denNgay)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 return (from hd in db.HoaDons
                         join b in db.BanAns on hd.MaBan equals b.MaBan
@@ -155,7 +155,7 @@ namespace PhoManager.DAL
             }
         }
 
-        private List<ChiTietHoaDonDTO> LayChiTietHoaDon(PhoDataContext db, int maHD)
+        private List<ChiTietHoaDonDTO> LayChiTietHoaDon(QLQuanPhoDataContext db, int maHD)
         {
             return (from ct in db.ChiTietHoaDons
                     join m in db.MonAns on ct.MaMon equals m.MaMon

@@ -57,13 +57,16 @@
     <Compile Include="PhoManager.DTO\NguyenLieuDTO.cs" />
     <Compile Include="PhoManager.DTO\NhanVienDTO.cs" />
     <Compile Include="PhoManager.DAL\BanAnDAL.cs" />
-    <Compile Include="PhoManager.DAL\Entities.cs" />
     <Compile Include="PhoManager.DAL\EntityMapper.cs" />
     <Compile Include="PhoManager.DAL\HoaDonDAL.cs" />
     <Compile Include="PhoManager.DAL\MonAnDAL.cs" />
     <Compile Include="PhoManager.DAL\NhanVienDAL.cs" />
-    <Compile Include="PhoManager.DAL\PhoDataContext.cs" />
     <Compile Include="PhoManager.DAL\ThongKeDAL.cs" />
+    <Compile Include="PhoManager.DAL\QLQuanPho.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLQuanPho.dbml</DependentUpon>
+    </Compile>
     <Compile Include="PhoManager.BLL\BanAnBLL.cs" />
     <Compile Include="PhoManager.BLL\HoaDonBLL.cs" />
     <Compile Include="PhoManager.BLL\MonAnBLL.cs" />
@@ -159,6 +162,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="PhoManager.DAL\QLQuanPho.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>QLQuanPho.designer.cs</LastGenOutput>
+    </None>
+    <None Include="PhoManager.DAL\QLQuanPho.dbml.layout">
+      <DependentUpon>QLQuanPho.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

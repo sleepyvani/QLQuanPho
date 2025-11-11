@@ -8,7 +8,7 @@ namespace PhoManager.DAL
     {
         public DataTable ThongKeDoanhThu(DateTime tuNgay, DateTime denNgay)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 var data = db.HoaDons
                     .Where(h => h.NgayLap.Date >= tuNgay.Date && h.NgayLap.Date <= denNgay.Date && h.TrangThai == "Đã thanh toán")
@@ -36,7 +36,7 @@ namespace PhoManager.DAL
 
         public DataTable ThongKeMonBanChay(DateTime tuNgay, DateTime denNgay, int top = 10)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 var data = (from ct in db.ChiTietHoaDons
                             join hd in db.HoaDons on ct.MaHD equals hd.MaHD
@@ -68,7 +68,7 @@ namespace PhoManager.DAL
 
         public DataTable ThongKeDoanhThuTheoNhanVien(DateTime tuNgay, DateTime denNgay)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 var data = (from nv in db.NhanViens
                             where nv.TrangThai
@@ -101,7 +101,7 @@ namespace PhoManager.DAL
 
         public decimal LayTongDoanhThu(DateTime tuNgay, DateTime denNgay)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 return db.HoaDons
                     .Where(h => h.NgayLap.Date >= tuNgay.Date && h.NgayLap.Date <= denNgay.Date && h.TrangThai == "Đã thanh toán")
@@ -112,7 +112,7 @@ namespace PhoManager.DAL
 
         public int LaySoLuongHoaDon(DateTime tuNgay, DateTime denNgay)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 return db.HoaDons
                     .Count(h => h.NgayLap.Date >= tuNgay.Date && h.NgayLap.Date <= denNgay.Date && h.TrangThai == "Đã thanh toán");

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram>
+  <object type="System.Data.Linq.Mapping.DatabaseAttribute" name="QLQuanPhoDataContext">
+    <property name="Name" value="QLQuanPho" />
+  </object>
+  <object type="System.Data.Linq.Mapping.TableAttribute" name="MonAn">
+    <property name="Name" value="dbo.MonAn" />
+    <property name="Member" value="MonAns" />
+  </object>
+  <object type="System.Data.Linq.Mapping.TableAttribute" name="NhanVien">
+    <property name="Name" value="dbo.NhanVien" />
+    <property name="Member" value="NhanViens" />
+  </object>
+  <object type="System.Data.Linq.Mapping.TableAttribute" name="BanAn">
+    <property name="Name" value="dbo.BanAn" />
+    <property name="Member" value="BanAns" />
+  </object>
+  <object type="System.Data.Linq.Mapping.TableAttribute" name="HoaDon">
+    <property name="Name" value="dbo.HoaDon" />
+    <property name="Member" value="HoaDons" />
+  </object>
+  <object type="System.Data.Linq.Mapping.TableAttribute" name="ChiTietHoaDon">
+    <property name="Name" value="dbo.ChiTietHoaDon" />
+    <property name="Member" value="ChiTietHoaDons" />
+  </object>
+  <object type="System.Data.Linq.Mapping.TableAttribute" name="NguyenLieu">
+    <property name="Name" value="dbo.NguyenLieu" />
+    <property name="Member" value="NguyenLieus" />
+  </object>
+  <object type="System.Data.Linq.Mapping.TableAttribute" name="MonAn_NguyenLieu">
+    <property name="Name" value="dbo.MonAn_NguyenLieu" />
+    <property name="Member" value="MonAn_NguyenLieus" />
+  </object>
+</ordesignerObjectsDiagram>
+

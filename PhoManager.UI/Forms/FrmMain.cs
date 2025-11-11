@@ -88,7 +88,7 @@ namespace PhoManager.UI.Forms
         {
             try
             {
-                bool ok = PhoDataContext.TestConnection();
+                bool ok = QLQuanPhoDataContext.TestConnection();
                 statusDatabase.Text = ok ? "Database: Kết nối thành công" : "Database: Không thể kết nối";
                 statusDatabase.ForeColor = ok ? System.Drawing.Color.FromArgb(35, 96, 67) : System.Drawing.Color.FromArgb(212, 68, 55);
             }

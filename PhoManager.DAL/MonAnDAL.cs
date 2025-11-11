@@ -9,7 +9,7 @@ namespace PhoManager.DAL
     {
         public List<MonAnDTO> LayDanhSachMonAn()
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 return db.MonAns
                     .OrderBy(m => m.TenMon)
@@ -20,7 +20,7 @@ namespace PhoManager.DAL
     
         public MonAnDTO LayMonAnTheoMa(int maMon)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 return db.MonAns
                     .FirstOrDefault(m => m.MaMon == maMon)
@@ -30,9 +30,9 @@ namespace PhoManager.DAL
 
         public bool ThemMonAn(MonAnDTO monAn)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
-                var entity = new MonAnEntity
+                var entity = new MonAn
                 {
                     TenMon = monAn.TenMon,
                     GiaNho = monAn.GiaNho,
@@ -53,7 +53,7 @@ namespace PhoManager.DAL
 
         public bool CapNhatMonAn(MonAnDTO monAn)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 var entity = db.MonAns.SingleOrDefault(m => m.MaMon == monAn.MaMon);
                 if (entity == null)
@@ -75,7 +75,7 @@ namespace PhoManager.DAL
 
         public bool XoaMonAn(int maMon)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 var entity = db.MonAns.SingleOrDefault(m => m.MaMon == maMon);
                 if (entity == null)
@@ -91,7 +91,7 @@ namespace PhoManager.DAL
 
         public List<MonAnDTO> TimKiemMonAn(string tenMon)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 tenMon = tenMon?.Trim() ?? string.Empty;
 

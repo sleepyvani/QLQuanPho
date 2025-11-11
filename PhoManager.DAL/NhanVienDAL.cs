@@ -9,7 +9,7 @@ namespace PhoManager.DAL
     {
         public NhanVienDTO DangNhap(string taiKhoan, string matKhau)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 return db.NhanViens
                     .Where(n => n.TaiKhoan == taiKhoan && n.MatKhau == matKhau && n.TrangThai)
@@ -27,7 +27,7 @@ namespace PhoManager.DAL
 
         public List<NhanVienDTO> LayDanhSachNhanVien()
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 return db.NhanViens
                     .OrderBy(n => n.HoTen)
@@ -38,7 +38,7 @@ namespace PhoManager.DAL
 
         public NhanVienDTO LayNhanVienTheoMa(int maNV)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 return db.NhanViens
                     .FirstOrDefault(n => n.MaNV == maNV)
@@ -48,9 +48,9 @@ namespace PhoManager.DAL
 
         public bool ThemNhanVien(NhanVienDTO nhanVien)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
-                var entity = new NhanVienEntity
+                var entity = new NhanVien
                 {
                     HoTen = nhanVien.HoTen,
                     TaiKhoan = nhanVien.TaiKhoan,
@@ -70,7 +70,7 @@ namespace PhoManager.DAL
 
         public bool CapNhatNhanVien(NhanVienDTO nhanVien)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 var entity = db.NhanViens.SingleOrDefault(n => n.MaNV == nhanVien.MaNV);
                 if (entity == null)
@@ -91,7 +91,7 @@ namespace PhoManager.DAL
 
         public bool XoaNhanVien(int maNV)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 var entity = db.NhanViens.SingleOrDefault(n => n.MaNV == maNV);
                 if (entity == null)
@@ -107,7 +107,7 @@ namespace PhoManager.DAL
 
         public bool DoiMatKhau(int maNV, string matKhauMoi)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 var entity = db.NhanViens.SingleOrDefault(n => n.MaNV == maNV);
                 if (entity == null)
@@ -123,7 +123,7 @@ namespace PhoManager.DAL
 
         public bool KiemTraTaiKhoanTonTai(string taiKhoan)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 return db.NhanViens.Any(n => n.TaiKhoan == taiKhoan);
             }

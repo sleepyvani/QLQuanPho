@@ -8,7 +8,7 @@ namespace PhoManager.DAL
     {
         public List<BanAnDTO> LayDanhSachBanAn()
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 return db.BanAns
                     .OrderBy(b => b.TenBan)
@@ -19,7 +19,7 @@ namespace PhoManager.DAL
 
         public BanAnDTO LayBanAnTheoMa(int maBan)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 return db.BanAns
                     .FirstOrDefault(b => b.MaBan == maBan)
@@ -29,9 +29,9 @@ namespace PhoManager.DAL
 
         public bool ThemBanAn(BanAnDTO banAn)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
-                var entity = new BanAnEntity
+                var entity = new BanAn
                 {
                     TenBan = banAn.TenBan,
                     TrangThai = banAn.TrangThai,
@@ -48,7 +48,7 @@ namespace PhoManager.DAL
 
         public bool CapNhatBanAn(BanAnDTO banAn)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 var entity = db.BanAns.SingleOrDefault(b => b.MaBan == banAn.MaBan);
                 if (entity == null)
@@ -68,7 +68,7 @@ namespace PhoManager.DAL
 
         public bool CapNhatTrangThaiBan(int maBan, string trangThai)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 var entity = db.BanAns.SingleOrDefault(b => b.MaBan == maBan);
                 if (entity == null)
@@ -84,7 +84,7 @@ namespace PhoManager.DAL
 
         public bool XoaBanAn(int maBan)
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 var entity = db.BanAns.SingleOrDefault(b => b.MaBan == maBan);
                 if (entity == null)
@@ -100,7 +100,7 @@ namespace PhoManager.DAL
 
         public List<BanAnDTO> LayDanhSachBanTrong()
         {
-            using (var db = new PhoDataContext())
+            using (var db = new QLQuanPhoDataContext())
             {
                 return db.BanAns
                     .Where(b => b.TrangThai == "Trống")

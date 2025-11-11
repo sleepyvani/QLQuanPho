@@ -6,7 +6,7 @@ namespace PhoManager.DAL
 {
     internal static class EntityMapper
     {
-        public static MonAnDTO ToDto(this MonAnEntity entity)
+        public static MonAnDTO ToDto(this MonAn entity)
         {
             if (entity == null) return null;
 
@@ -23,7 +23,7 @@ namespace PhoManager.DAL
             };
         }
 
-        public static NhanVienDTO ToDto(this NhanVienEntity entity)
+        public static NhanVienDTO ToDto(this NhanVien entity)
         {
             if (entity == null) return null;
 
@@ -39,7 +39,7 @@ namespace PhoManager.DAL
             };
         }
 
-        public static BanAnDTO ToDto(this BanAnEntity entity)
+        public static BanAnDTO ToDto(this BanAn entity)
         {
             if (entity == null) return null;
 
@@ -53,7 +53,7 @@ namespace PhoManager.DAL
             };
         }
 
-        public static NguyenLieuDTO ToDto(this NguyenLieuEntity entity)
+        public static NguyenLieuDTO ToDto(this NguyenLieu entity)
         {
             if (entity == null) return null;
 
@@ -68,7 +68,7 @@ namespace PhoManager.DAL
             };
         }
 
-        public static ChiTietHoaDonDTO ToDto(this ChiTietHoaDonEntity entity, string tenMon)
+        public static ChiTietHoaDonDTO ToDto(this ChiTietHoaDon entity, string tenMon)
         {
             if (entity == null) return null;
 
@@ -87,7 +87,7 @@ namespace PhoManager.DAL
         }
 
         public static HoaDonDTO ToDto(
-            this HoaDonEntity entity,
+            this HoaDon entity,
             string tenBan,
             string tenNhanVien,
             IEnumerable<ChiTietHoaDonDTO> chiTiet)

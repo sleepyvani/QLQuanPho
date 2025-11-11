@@ -210,8 +210,8 @@ QLQuanPho/
 │   └── NguyenLieuDTO.cs          # DTO cho nguyên liệu
 │
 ├── PhoManager.DAL/               # Data Access Layer (Truy xuất dữ liệu)
-│   ├── PhoDataContext.cs         # LINQ to SQL DataContext
-│   ├── Entities.cs               # Entity mapping cho LINQ to SQL
+│   ├── QLQuanPho.dbml            # LINQ to SQL DBML (Database Markup Language)
+│   ├── QLQuanPho.designer.cs     # Auto-generated DataContext và Entities từ DBML
 │   ├── EntityMapper.cs           # Chuyển đổi Entity ↔ DTO
 │   ├── MonAnDAL.cs               # DAL cho món ăn
 │   ├── NhanVienDAL.cs            # DAL cho nhân viên
@@ -394,11 +394,14 @@ Hoặc:
 
 ## 📝 Ghi chú kỹ thuật
 
-- Ứng dụng sử dụng **LINQ to SQL** (System.Data.Linq) để kết nối database
+- Ứng dụng sử dụng **LINQ to SQL** (System.Data.Linq) với **DBML** (Database Markup Language) để kết nối database
+- **DBML** được sử dụng để định nghĩa database schema và tự động generate DataContext và Entity classes
+- File `QLQuanPho.dbml` chứa định nghĩa các bảng và quan hệ, file `QLQuanPho.designer.cs` được tự động generate từ DBML
 - Kiến trúc **3-layer** (DTO → DAL → BLL → UI) giúp code dễ bảo trì và mở rộng
 - Tất cả DAL classes sử dụng `using` statement để đảm bảo dispose connection đúng cách
 - Validation được thực hiện ở cả BLL và UI layer
 - Các tính năng in hóa đơn, gộp/tách bàn, quản lý nguyên liệu có thể được mở rộng thêm
+- **Lưu ý**: Khi thay đổi database schema, cần cập nhật file `QLQuanPho.dbml` và rebuild project để regenerate `QLQuanPho.designer.cs`
 
 ## 💡 Mẹo và Best Practices
 
@@ -443,7 +446,7 @@ Hoặc:
                │
 ┌──────────────▼──────────────────┐
 │   DAL Layer (Data Access)       │  ← Truy xuất dữ liệu
-│   - PhoDataContext (LINQ)       │
+│   - QLQuanPhoDataContext (DBML) │
 │   - MonAnDAL, NhanVienDAL, ...  │
 └──────────────┬──────────────────┘
                │
@@ -458,6 +461,7 @@ Hoặc:
 - **C#**: Ngôn ngữ lập trình
 - **WinForms**: Framework giao diện desktop
 - **LINQ to SQL**: ORM để truy xuất database
+- **DBML (Database Markup Language)**: Định nghĩa database schema và mapping
 - **SQL Server**: Hệ quản trị cơ sở dữ liệu
 - **System.Data.Linq**: Thư viện LINQ to SQL
 
@@ -472,8 +476,8 @@ Hoặc:
    - **Output**: Thông tin log
 
 ### Test kết nối database
-1. Mở file `PhoManager.DAL/PhoDataContext.cs`
-2. Thêm breakpoint vào method `TestConnection()`
+1. Mở file `PhoManager.DAL/QLQuanPho.designer.cs`
+2. Thêm breakpoint vào method `TestConnection()` trong class `QLQuanPhoDataContext`
 3. Chạy ứng dụng và kiểm tra kết nối
 
 ## 📞 Hỗ trợ
