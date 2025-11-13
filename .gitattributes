@@ -1,7 +1,7 @@
-# Mặc định: Git tự nhận dạng file text
+# Mặc định: Git nhận dạng text
 * text=auto
 
-# Dùng CRLF cho các file C# và config trên Windows
+# Dùng CRLF cho các file C# và solution trên Windows
 *.cs      text eol=crlf
 *.xaml    text eol=crlf
 *.config  text eol=crlf
