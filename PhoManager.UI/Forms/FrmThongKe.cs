@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using PhoManager.BLL;
+using System.Linq;
 
 namespace PhoManager.UI.Forms
 {
@@ -8,9 +9,18 @@ namespace PhoManager.UI.Forms
     {
         private ThongKeBLL thongKeBLL = new ThongKeBLL();
 
+        // Dictionary lưu trạng thái sắp xếp cho DataGridView thống kê
+        private readonly System.Collections.Generic.Dictionary<string, bool> sortDirections = new System.Collections.Generic.Dictionary<string, bool>();
+
         public FrmThongKe()
         {
             InitializeComponent();
+
+            // Đăng ký sự kiện sắp xếp nếu DataGridView đã được khởi tạo
+            if (this.dgvThongKe != null)
+            {
+                this.dgvThongKe.ColumnHeaderMouseClick += dgvThongKe_ColumnHeaderMouseClick;
+            }
         }
 
         private void btnXemThongKe_Click(object sender, EventArgs e)
@@ -18,6 +28,45 @@ namespace PhoManager.UI.Forms
             DateTime tuNgay = dtpTuNgay.Value;
             DateTime denNgay = dtpDenNgay.Value;
             dgvThongKe.DataSource = thongKeBLL.ThongKeDoanhThu(tuNgay, denNgay);
+        }
+
+        /// <summary>
+        /// Xử lý sự kiện bấm vào tiêu đề cột để sắp xếp dữ liệu thống kê.
+        /// </summary>
+        private void dgvThongKe_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string colName = dgvThongKe.Columns[e.ColumnIndex].DataPropertyName;
+            if (string.IsNullOrEmpty(colName)) colName = dgvThongKe.Columns[e.ColumnIndex].Name;
+            if (string.IsNullOrEmpty(colName)) return;
+            bool ascending = true;
+            if (sortDirections.ContainsKey(colName)) ascending = !sortDirections[colName];
+            sortDirections[colName] = ascending;
+
+            if (dgvThongKe.DataSource is System.Data.DataTable dt)
+            {
+                var dv = dt.DefaultView;
+                dv.Sort = colName + (ascending ? " ASC" : " DESC");
+                dgvThongKe.DataSource = dv.ToTable();
+                return;
+            }
+            if (dgvThongKe.DataSource is System.Data.DataView dvSrc)
+            {
+                dvSrc.Sort = colName + (ascending ? " ASC" : " DESC");
+                dgvThongKe.DataSource = dvSrc.ToTable();
+                return;
+            }
+            if (dgvThongKe.DataSource is System.Collections.IList list && list.Count > 0)
+            {
+                var elementType = list[0].GetType();
+                var prop = elementType.GetProperty(colName);
+                if (prop == null) return;
+                var sorted = ascending ? list.Cast<object>().OrderBy(item => prop.GetValue(item, null))
+                                       : list.Cast<object>().OrderByDescending(item => prop.GetValue(item, null));
+                var listType = typeof(System.Collections.Generic.List<>).MakeGenericType(elementType);
+                var newList = (System.Collections.IList)Activator.CreateInstance(listType);
+                foreach (var obj in sorted) newList.Add(obj);
+                dgvThongKe.DataSource = newList;
+            }
         }
     }
 }

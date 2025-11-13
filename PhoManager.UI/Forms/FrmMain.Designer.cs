@@ -8,6 +8,13 @@ namespace PhoManager.UI.Forms
         private System.Windows.Forms.ToolStripMenuItem menuBanHang;
         private System.Windows.Forms.ToolStripMenuItem menuThongKe;
         private System.Windows.Forms.ToolStripMenuItem menuHeThong;
+        // Custom menu items for extended features
+        private System.Windows.Forms.ToolStripMenuItem menuBaoCaoDoanhThu;
+        private System.Windows.Forms.ToolStripMenuItem menuBaoCaoMonBanChay;
+        private System.Windows.Forms.ToolStripMenuItem menuBaoCaoHoaDon;
+        private System.Windows.Forms.ToolStripMenuItem menuQuanLyNguyenLieu;
+        private System.Windows.Forms.ToolStripMenuItem menuQuanLyNguoiDung;
+        private System.Windows.Forms.ToolStripMenuItem menuGioiThieu;
         private System.Windows.Forms.TableLayoutPanel mainLayout;
         private System.Windows.Forms.Panel headerPanel;
         private System.Windows.Forms.PictureBox picLogo;
@@ -71,6 +78,80 @@ namespace PhoManager.UI.Forms
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             
+            //
+            // Instantiate custom menu items for extended features
+            //
+            this.menuBaoCaoDoanhThu = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuBaoCaoMonBanChay = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuBaoCaoHoaDon = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuQuanLyNguyenLieu = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuQuanLyNguoiDung = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuGioiThieu = new System.Windows.Forms.ToolStripMenuItem();
+
+            //
+            // menuBaoCaoDoanhThu
+            //
+            this.menuBaoCaoDoanhThu.Name = "menuBaoCaoDoanhThu";
+            this.menuBaoCaoDoanhThu.Size = new System.Drawing.Size(200, 22);
+            this.menuBaoCaoDoanhThu.Text = "Báo cáo doanh thu";
+            this.menuBaoCaoDoanhThu.Click += new System.EventHandler(this.menuBaoCaoDoanhThu_Click);
+
+            //
+            // menuBaoCaoMonBanChay
+            //
+            this.menuBaoCaoMonBanChay.Name = "menuBaoCaoMonBanChay";
+            this.menuBaoCaoMonBanChay.Size = new System.Drawing.Size(200, 22);
+            this.menuBaoCaoMonBanChay.Text = "Báo cáo món bán chạy";
+            this.menuBaoCaoMonBanChay.Click += new System.EventHandler(this.menuBaoCaoMonBanChay_Click);
+
+            //
+            // menuBaoCaoHoaDon
+            //
+            this.menuBaoCaoHoaDon.Name = "menuBaoCaoHoaDon";
+            this.menuBaoCaoHoaDon.Size = new System.Drawing.Size(200, 22);
+            this.menuBaoCaoHoaDon.Text = "Báo cáo hóa đơn";
+            this.menuBaoCaoHoaDon.Click += new System.EventHandler(this.menuBaoCaoHoaDon_Click);
+
+            //
+            // menuQuanLyNguyenLieu
+            //
+            this.menuQuanLyNguyenLieu.Name = "menuQuanLyNguyenLieu";
+            this.menuQuanLyNguyenLieu.Size = new System.Drawing.Size(200, 22);
+            this.menuQuanLyNguyenLieu.Text = "Quản lý nguyên liệu";
+            this.menuQuanLyNguyenLieu.Click += new System.EventHandler(this.menuQuanLyNguyenLieu_Click);
+
+            //
+            // menuQuanLyNguoiDung
+            //
+            this.menuQuanLyNguoiDung.Name = "menuQuanLyNguoiDung";
+            this.menuQuanLyNguoiDung.Size = new System.Drawing.Size(200, 22);
+            this.menuQuanLyNguoiDung.Text = "Quản lý người dùng";
+            this.menuQuanLyNguoiDung.Click += new System.EventHandler(this.menuQuanLyNguoiDung_Click);
+
+            //
+            // menuGioiThieu
+            //
+            this.menuGioiThieu.Name = "menuGioiThieu";
+            this.menuGioiThieu.Size = new System.Drawing.Size(200, 22);
+            this.menuGioiThieu.Text = "Giới thiệu";
+            this.menuGioiThieu.Click += new System.EventHandler(this.menuGioiThieu_Click);
+
+            //
+            // Assign drop-down items to existing top-level menus
+            //
+            this.menuThongKe.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+                this.menuBaoCaoDoanhThu,
+                this.menuBaoCaoMonBanChay,
+                this.menuBaoCaoHoaDon
+            });
+            this.menuQuanLy.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+                this.menuQuanLyNguyenLieu,
+                this.menuQuanLyNguoiDung
+            });
+            this.menuHeThong.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+                this.menuGioiThieu
+            });
+
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
                 this.menuQuanLy,
                 this.menuBanHang,

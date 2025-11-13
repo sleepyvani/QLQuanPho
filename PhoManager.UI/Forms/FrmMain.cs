@@ -141,6 +141,62 @@ namespace PhoManager.UI.Forms
             frm.ShowDialog();
         }
 
+        // Event handlers for custom menu items added in FrmMain.Designer.cs
+
+        private void menuBaoCaoDoanhThu_Click(object sender, EventArgs e)
+        {
+            // Open the revenue report form
+            using (var frm = new FrmBaoCaoDoanhThu())
+            {
+                frm.ShowDialog();
+            }
+        }
+
+        private void menuBaoCaoMonBanChay_Click(object sender, EventArgs e)
+        {
+            // Open the top-selling dishes report form
+            using (var frm = new FrmBaoCaoMonBanChay())
+            {
+                frm.ShowDialog();
+            }
+        }
+
+        private void menuBaoCaoHoaDon_Click(object sender, EventArgs e)
+        {
+            // Open the invoice report form
+            using (var frm = new FrmBaoCaoHoaDon())
+            {
+                frm.ShowDialog();
+            }
+        }
+
+        private void menuQuanLyNguyenLieu_Click(object sender, EventArgs e)
+        {
+            // Open ingredient management form
+            using (var frm = new FrmNguyenLieu())
+            {
+                frm.ShowDialog();
+            }
+        }
+
+        private void menuQuanLyNguoiDung_Click(object sender, EventArgs e)
+        {
+            // Open user management form (inherits from FrmNhanVien)
+            using (var frm = new FrmQuanLyNguoiDung())
+            {
+                frm.ShowDialog();
+            }
+        }
+
+        private void menuGioiThieu_Click(object sender, EventArgs e)
+        {
+            // Open the team introduction form
+            using (var frm = new FrmGioiThieu())
+            {
+                frm.ShowDialog();
+            }
+        }
+
         private void btnDangXuat_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận", 
