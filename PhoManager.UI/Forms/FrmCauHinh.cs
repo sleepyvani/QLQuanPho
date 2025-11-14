@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using PhoManager.UI.Helpers;
 
 namespace PhoManager.UI.Forms
 {
@@ -8,6 +9,8 @@ namespace PhoManager.UI.Forms
         public FrmCauHinh()
         {
             InitializeComponent();
+            ThemeManager.ApplyBaseFormStyle(this);
+            ThemeManager.StyleButton(btnLuu, ButtonVariant.Primary, IconGlyphs.Save);
         }
 
         private void btnLuu_Click(object sender, EventArgs e)

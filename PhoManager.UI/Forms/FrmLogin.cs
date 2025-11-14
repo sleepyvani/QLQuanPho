@@ -1,9 +1,10 @@
 using System;
 using System.Drawing;
-using System.IO;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using PhoManager.BLL;
 using PhoManager.DTO;
+using PhoManager.UI.Helpers;
 using QLQuanPho.Properties;
 
 namespace PhoManager.UI.Forms
@@ -12,58 +13,36 @@ namespace PhoManager.UI.Forms
     {
         private NhanVienBLL nhanVienBLL = new NhanVienBLL();
         public static NhanVienDTO NhanVienDangNhap { get; private set; }
+        private bool passwordVisible;
 
         public FrmLogin()
         {
             InitializeComponent();
-            LoadLogo();
+            LoadVisuals();
             InitializeState();
         }
 
-        private void LoadLogo()
+        private void LoadVisuals()
         {
-            try
-            {
-                string logoPath = Path.Combine(Application.StartupPath, "Resources", "logo.png");
-                if (File.Exists(logoPath))
-                {
-                    picLogo.Image = Image.FromFile(logoPath);
-                    return;
-                }
+            lblHeroTitle.Text = "Quản lý quán phở\nnhanh và trực quan";
+            lblHeroSubtitle.Text = "Giao diện mới giúp bạn theo dõi trạng thái bàn, doanh thu và ca làm một cách thoải mái.";
+            lblHeroBullet1.Text = "• Vận hành gọn gàng, phối hợp mượt mà.";
+            lblHeroBullet2.Text = "• Báo cáo tức thời, kiểm soát doanh thu.";
+            lblBranding.Text = "Pho Manager";
+            lblBadge.Text = "Đã tối ưu cho ca làm sáng";
 
-                logoPath = Path.Combine(Application.StartupPath, "logo.png");
-                if (File.Exists(logoPath))
-                {
-                    picLogo.Image = Image.FromFile(logoPath);
-                    return;
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Error loading logo from file: {ex.Message}");
-            }
+            picUserIcon.Image = ThemeManager.CreateGlyphIcon(IconGlyphs.People, Color.FromArgb(150, 155, 168), 26);
+            picPasswordIcon.Image = ThemeManager.CreateGlyphIcon(IconGlyphs.Lock, Color.FromArgb(150, 155, 168), 26);
 
-            picLogo.Image = CreatePlaceholderLogo(picLogo.Width, picLogo.Height);
-        }
+            ThemeManager.ApplyRoundedCorners(pnlCard, 26);
+            ThemeManager.ApplyRoundedCorners(pnlUser, 20);
+            ThemeManager.ApplyRoundedCorners(pnlPassword, 20);
 
-        private Image CreatePlaceholderLogo(int width, int height)
-        {
-            Bitmap bmp = new Bitmap(width, height);
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                g.Clear(Color.Transparent);
-                using (Font font = new Font("Segoe UI", Math.Min(width, height) / 4, FontStyle.Bold))
-                using (SolidBrush brush = new SolidBrush(Color.FromArgb(35, 96, 67)))
-                {
-                    StringFormat sf = new StringFormat
-                    {
-                        Alignment = StringAlignment.Center,
-                        LineAlignment = StringAlignment.Center
-                    };
-                    g.DrawString("PHỞ", font, brush, new RectangleF(0, 0, width, height), sf);
-                }
-            }
-            return bmp;
+            ThemeManager.StyleButton(btnDangNhap, ButtonVariant.Primary, IconGlyphs.Lock);
+            ThemeManager.StyleButton(btnThoat, ButtonVariant.Secondary, IconGlyphs.Logout);
+
+            btnTogglePassword.FlatAppearance.BorderSize = 0;
+            btnTogglePassword.ForeColor = Color.FromArgb(120, 130, 145);
         }
 
         protected override void OnShown(EventArgs e)
@@ -130,6 +109,8 @@ namespace PhoManager.UI.Forms
                 txtTaiKhoan.Text = Settings.Default.RememberedUsername;
                 chkGhiNho.Checked = true;
             }
+            passwordVisible = false;
+            txtMatKhau.PasswordChar = '•';
         }
 
         private bool ValidateInputs(out string message)
@@ -157,6 +138,52 @@ namespace PhoManager.UI.Forms
             Settings.Default.RememberAccount = chkGhiNho.Checked;
             Settings.Default.RememberedUsername = chkGhiNho.Checked ? taiKhoan : string.Empty;
             Settings.Default.Save();
+        }
+
+        private void btnTogglePassword_Click(object sender, EventArgs e)
+        {
+            passwordVisible = !passwordVisible;
+            txtMatKhau.PasswordChar = passwordVisible ? '\0' : '•';
+            btnTogglePassword.Text = passwordVisible ? "\uE70D" : "\uE722";
+        }
+
+        private void pnlLeft_Paint(object sender, PaintEventArgs e)
+        {
+            using (var brush = new LinearGradientBrush(pnlLeft.ClientRectangle,
+                       Color.FromArgb(18, 38, 63),
+                       Color.FromArgb(32, 84, 145),
+                       LinearGradientMode.Vertical))
+            {
+                e.Graphics.FillRectangle(brush, pnlLeft.ClientRectangle);
+            }
+        }
+
+        private void pnlHeroArt_Paint(object sender, PaintEventArgs e)
+        {
+            var g = e.Graphics;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            var rect = pnlHeroArt.ClientRectangle;
+            rect.Inflate(-6, -6);
+            using (var bowlBrush = new SolidBrush(Color.FromArgb(248, 250, 253)))
+            using (var rimPen = new Pen(Color.FromArgb(191, 226, 255), 3))
+            using (var accentPen = new Pen(Color.FromArgb(26, 188, 156), 3))
+            {
+                var center = new Point(rect.Width / 2, rect.Height / 2 + 15);
+                var size = new Size(rect.Width - 30, rect.Height / 2);
+                var bowlRect = new Rectangle(center.X - size.Width / 2, center.Y - size.Height / 2, size.Width, size.Height);
+                var path = new GraphicsPath();
+                path.AddArc(bowlRect.X, bowlRect.Y, bowlRect.Width, bowlRect.Height, 0, 180);
+                path.AddLine(bowlRect.X, center.Y, bowlRect.Right, center.Y);
+                g.FillPath(bowlBrush, path);
+                g.DrawPath(rimPen, path);
+                g.DrawCurve(accentPen, new[]
+                {
+                    new Point(bowlRect.X + 18, bowlRect.Y + 4),
+                    new Point(center.X, bowlRect.Y - 28),
+                    new Point(bowlRect.Right - 18, bowlRect.Y + 4)
+                });
+                g.DrawLine(rimPen, bowlRect.X + 25, center.Y + 6, bowlRect.Right - 25, center.Y + 6);
+            }
         }
     }
 }

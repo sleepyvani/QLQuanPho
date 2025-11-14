@@ -465,6 +465,44 @@ Hoặc:
 - **SQL Server**: Hệ quản trị cơ sở dữ liệu
 - **System.Data.Linq**: Thư viện LINQ to SQL
 
+## 🧭 Quy ước mã
+
+### Đặt tên và tổ chức mã
+- Namespace: `PhoManager.*` theo từng tầng (`DTO`, `DAL`, `BLL`, `UI`, `Utilities`).
+- Tên lớp: PascalCase (ví dụ: `MonAnBLL`, `NhanVienDAL`, `HoaDonDTO`).
+- File Form: `FrmXxx.cs` kèm `FrmXxx.Designer.cs` và `.resx` tương ứng.
+- Biến private: camelCase (ví dụ: `hoaDonDAL`, `banAnBLL`).
+- Thuộc tính DTO: PascalCase, chỉ chứa dữ liệu, không có logic.
+
+### Nguyên tắc theo tầng
+- DTO: Chỉ đại diện dữ liệu; không tham chiếu DataContext hay UI.
+- DAL: Sử dụng `QLQuanPhoDataContext` với `using` để đảm bảo dispose; tránh logic nghiệp vụ nặng.
+- BLL: Thực hiện validation, tính toán (thuế, giảm giá, tổng tiền), giao dịch (`TransactionScope`) khi cần.
+- UI: Chỉ xử lý hiển thị, sự kiện, gọi BLL; không truy vấn DB trực tiếp.
+
+### Ánh xạ dữ liệu
+- Dùng `EntityMapper` với extension methods `ToDto()` cho Entity LINQ to SQL → DTO.
+- Khi truy vấn join (ví dụ hóa đơn), kết hợp `ToDto()` với dữ liệu bổ sung (tên bàn, nhân viên, chi tiết).
+
+### Cấu hình và kết nối
+- Connection string: `App.config` key `QLQuanPhoConnectionString`.
+- Đọc giá trị mặc định (thuế, giảm giá) từ `AppSettings` trong BLL (`HoaDonBLL`).
+
+### Bảo mật và mật khẩu
+- Băm mật khẩu bằng `PasswordHelper` (dạng `salt:hash` SHA-256); xác thực qua `VerifyPassword`.
+- Lưu ý: Dữ liệu mẫu hiện chứa mật khẩu dạng thuần. Nên cập nhật script dữ liệu mẫu hoặc cung cấp lệnh migrate để băm mật khẩu ban đầu.
+
+### Ghi log và xử lý lỗi
+- Dùng `Utilities.Logger` (ghi file ngày) cho lỗi DAL/BLL; tránh ném lỗi chưa xử lý lên UI.
+- Thông báo người dùng bằng tiếng Việt rõ ràng, đảm bảo mã Unicode đúng (tránh lỗi mã hóa trong chuỗi literal).
+
+### Chuẩn hoá UI/UX
+- Dùng `ThemeManager` để thống nhất style controls (nút, textbox, grid).
+- Tên sự kiện nên mô tả rõ hành động: `btnThem_Click`, `dgvMonAn_ColumnHeaderMouseClick`.
+
+### Tài liệu kiến trúc
+- Tham khảo chi tiết tại `docs/ARCHITECTURE.md` (sơ đồ luồng: đăng nhập, order, thanh toán, thống kê; data flow DTO↔DAL↔DBML).
+
 ## 🧪 Test và Debug
 
 ### Chạy ứng dụng ở chế độ Debug

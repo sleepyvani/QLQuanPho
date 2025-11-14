@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 using PhoManager.BLL;
 using System.Linq;
+using PhoManager.UI.Helpers;
 
 namespace PhoManager.UI.Forms
 {
@@ -15,6 +16,9 @@ namespace PhoManager.UI.Forms
         public FrmThongKe()
         {
             InitializeComponent();
+            ThemeManager.ApplyBaseFormStyle(this);
+            ThemeManager.StyleDataGridView(dgvThongKe);
+            ThemeManager.StyleButton(btnXemThongKe, ButtonVariant.Primary, IconGlyphs.Chart);
 
             // Đăng ký sự kiện sắp xếp nếu DataGridView đã được khởi tạo
             if (this.dgvThongKe != null)

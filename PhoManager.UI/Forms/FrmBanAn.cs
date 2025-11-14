@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using PhoManager.BLL;
 using PhoManager.DTO;
 using System.Linq;
+using PhoManager.UI.Helpers;
 
 namespace PhoManager.UI.Forms
 {
@@ -17,6 +18,15 @@ namespace PhoManager.UI.Forms
         public FrmBanAn()
         {
             InitializeComponent();
+            ThemeManager.ApplyBaseFormStyle(this);
+            ThemeManager.StyleDataGridView(dgvBanAn);
+            ThemeManager.StyleTextBox(txtTimKiemBan);
+            ThemeManager.StyleTextBox(txtTenBan);
+            ThemeManager.StyleTextBox(txtGhiChu);
+            ThemeManager.StyleButton(btnTimKiemBan, ButtonVariant.Primary, IconGlyphs.Search);
+            ThemeManager.StyleButton(btnThem, ButtonVariant.Primary, IconGlyphs.Add);
+            ThemeManager.StyleButton(btnSua, ButtonVariant.Secondary, IconGlyphs.Edit);
+            ThemeManager.StyleButton(btnXoa, ButtonVariant.Danger, IconGlyphs.Delete);
             LoadDanhSachBanAn(); 
             // Register events for sorting and selection
             this.dgvBanAn.SelectionChanged += dgvBanAn_SelectionChanged;

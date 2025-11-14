@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using PhoManager.BLL;
 using PhoManager.DTO;
 using System.Linq;
+using PhoManager.UI.Helpers;
 
 namespace PhoManager.UI.Forms
 {
@@ -18,6 +19,14 @@ namespace PhoManager.UI.Forms
         public FrmMonAn()
         {
             InitializeComponent();
+            ThemeManager.ApplyBaseFormStyle(this);
+            ThemeManager.StyleDataGridView(dgvMonAn);
+            ThemeManager.StyleButton(btnTimKiem, ButtonVariant.Primary, IconGlyphs.Search);
+            ThemeManager.StyleButton(btnLamMoi, ButtonVariant.Secondary, IconGlyphs.Refresh);
+            ThemeManager.StyleButton(btnThem, ButtonVariant.Primary, IconGlyphs.Add);
+            ThemeManager.StyleButton(btnSua, ButtonVariant.Secondary, IconGlyphs.Edit);
+            ThemeManager.StyleButton(btnXoa, ButtonVariant.Danger, IconGlyphs.Delete);
+            ThemeManager.StyleTextBox(txtTimKiem);
             ConfigureGrid();
             LoadDanhSachMonAn();
 

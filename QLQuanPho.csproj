@@ -97,6 +97,10 @@
     <Compile Include="PhoManager.UI\Controls\RoundedButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PhoManager.UI\Controls\SidebarButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PhoManager.UI\Helpers\ThemeManager.cs" />
     <Compile Include="PhoManager.UI\Helpers\LogoHelper.cs" />
     <Compile Include="PhoManager.UI\Forms\FrmBanAn.cs">
       <SubType>Form</SubType>

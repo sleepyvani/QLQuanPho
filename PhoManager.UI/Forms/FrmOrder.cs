@@ -4,6 +4,7 @@ using PhoManager.BLL;
 using PhoManager.DTO;
 using System.Linq;
 using System.Collections.Generic;
+using PhoManager.UI.Helpers;
 
 namespace PhoManager.UI.Forms
 {
@@ -21,6 +22,15 @@ namespace PhoManager.UI.Forms
         public FrmOrder()
         {
             InitializeComponent();
+            ThemeManager.ApplyBaseFormStyle(this);
+            ThemeManager.StyleDataGridView(dgvMonAn);
+            ThemeManager.StyleDataGridView(dgvChiTiet);
+            ThemeManager.StyleComboBox(cboBan);
+            ThemeManager.StyleComboBox(cboKichCo);
+            ThemeManager.StyleTextBox(txtSoLuong);
+            ThemeManager.StyleTextBox(txtGhiChuMon);
+            ThemeManager.StyleButton(btnThemMon, ButtonVariant.Primary, IconGlyphs.Add);
+            ThemeManager.StyleButton(btnXoaMon, ButtonVariant.Danger, IconGlyphs.Delete);
             LoadDanhSachBan();
             LoadDanhSachMonAn();
             btnXoaMon.Click += btnXoaMon_Click;

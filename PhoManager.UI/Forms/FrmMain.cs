@@ -3,16 +3,22 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using PhoManager.DAL;
+using PhoManager.UI.Helpers;
+using PhoManager.UI.Controls;
 
 namespace PhoManager.UI.Forms
 {
     public partial class FrmMain : Form
     {
         private bool isLoggingOut;
+        private SidebarButton currentNav;
 
         public FrmMain()
         {
             InitializeComponent();
+            ThemeManager.ApplyPanelCardStyle(cardRevenue);
+            ThemeManager.ApplyPanelCardStyle(cardOrders);
+            ThemeManager.ApplyPanelCardStyle(cardTables);
             LoadLogo();
             LoadMenu();
             UpdateDatabaseStatus();
@@ -52,7 +58,7 @@ namespace PhoManager.UI.Forms
             {
                 g.Clear(Color.Transparent);
                 using (Font font = new Font("Segoe UI", Math.Min(width, height) / 3, FontStyle.Bold))
-                using (SolidBrush brush = new SolidBrush(Color.FromArgb(35, 96, 67)))
+                using (SolidBrush brush = new SolidBrush(Color.White))
                 {
                     StringFormat sf = new StringFormat
                     {
@@ -69,18 +75,40 @@ namespace PhoManager.UI.Forms
         {
             if (FrmLogin.NhanVienDangNhap != null)
             {
-                lblNhanVien.Text = $"Xin chào, {FrmLogin.NhanVienDangNhap.HoTen} ({FrmLogin.NhanVienDangNhap.ChucVu})";
+                lblNhanVien.Text = $"Xin chào, {FrmLogin.NhanVienDangNhap.HoTen}";
                 statusUser.Text = $"Người dùng: {FrmLogin.NhanVienDangNhap.HoTen}";
+                var parts = FrmLogin.NhanVienDangNhap.HoTen.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                var lastName = parts.Length > 0 ? parts[parts.Length - 1] : FrmLogin.NhanVienDangNhap.HoTen;
+                lblPageTitle.Text = $"Chào {lastName}, chúc một ngày tốt lành!";
             }
 
+            currentNav = navDashboard;
+            navDashboard.IsActive = true;
+
             string chucVu = FrmLogin.NhanVienDangNhap?.ChucVu ?? "";
-            
-            if (chucVu != "Quản lý")
+            bool isManager = string.Equals(chucVu, "Quản lý", StringComparison.OrdinalIgnoreCase);
+
+            navMenu.Enabled = isManager;
+            navStaff.Enabled = isManager;
+            navAnalytics.Enabled = isManager;
+            navSettings.Enabled = isManager;
+
+            btnQuanLyMonAn.Enabled = isManager;
+            btnQuanLyNhanVien.Enabled = isManager;
+            btnThongKe.Enabled = isManager;
+            btnCauHinh.Enabled = isManager;
+        }
+
+        private void SetActiveNav(SidebarButton target)
+        {
+            if (currentNav != null)
             {
-                btnQuanLyMonAn.Enabled = false;
-                btnQuanLyNhanVien.Enabled = false;
-                btnThongKe.Enabled = false;
-                btnCauHinh.Enabled = false;
+                currentNav.IsActive = false;
+            }
+            currentNav = target;
+            if (currentNav != null)
+            {
+                currentNav.IsActive = true;
             }
         }
 
@@ -90,62 +118,80 @@ namespace PhoManager.UI.Forms
             {
                 bool ok = QLQuanPhoDataContext.TestConnection();
                 statusDatabase.Text = ok ? "Database: Kết nối thành công" : "Database: Không thể kết nối";
-                statusDatabase.ForeColor = ok ? System.Drawing.Color.FromArgb(35, 96, 67) : System.Drawing.Color.FromArgb(212, 68, 55);
+                statusDatabase.ForeColor = ok ? Color.FromArgb(35, 96, 67) : Color.FromArgb(212, 68, 55);
             }
             catch (Exception ex)
             {
                 statusDatabase.Text = $"Database: Lỗi - {ex.Message}";
-                statusDatabase.ForeColor = System.Drawing.Color.FromArgb(212, 68, 55);
+                statusDatabase.ForeColor = Color.FromArgb(212, 68, 55);
             }
         }
 
         private void btnQuanLyMonAn_Click(object sender, EventArgs e)
         {
-            FrmMonAn frm = new FrmMonAn();
-            frm.ShowDialog();
+            SetActiveNav(navMenu);
+            using (var frm = new FrmMonAn())
+            {
+                frm.ShowDialog();
+            }
         }
 
         private void btnQuanLyNhanVien_Click(object sender, EventArgs e)
         {
-            FrmNhanVien frm = new FrmNhanVien();
-            frm.ShowDialog();
+            SetActiveNav(navStaff);
+            using (var frm = new FrmNhanVien())
+            {
+                frm.ShowDialog();
+            }
         }
 
         private void btnQuanLyBanAn_Click(object sender, EventArgs e)
         {
-            FrmBanAn frm = new FrmBanAn();
-            frm.ShowDialog();
+            SetActiveNav(navTables);
+            using (var frm = new FrmBanAn())
+            {
+                frm.ShowDialog();
+            }
         }
 
         private void btnOrder_Click(object sender, EventArgs e)
         {
-            FrmOrder frm = new FrmOrder();
-            frm.ShowDialog();
+            SetActiveNav(navOrder);
+            using (var frm = new FrmOrder())
+            {
+                frm.ShowDialog();
+            }
         }
 
         private void btnHoaDon_Click(object sender, EventArgs e)
         {
-            FrmHoaDon frm = new FrmHoaDon();
-            frm.ShowDialog();
+            SetActiveNav(navInvoices);
+            using (var frm = new FrmHoaDon())
+            {
+                frm.ShowDialog();
+            }
         }
 
         private void btnThongKe_Click(object sender, EventArgs e)
         {
-            FrmThongKe frm = new FrmThongKe();
-            frm.ShowDialog();
+            SetActiveNav(navAnalytics);
+            using (var frm = new FrmThongKe())
+            {
+                frm.ShowDialog();
+            }
         }
 
         private void btnCauHinh_Click(object sender, EventArgs e)
         {
-            FrmCauHinh frm = new FrmCauHinh();
-            frm.ShowDialog();
+            SetActiveNav(navSettings);
+            using (var frm = new FrmCauHinh())
+            {
+                frm.ShowDialog();
+            }
         }
-
-        // Event handlers for custom menu items added in FrmMain.Designer.cs
 
         private void menuBaoCaoDoanhThu_Click(object sender, EventArgs e)
         {
-            // Open the revenue report form
             using (var frm = new FrmBaoCaoDoanhThu())
             {
                 frm.ShowDialog();
@@ -154,7 +200,6 @@ namespace PhoManager.UI.Forms
 
         private void menuBaoCaoMonBanChay_Click(object sender, EventArgs e)
         {
-            // Open the top-selling dishes report form
             using (var frm = new FrmBaoCaoMonBanChay())
             {
                 frm.ShowDialog();
@@ -163,47 +208,32 @@ namespace PhoManager.UI.Forms
 
         private void menuBaoCaoHoaDon_Click(object sender, EventArgs e)
         {
-            // Open the invoice report form
             using (var frm = new FrmBaoCaoHoaDon())
             {
                 frm.ShowDialog();
             }
         }
 
-        private void menuQuanLyNguyenLieu_Click(object sender, EventArgs e)
+        private void navAnalytics_Click(object sender, EventArgs e)
         {
-            // Open ingredient management form
-            using (var frm = new FrmNguyenLieu())
-            {
-                frm.ShowDialog();
-            }
+            SetActiveNav(navAnalytics);
+            var location = navAnalytics.PointToScreen(new Point(navAnalytics.Width, navAnalytics.Height / 2));
+            ctxBaoCao.Show(location);
         }
 
-        private void menuQuanLyNguoiDung_Click(object sender, EventArgs e)
+        private void navDashboard_Click(object sender, EventArgs e)
         {
-            // Open user management form (inherits from FrmNhanVien)
-            using (var frm = new FrmQuanLyNguoiDung())
-            {
-                frm.ShowDialog();
-            }
-        }
-
-        private void menuGioiThieu_Click(object sender, EventArgs e)
-        {
-            // Open the team introduction form
-            using (var frm = new FrmGioiThieu())
-            {
-                frm.ShowDialog();
-            }
+            SetActiveNav(navDashboard);
         }
 
         private void btnDangXuat_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận", 
+            SetActiveNav(navLogout);
+            if (MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 isLoggingOut = true;
-                this.Close();
+                Close();
             }
         }
 
@@ -211,7 +241,7 @@ namespace PhoManager.UI.Forms
         {
             if (!isLoggingOut)
             {
-                if (MessageBox.Show("Bạn có chắc chắn muốn thoát?", "Xác nhận", 
+                if (MessageBox.Show("Bạn có chắc chắn muốn thoát?", "Xác nhận",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 {
                     e.Cancel = true;
@@ -225,4 +255,3 @@ namespace PhoManager.UI.Forms
         }
     }
 }
-
