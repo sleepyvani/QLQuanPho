@@ -185,13 +185,13 @@ namespace PhoManager.UI.Controls
                     break;
                 case ButtonVariant.Secondary:
                     BackColor = Color.FromArgb(245, 246, 250);
-                    ForeColor = ThemeManager.TextColor;
+                    ForeColor = ThemeManager.TextPrimary;
                     borderColor = Color.FromArgb(220, 224, 232);
                     borderWidth = 1;
                     break;
                 case ButtonVariant.Tertiary:
                     BackColor = Color.White;
-                    ForeColor = ThemeManager.TextColor;
+                    ForeColor = ThemeManager.TextPrimary;
                     borderColor = Color.FromArgb(235, 238, 245);
                     borderWidth = 1;
                     break;
@@ -203,7 +203,7 @@ namespace PhoManager.UI.Controls
                     break;
                 default:
                     BackColor = Color.Transparent;
-                    ForeColor = ThemeManager.TextColor;
+                    ForeColor = ThemeManager.TextPrimary;
                     borderColor = Color.FromArgb(220, 224, 232);
                     borderWidth = 1;
                     break;

@@ -14,6 +14,10 @@ namespace PhoManager.UI.Forms
         private NhanVienBLL nhanVienBLL = new NhanVienBLL();
         public static NhanVienDTO NhanVienDangNhap { get; private set; }
         private bool passwordVisible;
+        private const string PLACEHOLDER_USERNAME = "Nhập tài khoản";
+        private const string PLACEHOLDER_PASSWORD = "Nhập mật khẩu";
+        private Color placeholderColor = Color.FromArgb(148, 163, 184); // Slate-400
+        private Color textColor = Color.FromArgb(15, 23, 42); // Slate-900
 
         public FrmLogin()
         {
@@ -24,31 +28,71 @@ namespace PhoManager.UI.Forms
 
         private void LoadVisuals()
         {
-            lblHeroTitle.Text = "Quản lý quán phở\nnhanh và trực quan";
-            lblHeroSubtitle.Text = "Giao diện mới giúp bạn theo dõi trạng thái bàn, doanh thu và ca làm một cách thoải mái.";
-            lblHeroBullet1.Text = "• Vận hành gọn gàng, phối hợp mượt mà.";
-            lblHeroBullet2.Text = "• Báo cáo tức thời, kiểm soát doanh thu.";
-            lblBranding.Text = "Pho Manager";
-            lblBadge.Text = "Đã tối ưu cho ca làm sáng";
+            lblBadge.Text = "Pho Manager 2025";
 
-            picUserIcon.Image = ThemeManager.CreateGlyphIcon(IconGlyphs.People, Color.FromArgb(150, 155, 168), 26);
-            picPasswordIcon.Image = ThemeManager.CreateGlyphIcon(IconGlyphs.Lock, Color.FromArgb(150, 155, 168), 26);
+            picUserIcon.Image = ThemeManager.CreateGlyphIcon(IconGlyphs.People, ThemeManager.TextMuted, 24);
+            picPasswordIcon.Image = ThemeManager.CreateGlyphIcon(IconGlyphs.Lock, ThemeManager.TextMuted, 24);
 
-            ThemeManager.ApplyRoundedCorners(pnlCard, 26);
-            ThemeManager.ApplyRoundedCorners(pnlUser, 20);
-            ThemeManager.ApplyRoundedCorners(pnlPassword, 20);
+            ThemeManager.ApplyRoundedCorners(pnlCard, ThemeManager.RadiusXL);
+            ThemeManager.ApplyRoundedCorners(pnlUser, ThemeManager.RadiusMD);
+            ThemeManager.ApplyRoundedCorners(pnlPassword, ThemeManager.RadiusMD);
 
-            ThemeManager.StyleButton(btnDangNhap, ButtonVariant.Primary, IconGlyphs.Lock);
-            ThemeManager.StyleButton(btnThoat, ButtonVariant.Secondary, IconGlyphs.Logout);
+            ThemeManager.StyleButton(btnDangNhap, ButtonVariant.Primary);
+            ThemeManager.StyleButton(btnThoat, ButtonVariant.Secondary);
 
             btnTogglePassword.FlatAppearance.BorderSize = 0;
-            btnTogglePassword.ForeColor = Color.FromArgb(120, 130, 145);
+            btnTogglePassword.ForeColor = ThemeManager.TextMuted;
+            btnTogglePassword.Cursor = Cursors.Hand;
+            
+            // Ensure textboxes display text correctly
+            txtTaiKhoan.Multiline = false;
+            txtMatKhau.Multiline = false;
+            
+            // Setup placeholders
+            SetupPlaceholder(txtTaiKhoan, PLACEHOLDER_USERNAME);
+            SetupPlaceholder(txtMatKhau, PLACEHOLDER_PASSWORD);
+        }
+        
+        private void SetupPlaceholder(TextBox textBox, string placeholder)
+        {
+            textBox.Text = placeholder;
+            textBox.ForeColor = placeholderColor;
+            
+            // For password field, remove password char when showing placeholder
+            if (textBox == txtMatKhau)
+            {
+                textBox.PasswordChar = '\0';
+            }
+            
+            textBox.Enter += (s, e) => {
+                if (textBox.Text == placeholder)
+                {
+                    textBox.Text = "";
+                    textBox.ForeColor = textColor;
+                    if (textBox == txtMatKhau)
+                    {
+                        textBox.PasswordChar = passwordVisible ? '\0' : '•';
+                    }
+                }
+            };
+            textBox.Leave += (s, e) => {
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    textBox.Text = placeholder;
+                    textBox.ForeColor = placeholderColor;
+                    if (textBox == txtMatKhau)
+                    {
+                        textBox.PasswordChar = '\0';
+                    }
+                }
+            };
         }
 
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
-            if (string.IsNullOrWhiteSpace(txtTaiKhoan.Text))
+            // Only focus if not showing placeholder
+            if (txtTaiKhoan.Text == PLACEHOLDER_USERNAME || string.IsNullOrWhiteSpace(txtTaiKhoan.Text))
             {
                 txtTaiKhoan.Focus();
             }
@@ -66,8 +110,8 @@ namespace PhoManager.UI.Forms
                 return;
             }
 
-            string taiKhoan = txtTaiKhoan.Text.Trim();
-            string matKhau = txtMatKhau.Text.Trim();
+            string taiKhoan = (txtTaiKhoan.Text == PLACEHOLDER_USERNAME) ? "" : txtTaiKhoan.Text.Trim();
+            string matKhau = (txtMatKhau.Text == PLACEHOLDER_PASSWORD) ? "" : txtMatKhau.Text.Trim();
 
             NhanVienDTO nhanVien = nhanVienBLL.DangNhap(taiKhoan, matKhau);
             
@@ -104,25 +148,33 @@ namespace PhoManager.UI.Forms
 
         private void InitializeState()
         {
-            if (Settings.Default.RememberAccount)
+            passwordVisible = false;
+            
+            if (Settings.Default.RememberAccount && !string.IsNullOrWhiteSpace(Settings.Default.RememberedUsername))
             {
+                // Load saved username - override placeholder
                 txtTaiKhoan.Text = Settings.Default.RememberedUsername;
+                txtTaiKhoan.ForeColor = textColor;
                 chkGhiNho.Checked = true;
             }
-            passwordVisible = false;
-            txtMatKhau.PasswordChar = '•';
+            // If no saved username, placeholder is already set in SetupPlaceholder()
+            
+            // Password field always starts with placeholder (no saved password)
+            // PasswordChar is handled in SetupPlaceholder Leave event
         }
 
         private bool ValidateInputs(out string message)
         {
-            if (string.IsNullOrWhiteSpace(txtTaiKhoan.Text))
+            string taiKhoan = txtTaiKhoan.Text.Trim();
+            if (string.IsNullOrWhiteSpace(taiKhoan) || taiKhoan == PLACEHOLDER_USERNAME)
             {
                 txtTaiKhoan.Focus();
                 message = "Vui lòng nhập tài khoản.";
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(txtMatKhau.Text))
+            string matKhau = txtMatKhau.Text.Trim();
+            if (string.IsNullOrWhiteSpace(matKhau) || matKhau == PLACEHOLDER_PASSWORD)
             {
                 txtMatKhau.Focus();
                 message = "Vui lòng nhập mật khẩu.";
@@ -143,48 +195,14 @@ namespace PhoManager.UI.Forms
         private void btnTogglePassword_Click(object sender, EventArgs e)
         {
             passwordVisible = !passwordVisible;
-            txtMatKhau.PasswordChar = passwordVisible ? '\0' : '•';
+            // Only toggle password char if not showing placeholder
+            if (txtMatKhau.Text != PLACEHOLDER_PASSWORD)
+            {
+                txtMatKhau.PasswordChar = passwordVisible ? '\0' : '•';
+            }
             btnTogglePassword.Text = passwordVisible ? "\uE70D" : "\uE722";
         }
 
-        private void pnlLeft_Paint(object sender, PaintEventArgs e)
-        {
-            using (var brush = new LinearGradientBrush(pnlLeft.ClientRectangle,
-                       Color.FromArgb(18, 38, 63),
-                       Color.FromArgb(32, 84, 145),
-                       LinearGradientMode.Vertical))
-            {
-                e.Graphics.FillRectangle(brush, pnlLeft.ClientRectangle);
-            }
-        }
-
-        private void pnlHeroArt_Paint(object sender, PaintEventArgs e)
-        {
-            var g = e.Graphics;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            var rect = pnlHeroArt.ClientRectangle;
-            rect.Inflate(-6, -6);
-            using (var bowlBrush = new SolidBrush(Color.FromArgb(248, 250, 253)))
-            using (var rimPen = new Pen(Color.FromArgb(191, 226, 255), 3))
-            using (var accentPen = new Pen(Color.FromArgb(26, 188, 156), 3))
-            {
-                var center = new Point(rect.Width / 2, rect.Height / 2 + 15);
-                var size = new Size(rect.Width - 30, rect.Height / 2);
-                var bowlRect = new Rectangle(center.X - size.Width / 2, center.Y - size.Height / 2, size.Width, size.Height);
-                var path = new GraphicsPath();
-                path.AddArc(bowlRect.X, bowlRect.Y, bowlRect.Width, bowlRect.Height, 0, 180);
-                path.AddLine(bowlRect.X, center.Y, bowlRect.Right, center.Y);
-                g.FillPath(bowlBrush, path);
-                g.DrawPath(rimPen, path);
-                g.DrawCurve(accentPen, new[]
-                {
-                    new Point(bowlRect.X + 18, bowlRect.Y + 4),
-                    new Point(center.X, bowlRect.Y - 28),
-                    new Point(bowlRect.Right - 18, bowlRect.Y + 4)
-                });
-                g.DrawLine(rimPen, bowlRect.X + 25, center.Y + 6, bowlRect.Right - 25, center.Y + 6);
-            }
-        }
     }
 }
 

@@ -1,3 +1,5 @@
+using PhoManager.UI.Helpers;
+
 namespace PhoManager.UI.Forms
 {
     partial class FrmNhanVien
@@ -150,29 +152,35 @@ namespace PhoManager.UI.Forms
             this.btnThem.Location = new System.Drawing.Point(1000, 308);
             this.btnThem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(120, 37);
+            this.btnThem.Size = new System.Drawing.Size(120, 42);
             this.btnThem.TabIndex = 6;
             this.btnThem.Text = "Thêm";
+            this.btnThem.UseVisualStyleBackColor = false;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
+            ThemeManager.StyleButton(this.btnThem, ButtonVariant.Primary);
             // 
             // btnSua
             // 
             this.btnSua.Location = new System.Drawing.Point(1147, 308);
             this.btnSua.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(120, 37);
+            this.btnSua.Size = new System.Drawing.Size(120, 42);
             this.btnSua.TabIndex = 7;
             this.btnSua.Text = "Sửa";
+            this.btnSua.UseVisualStyleBackColor = false;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
+            ThemeManager.StyleButton(this.btnSua, ButtonVariant.Secondary);
             // 
             // btnXoa
             // 
             this.btnXoa.Location = new System.Drawing.Point(1000, 357);
             this.btnXoa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(120, 37);
+            this.btnXoa.Size = new System.Drawing.Size(120, 42);
             this.btnXoa.TabIndex = 8;
             this.btnXoa.Text = "Xóa";
+            this.btnXoa.UseVisualStyleBackColor = false;
+            ThemeManager.StyleButton(this.btnXoa, ButtonVariant.Danger);
             // 
             // txtTimKiemNV
             // 
@@ -186,17 +194,20 @@ namespace PhoManager.UI.Forms
             // 
             this.btnTimKiemNV.Location = new System.Drawing.Point(1192, 24);
             this.btnTimKiemNV.Name = "btnTimKiemNV";
-            this.btnTimKiemNV.Size = new System.Drawing.Size(75, 23);
+            this.btnTimKiemNV.Size = new System.Drawing.Size(100, 42);
             this.btnTimKiemNV.TabIndex = 10;
             this.btnTimKiemNV.Text = "Tìm Kiếm";
-            this.btnTimKiemNV.UseVisualStyleBackColor = true;
+            this.btnTimKiemNV.UseVisualStyleBackColor = false;
             this.btnTimKiemNV.Click += new System.EventHandler(this.btnTimKiemNV_Click);
+            ThemeManager.StyleButton(this.btnTimKiemNV, ButtonVariant.Secondary, IconGlyphs.Search);
             // 
             // FrmNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = ThemeManager.BackgroundPrimary;
             this.ClientSize = new System.Drawing.Size(1333, 554);
+            ThemeManager.StyleDataGridView(this.dgvNhanVien);
             this.Controls.Add(this.btnTimKiemNV);
             this.Controls.Add(this.txtTimKiemNV);
             this.Controls.Add(this.dgvNhanVien);

@@ -1,3 +1,5 @@
+using PhoManager.UI.Helpers;
+
 namespace PhoManager.UI.Forms
 {
     partial class FrmMonAn
@@ -88,7 +90,7 @@ namespace PhoManager.UI.Forms
             this.rootLayout.RowCount = 2;
             this.rootLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64F));
             this.rootLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.rootLayout.Size = new System.Drawing.Size(1234, 683);
+            this.rootLayout.Size = new System.Drawing.Size(1542, 733);
             this.rootLayout.TabIndex = 0;
             // 
             // searchPanel
@@ -102,33 +104,29 @@ namespace PhoManager.UI.Forms
             this.searchPanel.Margin = new System.Windows.Forms.Padding(0);
             this.searchPanel.Name = "searchPanel";
             this.searchPanel.Padding = new System.Windows.Forms.Padding(23, 16, 23, 16);
-            this.searchPanel.Size = new System.Drawing.Size(1234, 64);
+            this.searchPanel.Size = new System.Drawing.Size(1542, 64);
             this.searchPanel.TabIndex = 0;
             // 
             // btnLamMoi
             // 
             this.btnLamMoi.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnLamMoi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLamMoi.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnLamMoi.Location = new System.Drawing.Point(389, 18);
             this.btnLamMoi.Name = "btnLamMoi";
-            this.btnLamMoi.Size = new System.Drawing.Size(103, 28);
+            this.btnLamMoi.Size = new System.Drawing.Size(100, 42);
             this.btnLamMoi.TabIndex = 2;
             this.btnLamMoi.Text = "Làm mới";
-            this.btnLamMoi.UseVisualStyleBackColor = true;
+            this.btnLamMoi.UseVisualStyleBackColor = false;
             this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
             // 
             // btnTimKiem
             // 
             this.btnTimKiem.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnTimKiem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTimKiem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnTimKiem.Location = new System.Drawing.Point(274, 18);
             this.btnTimKiem.Name = "btnTimKiem";
-            this.btnTimKiem.Size = new System.Drawing.Size(103, 28);
+            this.btnTimKiem.Size = new System.Drawing.Size(100, 42);
             this.btnTimKiem.TabIndex = 1;
             this.btnTimKiem.Text = "Tìm kiếm";
-            this.btnTimKiem.UseVisualStyleBackColor = true;
+            this.btnTimKiem.UseVisualStyleBackColor = false;
             this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
             // txtTimKiem
@@ -153,8 +151,8 @@ namespace PhoManager.UI.Forms
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.detailLayout);
-            this.splitContainer.Size = new System.Drawing.Size(1228, 613);
-            this.splitContainer.SplitterDistance = 731;
+            this.splitContainer.Size = new System.Drawing.Size(1536, 663);
+            this.splitContainer.SplitterDistance = 914;
             this.splitContainer.SplitterWidth = 5;
             this.splitContainer.TabIndex = 1;
             // 
@@ -173,7 +171,7 @@ namespace PhoManager.UI.Forms
             this.dgvMonAn.RowHeadersVisible = false;
             this.dgvMonAn.RowHeadersWidth = 51;
             this.dgvMonAn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMonAn.Size = new System.Drawing.Size(731, 613);
+            this.dgvMonAn.Size = new System.Drawing.Size(914, 663);
             this.dgvMonAn.TabIndex = 0;
             this.dgvMonAn.SelectionChanged += new System.EventHandler(this.dgvMonAn_SelectionChanged);
             // 
@@ -208,7 +206,7 @@ namespace PhoManager.UI.Forms
             this.detailLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
             this.detailLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 108F));
             this.detailLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.detailLayout.Size = new System.Drawing.Size(492, 613);
+            this.detailLayout.Size = new System.Drawing.Size(617, 663);
             this.detailLayout.TabIndex = 0;
             // 
             // lblTenMon
@@ -218,7 +216,7 @@ namespace PhoManager.UI.Forms
             this.lblTenMon.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblTenMon.Location = new System.Drawing.Point(14, 21);
             this.lblTenMon.Name = "lblTenMon";
-            this.lblTenMon.Size = new System.Drawing.Size(135, 53);
+            this.lblTenMon.Size = new System.Drawing.Size(172, 53);
             this.lblTenMon.TabIndex = 0;
             this.lblTenMon.Text = "Tên món";
             this.lblTenMon.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -227,10 +225,10 @@ namespace PhoManager.UI.Forms
             // 
             this.txtTenMon.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtTenMon.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtTenMon.Location = new System.Drawing.Point(155, 24);
+            this.txtTenMon.Location = new System.Drawing.Point(192, 24);
             this.txtTenMon.MaxLength = 100;
             this.txtTenMon.Name = "txtTenMon";
-            this.txtTenMon.Size = new System.Drawing.Size(323, 30);
+            this.txtTenMon.Size = new System.Drawing.Size(411, 30);
             this.txtTenMon.TabIndex = 1;
             // 
             // lblGiaNho
@@ -240,7 +238,7 @@ namespace PhoManager.UI.Forms
             this.lblGiaNho.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblGiaNho.Location = new System.Drawing.Point(14, 74);
             this.lblGiaNho.Name = "lblGiaNho";
-            this.lblGiaNho.Size = new System.Drawing.Size(135, 53);
+            this.lblGiaNho.Size = new System.Drawing.Size(172, 53);
             this.lblGiaNho.TabIndex = 2;
             this.lblGiaNho.Text = "Giá tô nhỏ";
             this.lblGiaNho.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -254,7 +252,7 @@ namespace PhoManager.UI.Forms
             0,
             0,
             0});
-            this.nudGiaNho.Location = new System.Drawing.Point(155, 77);
+            this.nudGiaNho.Location = new System.Drawing.Point(192, 77);
             this.nudGiaNho.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -266,7 +264,7 @@ namespace PhoManager.UI.Forms
             0,
             0});
             this.nudGiaNho.Name = "nudGiaNho";
-            this.nudGiaNho.Size = new System.Drawing.Size(323, 30);
+            this.nudGiaNho.Size = new System.Drawing.Size(411, 30);
             this.nudGiaNho.TabIndex = 3;
             this.nudGiaNho.ThousandsSeparator = true;
             this.nudGiaNho.Value = new decimal(new int[] {
@@ -282,7 +280,7 @@ namespace PhoManager.UI.Forms
             this.lblGiaLon.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblGiaLon.Location = new System.Drawing.Point(14, 127);
             this.lblGiaLon.Name = "lblGiaLon";
-            this.lblGiaLon.Size = new System.Drawing.Size(135, 53);
+            this.lblGiaLon.Size = new System.Drawing.Size(172, 53);
             this.lblGiaLon.TabIndex = 4;
             this.lblGiaLon.Text = "Giá tô lớn";
             this.lblGiaLon.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -296,7 +294,7 @@ namespace PhoManager.UI.Forms
             0,
             0,
             0});
-            this.nudGiaLon.Location = new System.Drawing.Point(155, 130);
+            this.nudGiaLon.Location = new System.Drawing.Point(192, 130);
             this.nudGiaLon.Maximum = new decimal(new int[] {
             2000000,
             0,
@@ -308,7 +306,7 @@ namespace PhoManager.UI.Forms
             0,
             0});
             this.nudGiaLon.Name = "nudGiaLon";
-            this.nudGiaLon.Size = new System.Drawing.Size(323, 30);
+            this.nudGiaLon.Size = new System.Drawing.Size(411, 30);
             this.nudGiaLon.TabIndex = 5;
             this.nudGiaLon.ThousandsSeparator = true;
             this.nudGiaLon.Value = new decimal(new int[] {
@@ -324,7 +322,7 @@ namespace PhoManager.UI.Forms
             this.lblGhiChu.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblGhiChu.Location = new System.Drawing.Point(14, 180);
             this.lblGhiChu.Name = "lblGhiChu";
-            this.lblGhiChu.Size = new System.Drawing.Size(135, 96);
+            this.lblGhiChu.Size = new System.Drawing.Size(172, 96);
             this.lblGhiChu.TabIndex = 6;
             this.lblGhiChu.Text = "Ghi chú";
             this.lblGhiChu.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -333,10 +331,10 @@ namespace PhoManager.UI.Forms
             // 
             this.txtGhiChu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtGhiChu.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtGhiChu.Location = new System.Drawing.Point(155, 183);
+            this.txtGhiChu.Location = new System.Drawing.Point(192, 183);
             this.txtGhiChu.Multiline = true;
             this.txtGhiChu.Name = "txtGhiChu";
-            this.txtGhiChu.Size = new System.Drawing.Size(323, 90);
+            this.txtGhiChu.Size = new System.Drawing.Size(411, 90);
             this.txtGhiChu.TabIndex = 7;
             // 
             // lblMoTa
@@ -346,7 +344,7 @@ namespace PhoManager.UI.Forms
             this.lblMoTa.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblMoTa.Location = new System.Drawing.Point(14, 276);
             this.lblMoTa.Name = "lblMoTa";
-            this.lblMoTa.Size = new System.Drawing.Size(135, 128);
+            this.lblMoTa.Size = new System.Drawing.Size(172, 128);
             this.lblMoTa.TabIndex = 8;
             this.lblMoTa.Text = "Mô tả";
             this.lblMoTa.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -355,11 +353,11 @@ namespace PhoManager.UI.Forms
             // 
             this.txtMoTa.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtMoTa.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtMoTa.Location = new System.Drawing.Point(155, 279);
+            this.txtMoTa.Location = new System.Drawing.Point(192, 279);
             this.txtMoTa.Multiline = true;
             this.txtMoTa.Name = "txtMoTa";
             this.txtMoTa.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMoTa.Size = new System.Drawing.Size(323, 122);
+            this.txtMoTa.Size = new System.Drawing.Size(411, 122);
             this.txtMoTa.TabIndex = 9;
             // 
             // chkTrangThai
@@ -369,7 +367,7 @@ namespace PhoManager.UI.Forms
             this.chkTrangThai.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkTrangThai.Dock = System.Windows.Forms.DockStyle.Left;
             this.chkTrangThai.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.chkTrangThai.Location = new System.Drawing.Point(155, 413);
+            this.chkTrangThai.Location = new System.Drawing.Point(192, 413);
             this.chkTrangThai.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
             this.chkTrangThai.Name = "chkTrangThai";
             this.chkTrangThai.Size = new System.Drawing.Size(96, 31);
@@ -383,22 +381,18 @@ namespace PhoManager.UI.Forms
             this.actionPanel.Controls.Add(this.btnSua);
             this.actionPanel.Controls.Add(this.btnXoa);
             this.actionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.actionPanel.Location = new System.Drawing.Point(152, 447);
+            this.actionPanel.Location = new System.Drawing.Point(189, 447);
             this.actionPanel.Margin = new System.Windows.Forms.Padding(0, 0, 0, 11);
             this.actionPanel.Name = "actionPanel";
-            this.actionPanel.Size = new System.Drawing.Size(329, 97);
+            this.actionPanel.Size = new System.Drawing.Size(417, 97);
             this.actionPanel.TabIndex = 11;
             this.actionPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.actionPanel_Paint);
             // 
             // btnThem
             // 
-            this.btnThem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(96)))), ((int)(((byte)(67)))));
-            this.btnThem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnThem.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.btnThem.ForeColor = System.Drawing.Color.White;
             this.btnThem.Location = new System.Drawing.Point(3, 3);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(100, 43);
+            this.btnThem.Size = new System.Drawing.Size(120, 42);
             this.btnThem.TabIndex = 0;
             this.btnThem.Text = "Thêm";
             this.btnThem.UseVisualStyleBackColor = false;
@@ -406,13 +400,9 @@ namespace PhoManager.UI.Forms
             // 
             // btnSua
             // 
-            this.btnSua.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(204)))), ((int)(((byte)(66)))));
-            this.btnSua.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSua.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.btnSua.ForeColor = System.Drawing.Color.Black;
-            this.btnSua.Location = new System.Drawing.Point(109, 3);
+            this.btnSua.Location = new System.Drawing.Point(129, 3);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(100, 43);
+            this.btnSua.Size = new System.Drawing.Size(120, 42);
             this.btnSua.TabIndex = 1;
             this.btnSua.Text = "Cập nhật";
             this.btnSua.UseVisualStyleBackColor = false;
@@ -420,13 +410,9 @@ namespace PhoManager.UI.Forms
             // 
             // btnXoa
             // 
-            this.btnXoa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(68)))), ((int)(((byte)(55)))));
-            this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXoa.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.btnXoa.ForeColor = System.Drawing.Color.White;
-            this.btnXoa.Location = new System.Drawing.Point(215, 3);
+            this.btnXoa.Location = new System.Drawing.Point(255, 3);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(100, 43);
+            this.btnXoa.Size = new System.Drawing.Size(120, 42);
             this.btnXoa.TabIndex = 2;
             this.btnXoa.Text = "Xóa";
             this.btnXoa.UseVisualStyleBackColor = false;
@@ -438,9 +424,9 @@ namespace PhoManager.UI.Forms
             this.lblHint.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.lblHint.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Italic);
             this.lblHint.ForeColor = System.Drawing.Color.DimGray;
-            this.lblHint.Location = new System.Drawing.Point(155, 582);
+            this.lblHint.Location = new System.Drawing.Point(192, 632);
             this.lblHint.Name = "lblHint";
-            this.lblHint.Size = new System.Drawing.Size(323, 20);
+            this.lblHint.Size = new System.Drawing.Size(411, 20);
             this.lblHint.TabIndex = 12;
             this.lblHint.Text = "* Giá tính theo đồng Việt Nam";
             this.lblHint.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -449,8 +435,8 @@ namespace PhoManager.UI.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1234, 683);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(247)))), ((int)(((byte)(250)))));
+            this.ClientSize = new System.Drawing.Size(1542, 733);
             this.Controls.Add(this.rootLayout);
             this.Name = "FrmMonAn";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

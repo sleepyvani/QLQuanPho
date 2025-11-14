@@ -1,3 +1,5 @@
+using PhoManager.UI.Helpers;
+
 namespace PhoManager.UI.Forms
 {
     partial class FrmCauHinh
@@ -11,12 +13,15 @@ namespace PhoManager.UI.Forms
             this.SuspendLayout();
             
             this.btnLuu.Location = new System.Drawing.Point(50, 50);
-            this.btnLuu.Size = new System.Drawing.Size(150, 40);
+            this.btnLuu.Size = new System.Drawing.Size(150, 42);
             this.btnLuu.Text = "Lưu";
+            this.btnLuu.UseVisualStyleBackColor = false;
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
+            ThemeManager.StyleButton(this.btnLuu, ButtonVariant.Primary);
             
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = ThemeManager.BackgroundPrimary;
             this.ClientSize = new System.Drawing.Size(600, 400);
             this.Controls.Add(this.btnLuu);
             this.Name = "FrmCauHinh";

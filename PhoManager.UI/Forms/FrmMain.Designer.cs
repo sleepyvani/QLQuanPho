@@ -29,7 +29,7 @@ namespace PhoManager.UI.Forms
         private System.Windows.Forms.Label lblNhanVien;
         private System.Windows.Forms.Label lblPageTitle;
         private System.Windows.Forms.Label lblCurrentTime;
-        private PhoManager.UI.Controls.RoundedButton btnQuickOrder;
+        private System.Windows.Forms.Button btnQuickOrder;
         private System.Windows.Forms.FlowLayoutPanel cardContainer;
         private System.Windows.Forms.Panel cardRevenue;
         private System.Windows.Forms.Label lblRevenueCaption;
@@ -44,14 +44,14 @@ namespace PhoManager.UI.Forms
         private System.Windows.Forms.Label lblTablesValue;
         private System.Windows.Forms.Label lblTablesSub;
         private System.Windows.Forms.FlowLayoutPanel quickActionPanel;
-        private PhoManager.UI.Controls.RoundedButton btnQuanLyMonAn;
-        private PhoManager.UI.Controls.RoundedButton btnQuanLyNhanVien;
-        private PhoManager.UI.Controls.RoundedButton btnQuanLyBanAn;
-        private PhoManager.UI.Controls.RoundedButton btnOrder;
-        private PhoManager.UI.Controls.RoundedButton btnHoaDon;
-        private PhoManager.UI.Controls.RoundedButton btnThongKe;
-        private PhoManager.UI.Controls.RoundedButton btnCauHinh;
-        private PhoManager.UI.Controls.RoundedButton btnDangXuat;
+        private System.Windows.Forms.Button btnQuanLyMonAn;
+        private System.Windows.Forms.Button btnQuanLyNhanVien;
+        private System.Windows.Forms.Button btnQuanLyBanAn;
+        private System.Windows.Forms.Button btnOrder;
+        private System.Windows.Forms.Button btnHoaDon;
+        private System.Windows.Forms.Button btnThongKe;
+        private System.Windows.Forms.Button btnCauHinh;
+        private System.Windows.Forms.Button btnDangXuat;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel statusDatabase;
         private System.Windows.Forms.ToolStripStatusLabel statusSpacer;
@@ -92,14 +92,14 @@ namespace PhoManager.UI.Forms
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.quickActionPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnQuanLyMonAn = new PhoManager.UI.Controls.RoundedButton();
-            this.btnQuanLyNhanVien = new PhoManager.UI.Controls.RoundedButton();
-            this.btnQuanLyBanAn = new PhoManager.UI.Controls.RoundedButton();
-            this.btnOrder = new PhoManager.UI.Controls.RoundedButton();
-            this.btnHoaDon = new PhoManager.UI.Controls.RoundedButton();
-            this.btnThongKe = new PhoManager.UI.Controls.RoundedButton();
-            this.btnCauHinh = new PhoManager.UI.Controls.RoundedButton();
-            this.btnDangXuat = new PhoManager.UI.Controls.RoundedButton();
+            this.btnQuanLyMonAn = new System.Windows.Forms.Button();
+            this.btnQuanLyNhanVien = new System.Windows.Forms.Button();
+            this.btnQuanLyBanAn = new System.Windows.Forms.Button();
+            this.btnOrder = new System.Windows.Forms.Button();
+            this.btnHoaDon = new System.Windows.Forms.Button();
+            this.btnThongKe = new System.Windows.Forms.Button();
+            this.btnCauHinh = new System.Windows.Forms.Button();
+            this.btnDangXuat = new System.Windows.Forms.Button();
             this.cardContainer = new System.Windows.Forms.FlowLayoutPanel();
             this.cardRevenue = new System.Windows.Forms.Panel();
             this.lblRevenueSub = new System.Windows.Forms.Label();
@@ -114,7 +114,7 @@ namespace PhoManager.UI.Forms
             this.lblTablesValue = new System.Windows.Forms.Label();
             this.lblTablesCaption = new System.Windows.Forms.Label();
             this.pnlHeader = new System.Windows.Forms.Panel();
-            this.btnQuickOrder = new PhoManager.UI.Controls.RoundedButton();
+            this.btnQuickOrder = new System.Windows.Forms.Button();
             this.lblCurrentTime = new System.Windows.Forms.Label();
             this.lblPageTitle = new System.Windows.Forms.Label();
             this.lblNhanVien = new System.Windows.Forms.Label();
@@ -287,7 +287,7 @@ namespace PhoManager.UI.Forms
             // 
             // pnlMain
             // 
-            this.pnlMain.BackColor = PhoManager.UI.Helpers.ThemeManager.BackgroundColor;
+            this.pnlMain.BackColor = PhoManager.UI.Helpers.ThemeManager.BackgroundPrimary;
             this.pnlMain.Controls.Add(this.quickActionPanel);
             this.pnlMain.Controls.Add(this.cardContainer);
             this.pnlMain.Controls.Add(this.pnlHeader);
@@ -322,75 +322,75 @@ namespace PhoManager.UI.Forms
             // 
             // btnQuanLyMonAn
             // 
-            this.btnQuanLyMonAn.Glyph = PhoManager.UI.Helpers.IconGlyphs.Bowl;
-            this.btnQuanLyMonAn.Text = "Quản lý Món ăn";
-            this.btnQuanLyMonAn.Variant = ButtonVariant.Tertiary;
             this.btnQuanLyMonAn.Margin = new Padding(10);
             this.btnQuanLyMonAn.Size = new Size(210, 90);
+            this.btnQuanLyMonAn.Text = "Quản lý Món ăn";
+            this.btnQuanLyMonAn.UseVisualStyleBackColor = false;
             this.btnQuanLyMonAn.Click += new EventHandler(this.btnQuanLyMonAn_Click);
+            ThemeManager.StyleButton(this.btnQuanLyMonAn, ButtonVariant.Tertiary, IconGlyphs.Bowl);
             // 
             // btnQuanLyNhanVien
             // 
-            this.btnQuanLyNhanVien.Glyph = PhoManager.UI.Helpers.IconGlyphs.People;
-            this.btnQuanLyNhanVien.Text = "Nhân viên";
-            this.btnQuanLyNhanVien.Variant = ButtonVariant.Tertiary;
             this.btnQuanLyNhanVien.Margin = new Padding(10);
             this.btnQuanLyNhanVien.Size = new Size(210, 90);
+            this.btnQuanLyNhanVien.Text = "Nhân viên";
+            this.btnQuanLyNhanVien.UseVisualStyleBackColor = false;
             this.btnQuanLyNhanVien.Click += new EventHandler(this.btnQuanLyNhanVien_Click);
+            ThemeManager.StyleButton(this.btnQuanLyNhanVien, ButtonVariant.Tertiary, IconGlyphs.People);
             // 
             // btnQuanLyBanAn
             // 
-            this.btnQuanLyBanAn.Glyph = PhoManager.UI.Helpers.IconGlyphs.Table;
-            this.btnQuanLyBanAn.Text = "Quản lý Bàn";
-            this.btnQuanLyBanAn.Variant = ButtonVariant.Tertiary;
             this.btnQuanLyBanAn.Margin = new Padding(10);
             this.btnQuanLyBanAn.Size = new Size(210, 90);
+            this.btnQuanLyBanAn.Text = "Quản lý Bàn";
+            this.btnQuanLyBanAn.UseVisualStyleBackColor = false;
             this.btnQuanLyBanAn.Click += new EventHandler(this.btnQuanLyBanAn_Click);
+            ThemeManager.StyleButton(this.btnQuanLyBanAn, ButtonVariant.Tertiary, IconGlyphs.Table);
             // 
             // btnOrder
             // 
-            this.btnOrder.Glyph = PhoManager.UI.Helpers.IconGlyphs.Order;
-            this.btnOrder.Text = "Gọi món trực tiếp";
-            this.btnOrder.Variant = ButtonVariant.Primary;
             this.btnOrder.Margin = new Padding(10);
             this.btnOrder.Size = new Size(210, 90);
+            this.btnOrder.Text = "Gọi món trực tiếp";
+            this.btnOrder.UseVisualStyleBackColor = false;
             this.btnOrder.Click += new EventHandler(this.btnOrder_Click);
+            ThemeManager.StyleButton(this.btnOrder, ButtonVariant.Primary, IconGlyphs.Order);
             // 
             // btnHoaDon
             // 
-            this.btnHoaDon.Glyph = PhoManager.UI.Helpers.IconGlyphs.Invoice;
-            this.btnHoaDon.Text = "Quản lý Hóa đơn";
-            this.btnHoaDon.Variant = ButtonVariant.Tertiary;
             this.btnHoaDon.Margin = new Padding(10);
             this.btnHoaDon.Size = new Size(210, 90);
+            this.btnHoaDon.Text = "Quản lý Hóa đơn";
+            this.btnHoaDon.UseVisualStyleBackColor = false;
             this.btnHoaDon.Click += new EventHandler(this.btnHoaDon_Click);
+            ThemeManager.StyleButton(this.btnHoaDon, ButtonVariant.Tertiary, IconGlyphs.Invoice);
             // 
             // btnThongKe
             // 
-            this.btnThongKe.Glyph = PhoManager.UI.Helpers.IconGlyphs.Chart;
-            this.btnThongKe.Text = "Thống kê nhanh";
-            this.btnThongKe.Variant = ButtonVariant.Tertiary;
             this.btnThongKe.Margin = new Padding(10);
             this.btnThongKe.Size = new Size(210, 90);
+            this.btnThongKe.Text = "Thống kê nhanh";
+            this.btnThongKe.UseVisualStyleBackColor = false;
             this.btnThongKe.Click += new EventHandler(this.btnThongKe_Click);
+            ThemeManager.StyleButton(this.btnThongKe, ButtonVariant.Tertiary, IconGlyphs.Chart);
             // 
             // btnCauHinh
             // 
-            this.btnCauHinh.Glyph = PhoManager.UI.Helpers.IconGlyphs.Settings;
-            this.btnCauHinh.Text = "Thiết lập hệ thống";
-            this.btnCauHinh.Variant = ButtonVariant.Tertiary;
             this.btnCauHinh.Margin = new Padding(10);
             this.btnCauHinh.Size = new Size(210, 90);
+            this.btnCauHinh.Text = "Thiết lập hệ thống";
+            this.btnCauHinh.UseVisualStyleBackColor = false;
             this.btnCauHinh.Click += new EventHandler(this.btnCauHinh_Click);
+            ThemeManager.StyleButton(this.btnCauHinh, ButtonVariant.Tertiary, IconGlyphs.Settings);
             // 
             // btnDangXuat
             // 
-            this.btnDangXuat.Glyph = PhoManager.UI.Helpers.IconGlyphs.Logout;
-            this.btnDangXuat.Text = "Đăng xuất";
-            this.btnDangXuat.Variant = ButtonVariant.Danger;
             this.btnDangXuat.Margin = new Padding(10);
             this.btnDangXuat.Size = new Size(210, 90);
+            this.btnDangXuat.Text = "Đăng xuất";
+            this.btnDangXuat.UseVisualStyleBackColor = false;
             this.btnDangXuat.Click += new EventHandler(this.btnDangXuat_Click);
+            ThemeManager.StyleButton(this.btnDangXuat, ButtonVariant.Danger, IconGlyphs.Logout);
             // 
             // cardContainer
             // 
@@ -443,7 +443,7 @@ namespace PhoManager.UI.Forms
             // 
             this.lblRevenueCaption.AutoSize = true;
             this.lblRevenueCaption.Font = new Font("Segoe UI Semibold", 11F);
-            this.lblRevenueCaption.ForeColor = ThemeManager.TextColor;
+            this.lblRevenueCaption.ForeColor = ThemeManager.TextPrimary;
             this.lblRevenueCaption.Location = new Point(20, 18);
             this.lblRevenueCaption.Name = "lblRevenueCaption";
             this.lblRevenueCaption.Size = new Size(131, 20);
@@ -488,7 +488,7 @@ namespace PhoManager.UI.Forms
             // 
             this.lblOrdersCaption.AutoSize = true;
             this.lblOrdersCaption.Font = new Font("Segoe UI Semibold", 11F);
-            this.lblOrdersCaption.ForeColor = ThemeManager.TextColor;
+            this.lblOrdersCaption.ForeColor = ThemeManager.TextPrimary;
             this.lblOrdersCaption.Location = new Point(20, 18);
             this.lblOrdersCaption.Name = "lblOrdersCaption";
             this.lblOrdersCaption.Size = new Size(100, 20);
@@ -522,7 +522,7 @@ namespace PhoManager.UI.Forms
             // 
             this.lblTablesValue.AutoSize = true;
             this.lblTablesValue.Font = new Font("Segoe UI Semibold", 24F);
-            this.lblTablesValue.ForeColor = ThemeManager.TextColor;
+            this.lblTablesValue.ForeColor = ThemeManager.TextPrimary;
             this.lblTablesValue.Location = new Point(20, 50);
             this.lblTablesValue.Name = "lblTablesValue";
             this.lblTablesValue.Size = new Size(37, 45);
@@ -533,7 +533,7 @@ namespace PhoManager.UI.Forms
             // 
             this.lblTablesCaption.AutoSize = true;
             this.lblTablesCaption.Font = new Font("Segoe UI Semibold", 11F);
-            this.lblTablesCaption.ForeColor = ThemeManager.TextColor;
+            this.lblTablesCaption.ForeColor = ThemeManager.TextPrimary;
             this.lblTablesCaption.Location = new Point(20, 18);
             this.lblTablesCaption.Name = "lblTablesCaption";
             this.lblTablesCaption.Size = new Size(138, 20);
@@ -555,13 +555,14 @@ namespace PhoManager.UI.Forms
             // btnQuickOrder
             // 
             this.btnQuickOrder.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            this.btnQuickOrder.Glyph = PhoManager.UI.Helpers.IconGlyphs.Order;
             this.btnQuickOrder.Location = new Point(642, 58);
             this.btnQuickOrder.Name = "btnQuickOrder";
-            this.btnQuickOrder.Size = new Size(260, 46);
+            this.btnQuickOrder.Size = new Size(260, 42);
             this.btnQuickOrder.TabIndex = 3;
             this.btnQuickOrder.Text = "Tạo order mới";
+            this.btnQuickOrder.UseVisualStyleBackColor = false;
             this.btnQuickOrder.Click += new EventHandler(this.btnOrder_Click);
+            ThemeManager.StyleButton(this.btnQuickOrder, ButtonVariant.Primary, IconGlyphs.Order);
             // 
             // lblCurrentTime
             // 
@@ -579,7 +580,7 @@ namespace PhoManager.UI.Forms
             // 
             this.lblPageTitle.AutoSize = true;
             this.lblPageTitle.Font = new Font("Segoe UI Semibold", 18F);
-            this.lblPageTitle.ForeColor = ThemeManager.TextColor;
+            this.lblPageTitle.ForeColor = ThemeManager.TextPrimary;
             this.lblPageTitle.Location = new Point(14, 14);
             this.lblPageTitle.Name = "lblPageTitle";
             this.lblPageTitle.Size = new Size(247, 32);

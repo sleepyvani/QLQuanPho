@@ -1,3 +1,5 @@
+using PhoManager.UI.Helpers;
+
 namespace PhoManager.UI.Forms
 {
     partial class FrmThongKe
@@ -24,8 +26,11 @@ namespace PhoManager.UI.Forms
             this.dtpDenNgay.Size = new System.Drawing.Size(200, 20);
             
             this.btnXemThongKe.Location = new System.Drawing.Point(460, 18);
+            this.btnXemThongKe.Size = new System.Drawing.Size(120, 42);
             this.btnXemThongKe.Text = "Xem thống kê";
+            this.btnXemThongKe.UseVisualStyleBackColor = false;
             this.btnXemThongKe.Click += new System.EventHandler(this.btnXemThongKe_Click);
+            ThemeManager.StyleButton(this.btnXemThongKe, ButtonVariant.Primary);
             
             this.dgvThongKe.Location = new System.Drawing.Point(20, 60);
             this.dgvThongKe.Size = new System.Drawing.Size(800, 400);
@@ -33,7 +38,9 @@ namespace PhoManager.UI.Forms
             
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = ThemeManager.BackgroundPrimary;
             this.ClientSize = new System.Drawing.Size(900, 500);
+            ThemeManager.StyleDataGridView(this.dgvThongKe);
             this.Controls.Add(this.dgvThongKe);
             this.Controls.Add(this.dtpTuNgay);
             this.Controls.Add(this.dtpDenNgay);
