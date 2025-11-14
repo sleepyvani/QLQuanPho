@@ -15,153 +15,33 @@ namespace PhoManager.UI.Forms
         private readonly NguyenLieuBLL nguyenLieuBLL = new NguyenLieuBLL();
         private NguyenLieuDTO nguyenLieuDangChon;
 
-        // Controls
-        private SplitContainer splitContainer;
-        private DataGridView dgvNguyenLieu;
-        private TextBox txtTen;
-        private TextBox txtDonVi;
-        private NumericUpDown nudSoLuong;
-        private TextBox txtGiaNhap;
-        private Button btnThem;
-        private Button btnSua;
-        private Button btnXoa;
-        private Button btnLamMoi;
-        private Label lblStatus;
+        // Giao diện (UI) được khai báo trong file designer nên không khai báo thủ công ở đây.
 
         public FrmNguyenLieu()
         {
             InitializeComponent();
+            // Áp dụng chủ đề cơ bản cho form
+            PhoManager.UI.Helpers.ThemeManager.ApplyBaseFormStyle(this);
+            // Áp dụng style cho lưới và các control nếu có
+            PhoManager.UI.Helpers.ThemeManager.StyleDataGridView(dgvNguyenLieu);
+            PhoManager.UI.Helpers.ThemeManager.StyleButton(btnThem, PhoManager.UI.Helpers.ButtonVariant.Primary, PhoManager.UI.Helpers.IconGlyphs.Add);
+            PhoManager.UI.Helpers.ThemeManager.StyleButton(btnSua, PhoManager.UI.Helpers.ButtonVariant.Secondary, PhoManager.UI.Helpers.IconGlyphs.Edit);
+            PhoManager.UI.Helpers.ThemeManager.StyleButton(btnXoa, PhoManager.UI.Helpers.ButtonVariant.Danger, PhoManager.UI.Helpers.IconGlyphs.Delete);
+            PhoManager.UI.Helpers.ThemeManager.StyleButton(btnLamMoi, PhoManager.UI.Helpers.ButtonVariant.Tertiary, PhoManager.UI.Helpers.IconGlyphs.Refresh);
+            PhoManager.UI.Helpers.ThemeManager.StyleTextBox(txtTen);
+            PhoManager.UI.Helpers.ThemeManager.StyleTextBox(txtDonVi);
+            PhoManager.UI.Helpers.ThemeManager.StyleTextBox(txtGiaNhap);
+
             LoadNguyenLieu();
 
             // Đăng ký sự kiện sắp xếp khi bấm vào tiêu đề cột
-            this.dgvNguyenLieu.ColumnHeaderMouseClick += dgvNguyenLieu_ColumnHeaderMouseClick;
+            if (this.dgvNguyenLieu != null)
+            {
+                this.dgvNguyenLieu.ColumnHeaderMouseClick += dgvNguyenLieu_ColumnHeaderMouseClick;
+            }
         }
 
-        /// <summary>
-        /// Khởi tạo giao diện.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            this.Text = "Quản lý Nguyên liệu";
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.MinimumSize = new Size(800, 450);
-
-            splitContainer = new SplitContainer();
-            splitContainer.Dock = DockStyle.Fill;
-            splitContainer.Orientation = Orientation.Vertical;
-            splitContainer.SplitterDistance = 500;
-            this.Controls.Add(splitContainer);
-
-            // DataGridView
-            dgvNguyenLieu = new DataGridView();
-            dgvNguyenLieu.Dock = DockStyle.Fill;
-            dgvNguyenLieu.ReadOnly = true;
-            dgvNguyenLieu.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvNguyenLieu.AllowUserToAddRows = false;
-            dgvNguyenLieu.AllowUserToDeleteRows = false;
-            dgvNguyenLieu.AutoGenerateColumns = true;
-            dgvNguyenLieu.CellClick += dgvNguyenLieu_CellClick;
-            splitContainer.Panel1.Controls.Add(dgvNguyenLieu);
-
-            // Panel for details
-            Panel panel = new Panel();
-            panel.Dock = DockStyle.Fill;
-            splitContainer.Panel2.Controls.Add(panel);
-
-            int marginTop = 20;
-            int labelWidth = 100;
-            int controlWidth = 180;
-            int leftX = 20;
-            int secondX = leftX + labelWidth + 10;
-            int rowHeight = 30;
-            int currentY = marginTop;
-
-            // Tên nguyên liệu
-            Label lblTen = new Label();
-            lblTen.Text = "Tên NL:";
-            lblTen.Location = new Point(leftX, currentY + 5);
-            lblTen.AutoSize = true;
-            panel.Controls.Add(lblTen);
-            txtTen = new TextBox();
-            txtTen.Location = new Point(secondX, currentY);
-            txtTen.Width = controlWidth;
-            panel.Controls.Add(txtTen);
-            currentY += rowHeight;
-
-            // Đơn vị tính
-            Label lblDonVi = new Label();
-            lblDonVi.Text = "Đơn vị:";
-            lblDonVi.Location = new Point(leftX, currentY + 5);
-            lblDonVi.AutoSize = true;
-            panel.Controls.Add(lblDonVi);
-            txtDonVi = new TextBox();
-            txtDonVi.Location = new Point(secondX, currentY);
-            txtDonVi.Width = controlWidth;
-            panel.Controls.Add(txtDonVi);
-            currentY += rowHeight;
-
-            // Số lượng tồn
-            Label lblSoLuong = new Label();
-            lblSoLuong.Text = "Số lượng:";
-            lblSoLuong.Location = new Point(leftX, currentY + 5);
-            lblSoLuong.AutoSize = true;
-            panel.Controls.Add(lblSoLuong);
-            nudSoLuong = new NumericUpDown();
-            nudSoLuong.Location = new Point(secondX, currentY);
-            nudSoLuong.Width = controlWidth;
-            nudSoLuong.Minimum = 0;
-            nudSoLuong.Maximum = 1000000;
-            panel.Controls.Add(nudSoLuong);
-            currentY += rowHeight;
-
-            // Giá nhập
-            Label lblGiaNhap = new Label();
-            lblGiaNhap.Text = "Giá nhập:";
-            lblGiaNhap.Location = new Point(leftX, currentY + 5);
-            lblGiaNhap.AutoSize = true;
-            panel.Controls.Add(lblGiaNhap);
-            txtGiaNhap = new TextBox();
-            txtGiaNhap.Location = new Point(secondX, currentY);
-            txtGiaNhap.Width = controlWidth;
-            panel.Controls.Add(txtGiaNhap);
-            currentY += rowHeight + 10;
-
-            // Buttons
-            btnThem = new Button();
-            btnThem.Text = "Thêm";
-            btnThem.Width = 80;
-            btnThem.Location = new Point(leftX, currentY);
-            btnThem.Click += btnThem_Click;
-            panel.Controls.Add(btnThem);
-
-            btnSua = new Button();
-            btnSua.Text = "Sửa";
-            btnSua.Width = 80;
-            btnSua.Location = new Point(leftX + 90, currentY);
-            btnSua.Click += btnSua_Click;
-            panel.Controls.Add(btnSua);
-
-            btnXoa = new Button();
-            btnXoa.Text = "Xóa";
-            btnXoa.Width = 80;
-            btnXoa.Location = new Point(leftX + 180, currentY);
-            btnXoa.Click += btnXoa_Click;
-            panel.Controls.Add(btnXoa);
-
-            btnLamMoi = new Button();
-            btnLamMoi.Text = "Làm mới";
-            btnLamMoi.Width = 80;
-            btnLamMoi.Location = new Point(leftX + 270, currentY);
-            btnLamMoi.Click += btnLamMoi_Click;
-            panel.Controls.Add(btnLamMoi);
-            currentY += rowHeight + 10;
-
-            lblStatus = new Label();
-            lblStatus.AutoSize = true;
-            lblStatus.ForeColor = Color.FromArgb(35, 96, 67);
-            lblStatus.Location = new Point(leftX, currentY + 5);
-            panel.Controls.Add(lblStatus);
-        }
+        // Phần khởi tạo giao diện được đặt trong tệp FrmNguyenLieu.Designer.cs
 
         /// <summary>
         /// Nạp danh sách nguyên liệu vào DataGridView.

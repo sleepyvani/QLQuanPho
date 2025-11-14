@@ -42,16 +42,116 @@ namespace PhoManager.UI.Helpers
 
     public static class ThemeManager
     {
-        public static readonly Color PrimaryColor = Color.FromArgb(26, 188, 156);
-        public static readonly Color PrimaryDark = Color.FromArgb(22, 160, 133);
-        public static readonly Color AccentColor = Color.FromArgb(52, 152, 219);
-        public static readonly Color DangerColor = Color.FromArgb(235, 87, 87);
-        public static readonly Color TextColor = Color.FromArgb(35, 45, 63);
-        public static readonly Color TextMuted = Color.FromArgb(112, 123, 140);
-        public static readonly Color BackgroundColor = Color.FromArgb(245, 247, 250);
-        public static readonly Color PanelColor = Color.White;
-        public static readonly Color SidebarColor = Color.FromArgb(33, 42, 62);
-        public static readonly Color SidebarActive = Color.FromArgb(60, 75, 99);
+        /// <summary>
+        /// Indicates whether the dark theme is currently active.  When true the colour
+        /// palette will switch to darker shades and light foregrounds.  Use
+        /// <see cref="SetTheme(bool)"/> to change this flag and update the static colour
+        /// fields accordingly.  By default the application starts in light mode.
+        /// </summary>
+        public static bool IsDarkTheme { get; private set; } = false;
+
+        /// <summary>
+        /// The primary accent colour used for important buttons and highlights.
+        /// This value changes when the theme is toggled.  Do not treat this
+        /// value as constant – use it at the point of drawing or styling.
+        /// </summary>
+        public static Color PrimaryColor = Color.FromArgb(26, 188, 156);
+
+        /// <summary>
+        /// A darker variation of the primary colour used on hover states.
+        /// </summary>
+        public static Color PrimaryDark = Color.FromArgb(22, 160, 133);
+
+        /// <summary>
+        /// A secondary accent colour used sparingly.
+        /// </summary>
+        public static Color AccentColor = Color.FromArgb(52, 152, 219);
+
+        /// <summary>
+        /// Colour used for destructive actions like delete buttons.
+        /// </summary>
+        public static Color DangerColor = Color.FromArgb(235, 87, 87);
+
+        /// <summary>
+        /// Main text colour.  Adjusted depending on light/dark mode.
+        /// </summary>
+        public static Color TextColor = Color.FromArgb(35, 45, 63);
+
+        /// <summary>
+        /// Muted text colour for secondary captions.
+        /// </summary>
+        public static Color TextMuted = Color.FromArgb(112, 123, 140);
+
+        /// <summary>
+        /// Background colour for the main window and large panels.
+        /// </summary>
+        public static Color BackgroundColor = Color.FromArgb(245, 247, 250);
+
+        /// <summary>
+        /// Background colour for card-like panels and containers.
+        /// </summary>
+        public static Color PanelColor = Color.White;
+
+        /// <summary>
+        /// Background colour for the sidebar.
+        /// </summary>
+        public static Color SidebarColor = Color.FromArgb(33, 42, 62);
+
+        /// <summary>
+        /// Background colour for the active sidebar button.
+        /// </summary>
+        public static Color SidebarActive = Color.FromArgb(60, 75, 99);
+
+        /// <summary>
+        /// When the user selects a custom logo this property is set.  If null then
+        /// the default logo (file in Resources folder) will be used.  Forms
+        /// displaying a logo should bind to this property rather than embedding
+        /// the logo directly so that theme and configuration changes apply
+        /// instantly.
+        /// </summary>
+        public static Image CustomLogoImage { get; set; }
+
+        /// <summary>
+        /// Switches the colour palette between light and dark modes.  When
+        /// switching the static colour fields are updated immediately.  Call
+        /// this method before styling controls or redrawing windows.  If you
+        /// need to refresh existing controls after changing the theme you
+        /// should manually call an update method on those controls (for
+        /// example, FrmMain.ReloadTheme()).
+        /// </summary>
+        /// <param name="dark">True to enable dark mode; false for light.</param>
+        public static void SetTheme(bool dark)
+        {
+            IsDarkTheme = dark;
+            if (dark)
+            {
+                // Dark theme values
+                PrimaryColor = Color.FromArgb(52, 73, 94);
+                PrimaryDark = Color.FromArgb(44, 62, 80);
+                AccentColor = Color.FromArgb(93, 173, 226);
+                DangerColor = Color.FromArgb(192, 57, 43);
+                TextColor = Color.FromArgb(236, 240, 241);
+                TextMuted = Color.FromArgb(149, 165, 166);
+                BackgroundColor = Color.FromArgb(24, 33, 46);
+                PanelColor = Color.FromArgb(29, 40, 56);
+                SidebarColor = Color.FromArgb(33, 42, 62);
+                SidebarActive = Color.FromArgb(60, 75, 99);
+            }
+            else
+            {
+                // Light theme values
+                PrimaryColor = Color.FromArgb(26, 188, 156);
+                PrimaryDark = Color.FromArgb(22, 160, 133);
+                AccentColor = Color.FromArgb(52, 152, 219);
+                DangerColor = Color.FromArgb(235, 87, 87);
+                TextColor = Color.FromArgb(35, 45, 63);
+                TextMuted = Color.FromArgb(112, 123, 140);
+                BackgroundColor = Color.FromArgb(245, 247, 250);
+                PanelColor = Color.White;
+                SidebarColor = Color.FromArgb(33, 42, 62);
+                SidebarActive = Color.FromArgb(60, 75, 99);
+            }
+        }
 
         private static readonly Font DefaultFont = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
         private static readonly Font IconFont;

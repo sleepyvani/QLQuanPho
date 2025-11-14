@@ -23,6 +23,51 @@ namespace PhoManager.UI.Forms
             LoadMenu();
             UpdateDatabaseStatus();
             timerClock_Tick(this, EventArgs.Empty);
+
+            // Load initial dashboard statistics (revenue and order count)
+            UpdateDashboardStatistics();
+        }
+
+        /// <summary>
+        /// Re-applies theme colours and logo to the main form.  Call this method after
+        /// toggling between light and dark modes or changing the logo.  It will
+        /// update backgrounds, card styles, sidebar colours and quick action
+        /// buttons accordingly.  Existing navigation state is preserved.
+        /// </summary>
+        public void ReloadTheme()
+        {
+            // Update primary panels
+            this.pnlSidebar.BackColor = ThemeManager.SidebarColor;
+            this.pnlSidebarHeader.BackColor = ThemeManager.SidebarColor;
+            this.pnlSidebarFooter.BackColor = ThemeManager.SidebarColor;
+            this.pnlMain.BackColor = ThemeManager.BackgroundColor;
+
+            // Update cards
+            ThemeManager.ApplyPanelCardStyle(cardRevenue);
+            ThemeManager.ApplyPanelCardStyle(cardOrders);
+            ThemeManager.ApplyPanelCardStyle(cardTables);
+
+            // Update sidebar buttons state to refresh colours and icons
+            var buttons = new[] { navDashboard, navOrder, navTables, navMenu, navStaff, navInvoices, navAnalytics, navSettings, navLogout };
+            foreach (var btn in buttons)
+            {
+                // Trigger the setter to force UpdateState and refresh icon
+                bool active = btn.IsActive;
+                btn.IsActive = active;
+            }
+
+            // Update quick action buttons: reapply variant to update colours
+            var actions = new[] { btnQuanLyMonAn, btnQuanLyNhanVien, btnQuanLyBanAn, btnOrder, btnHoaDon, btnThongKe, btnCauHinh, btnDangXuat };
+            foreach (var act in actions)
+            {
+                // Reset variant to itself so the setter calls ApplyVariant
+                var variant = act.Variant;
+                act.Variant = variant;
+            }
+
+            // Reload the logo if a custom logo is set
+            LoadLogo();
+            this.Invalidate();
         }
 
         private void LoadLogo()
@@ -127,6 +172,103 @@ namespace PhoManager.UI.Forms
             }
         }
 
+        /// <summary>
+        /// Updates the revenue and order count statistics displayed on the dashboard.  It
+        /// calculates today's total revenue and total number of completed orders
+        /// (hóa đơn đã thanh toán) using ThongKeBLL.  It also compares today's
+        /// values with yesterday's to update the subtitle texts.  This method
+        /// should be called whenever data that affects revenue or order count
+        /// changes, such as after completing an order or viewing invoice history.
+        /// </summary>
+        private void UpdateDashboardStatistics()
+        {
+            try
+            {
+                var tkBLL = new PhoManager.BLL.ThongKeBLL();
+                DateTime today = DateTime.Today;
+                DateTime yesterday = today.AddDays(-1);
+
+                // Calculate revenue and order count for today
+                decimal revenueToday = tkBLL.LayTongDoanhThu(today, today);
+                int ordersToday = tkBLL.LaySoLuongHoaDon(today, today);
+
+                // Format revenue with thousand separators and currency suffix
+                lblRevenueValue.Text = string.Format("{0:N0} VND", revenueToday);
+                lblOrdersValue.Text = ordersToday.ToString();
+
+                // Compare with yesterday for subtitle text
+                decimal revenueYesterday = tkBLL.LayTongDoanhThu(yesterday, yesterday);
+                int ordersYesterday = tkBLL.LaySoLuongHoaDon(yesterday, yesterday);
+
+                // Determine revenue change text
+                string revChange;
+                if (revenueYesterday == 0m && revenueToday > 0m)
+                {
+                    revChange = "Tăng so với hôm qua";
+                }
+                else if (revenueYesterday == 0m && revenueToday == 0m)
+                {
+                    revChange = "Không có doanh thu";
+                }
+                else
+                {
+                    decimal diff = revenueToday - revenueYesterday;
+                    decimal percent = revenueYesterday != 0 ? diff / revenueYesterday * 100 : 0;
+                    if (diff > 0)
+                    {
+                        revChange = $"+{percent:0.##}% so với hôm qua";
+                    }
+                    else if (diff < 0)
+                    {
+                        revChange = $"-{Math.Abs(percent):0.##}% so với hôm qua";
+                    }
+                    else
+                    {
+                        revChange = "Bằng hôm qua";
+                    }
+                }
+                lblRevenueSub.Text = revChange;
+
+                // Determine order change text
+                string orderChange;
+                if (ordersYesterday == 0 && ordersToday > 0)
+                {
+                    orderChange = "Tăng so với hôm qua";
+                }
+                else if (ordersYesterday == 0 && ordersToday == 0)
+                {
+                    orderChange = "Không có đơn hoàn tất";
+                }
+                else
+                {
+                    int diffOrder = ordersToday - ordersYesterday;
+                    decimal percentOrder = ordersYesterday != 0 ? (decimal)diffOrder / ordersYesterday * 100 : 0;
+                    if (diffOrder > 0)
+                    {
+                        orderChange = $"+{percentOrder:0.##}% so với hôm qua";
+                    }
+                    else if (diffOrder < 0)
+                    {
+                        orderChange = $"-{Math.Abs(percentOrder):0.##}% so với hôm qua";
+                    }
+                    else
+                    {
+                        orderChange = "Bằng hôm qua";
+                    }
+                }
+                lblOrdersSub.Text = orderChange;
+            }
+            catch (Exception ex)
+            {
+                // Log but do not crash if there is a database error; display fallback text
+                PhoManager.Utilities.Logger.Error("Failed to update dashboard statistics: " + ex.Message);
+                lblRevenueValue.Text = "0 VND";
+                lblOrdersValue.Text = "0";
+                lblRevenueSub.Text = "Không thể lấy dữ liệu";
+                lblOrdersSub.Text = "Không thể lấy dữ liệu";
+            }
+        }
+
         private void btnQuanLyMonAn_Click(object sender, EventArgs e)
         {
             SetActiveNav(navMenu);
@@ -161,15 +303,27 @@ namespace PhoManager.UI.Forms
             {
                 frm.ShowDialog();
             }
+
+            // After closing the Order form, refresh dashboard statistics because
+            // the user may have added or completed orders which affect revenue
+            // and order counts.
+            UpdateDashboardStatistics();
         }
 
         private void btnHoaDon_Click(object sender, EventArgs e)
         {
+            // Khi người dùng nhấn vào mục "Hóa đơn" trên thanh điều hướng, chúng ta mở form
+            // báo cáo hóa đơn để hiển thị lịch sử hóa đơn và cho phép xuất/in. Form FrmHoaDon
+            // cũ chỉ có nút stub nên được thay thế bằng FrmBaoCaoHoaDon.
             SetActiveNav(navInvoices);
-            using (var frm = new FrmHoaDon())
+            using (var frm = new FrmBaoCaoHoaDon())
             {
                 frm.ShowDialog();
             }
+
+            // Sau khi xem hoặc thao tác với hóa đơn, cập nhật lại thống kê để phản ánh
+            // các hóa đơn đã thanh toán gần đây.
+            UpdateDashboardStatistics();
         }
 
         private void btnThongKe_Click(object sender, EventArgs e)
