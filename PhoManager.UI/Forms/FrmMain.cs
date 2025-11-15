@@ -52,16 +52,56 @@ namespace PhoManager.UI.Forms
 
         private void StyleNavigationButtons()
         {
+            // CRITICAL: Set button sizes and font FIRST before styling to prevent text wrapping
             var navButtons = new[] { btnNavOrder, btnNavTables, btnNavMenu, btnNavStaff, btnNavInvoices, btnNavAnalytics, btnNavSettings, btnNavLogout };
             foreach (var btn in navButtons)
             {
-                ThemeManager.StyleButton(btn, ButtonVariant.Ghost);
+                // Set font FIRST before StyleButton to preserve it
+                btn.Font = new Font("Segoe UI Semibold", 8.5F);
+                btn.AutoSize = false;
+                btn.UseCompatibleTextRendering = false;
+                // Ensure minimum width based on text length - CRITICAL to prevent wrapping
+                if (btn == btnNavOrder) btn.Width = Math.Max(btn.Width, 110);
+                else if (btn == btnNavTables || btn == btnNavMenu) btn.Width = Math.Max(btn.Width, 130);
+                else if (btn == btnNavStaff) btn.Width = Math.Max(btn.Width, 110);
+                else if (btn == btnNavInvoices || btn == btnNavAnalytics || btn == btnNavSettings) btn.Width = Math.Max(btn.Width, 100);
+                else if (btn == btnNavLogout) btn.Width = Math.Max(btn.Width, 120);
             }
+            
+            // Style navbar buttons - NO ICONS to save space for text
+            ThemeManager.StyleButton(btnNavOrder, ButtonVariant.Ghost);
+            ThemeManager.StyleButton(btnNavTables, ButtonVariant.Ghost);
+            ThemeManager.StyleButton(btnNavMenu, ButtonVariant.Ghost);
+            ThemeManager.StyleButton(btnNavStaff, ButtonVariant.Ghost);
+            ThemeManager.StyleButton(btnNavInvoices, ButtonVariant.Ghost);
+            ThemeManager.StyleButton(btnNavAnalytics, ButtonVariant.Ghost);
+            ThemeManager.StyleButton(btnNavSettings, ButtonVariant.Ghost);
+            ThemeManager.StyleButton(btnNavLogout, ButtonVariant.Ghost);
+            
+            // CRITICAL: Force proper alignment AFTER StyleButton - NO ICONS, just text centered
+            foreach (var btn in navButtons)
+            {
+                btn.AutoSize = false;
+                btn.TextAlign = ContentAlignment.MiddleCenter;
+                btn.ImageAlign = ContentAlignment.MiddleCenter;
+                btn.TextImageRelation = TextImageRelation.Overlay;
+                btn.Padding = new Padding(8, 0, 8, 0);
+                btn.UseCompatibleTextRendering = false;
+                // Force single line text - set font again to ensure it's preserved
+                btn.Font = new Font("Segoe UI Semibold", 8.5F);
+            }
+            
             ThemeManager.StyleButton(btnQuickOrder, ButtonVariant.Primary, IconGlyphs.Order);
+            btnQuickOrder.AutoSize = false;
+            btnQuickOrder.TextAlign = ContentAlignment.MiddleCenter;
+            btnQuickOrder.UseCompatibleTextRendering = false;
         }
 
         private void StyleQuickActionButtons()
         {
+            var quickActions = new[] { btnQuanLyMonAn, btnQuanLyNhanVien, btnQuanLyBanAn, btnOrder, btnHoaDon, btnThongKe, btnCauHinh, btnDangXuat };
+            
+            // Apply styling with icons - StyleButton will detect Height >= 80 and apply large button style
             ThemeManager.StyleButton(btnQuanLyMonAn, ButtonVariant.Tertiary, IconGlyphs.Bowl);
             ThemeManager.StyleButton(btnQuanLyNhanVien, ButtonVariant.Tertiary, IconGlyphs.People);
             ThemeManager.StyleButton(btnQuanLyBanAn, ButtonVariant.Tertiary, IconGlyphs.Table);
@@ -71,14 +111,20 @@ namespace PhoManager.UI.Forms
             ThemeManager.StyleButton(btnCauHinh, ButtonVariant.Tertiary, IconGlyphs.Settings);
             ThemeManager.StyleButton(btnDangXuat, ButtonVariant.Danger, IconGlyphs.Logout);
             
-            // Set button sizes for quick actions
-            var quickActions = new[] { btnQuanLyMonAn, btnQuanLyNhanVien, btnQuanLyBanAn, btnOrder, btnHoaDon, btnThongKe, btnCauHinh, btnDangXuat };
+            // Force proper alignment for large buttons - CRITICAL for icon/text positioning
             foreach (var btn in quickActions)
             {
-                btn.Size = new Size(210, 90);
+                btn.AutoSize = false;
+                // CRITICAL: ImageAboveText requires specific alignment
                 btn.TextImageRelation = TextImageRelation.ImageAboveText;
+                // Icon must be at top center horizontally
                 btn.ImageAlign = ContentAlignment.TopCenter;
+                // Text must be at bottom center horizontally (centers text in bottom portion)
                 btn.TextAlign = ContentAlignment.BottomCenter;
+                // Padding: symmetric left/right, top space for icon, bottom space for text
+                btn.Padding = new Padding(8, 32, 8, 8);
+                // Prevent text wrapping
+                btn.UseCompatibleTextRendering = false;
             }
         }
 

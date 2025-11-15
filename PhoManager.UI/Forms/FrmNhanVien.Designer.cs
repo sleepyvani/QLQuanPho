@@ -91,7 +91,7 @@ namespace PhoManager.UI.Forms
             // dgvNhanVien
             // 
             this.dgvNhanVien.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvNhanVien.ColumnHeadersHeight = 29;
+            this.dgvNhanVien.ColumnHeadersHeight = 45;
             this.dgvNhanVien.Location = new System.Drawing.Point(27, 25);
             this.dgvNhanVien.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvNhanVien.Name = "dgvNhanVien";
@@ -149,32 +149,50 @@ namespace PhoManager.UI.Forms
             // 
             // btnThem
             // 
+            this.btnThem.AutoSize = false;
+            this.btnThem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnThem.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnThem.Location = new System.Drawing.Point(1000, 308);
             this.btnThem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(120, 37);
+            this.btnThem.Size = new System.Drawing.Size(110, 42);
             this.btnThem.TabIndex = 6;
             this.btnThem.Text = "Thêm";
+            this.btnThem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnThem.UseCompatibleTextRendering = false;
+            this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnSua
             // 
-            this.btnSua.Location = new System.Drawing.Point(1147, 308);
+            this.btnSua.AutoSize = false;
+            this.btnSua.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSua.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnSua.Location = new System.Drawing.Point(1118, 308);
             this.btnSua.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(120, 37);
+            this.btnSua.Size = new System.Drawing.Size(110, 42);
             this.btnSua.TabIndex = 7;
             this.btnSua.Text = "Sửa";
+            this.btnSua.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnSua.UseCompatibleTextRendering = false;
+            this.btnSua.UseVisualStyleBackColor = true;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
             // 
-            this.btnXoa.Location = new System.Drawing.Point(1000, 357);
+            this.btnXoa.AutoSize = false;
+            this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnXoa.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnXoa.Location = new System.Drawing.Point(1000, 358);
             this.btnXoa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(120, 37);
+            this.btnXoa.Size = new System.Drawing.Size(110, 42);
             this.btnXoa.TabIndex = 8;
             this.btnXoa.Text = "Xóa";
+            this.btnXoa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnXoa.UseCompatibleTextRendering = false;
+            this.btnXoa.UseVisualStyleBackColor = true;
             // 
             // txtTimKiemNV
             // 
@@ -186,11 +204,16 @@ namespace PhoManager.UI.Forms
             // 
             // btnTimKiemNV
             // 
+            this.btnTimKiemNV.AutoSize = false;
+            this.btnTimKiemNV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTimKiemNV.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
             this.btnTimKiemNV.Location = new System.Drawing.Point(1192, 24);
             this.btnTimKiemNV.Name = "btnTimKiemNV";
-            this.btnTimKiemNV.Size = new System.Drawing.Size(75, 23);
+            this.btnTimKiemNV.Size = new System.Drawing.Size(140, 32);
             this.btnTimKiemNV.TabIndex = 10;
-            this.btnTimKiemNV.Text = "Tìm Kiếm";
+            this.btnTimKiemNV.Text = "Tìm kiếm";
+            this.btnTimKiemNV.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnTimKiemNV.UseCompatibleTextRendering = false;
             this.btnTimKiemNV.UseVisualStyleBackColor = true;
             this.btnTimKiemNV.Click += new System.EventHandler(this.btnTimKiemNV_Click);
             // 

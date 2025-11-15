@@ -60,7 +60,7 @@ namespace PhoManager.UI.Forms
             // 
             // dgvMonAn
             // 
-            this.dgvMonAn.ColumnHeadersHeight = 29;
+            this.dgvMonAn.ColumnHeadersHeight = 45;
             this.dgvMonAn.Location = new System.Drawing.Point(27, 74);
             this.dgvMonAn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvMonAn.Name = "dgvMonAn";
@@ -70,7 +70,7 @@ namespace PhoManager.UI.Forms
             // 
             // dgvChiTiet
             // 
-            this.dgvChiTiet.ColumnHeadersHeight = 29;
+            this.dgvChiTiet.ColumnHeadersHeight = 45;
             this.dgvChiTiet.Location = new System.Drawing.Point(733, 74);
             this.dgvChiTiet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvChiTiet.Name = "dgvChiTiet";
@@ -138,12 +138,18 @@ namespace PhoManager.UI.Forms
             // 
             // btnThemMon
             // 
+            this.btnThemMon.AutoSize = false;
+            this.btnThemMon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnThemMon.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnThemMon.Location = new System.Drawing.Point(600, 465);
             this.btnThemMon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnThemMon.Name = "btnThemMon";
-            this.btnThemMon.Size = new System.Drawing.Size(100, 28);
+            this.btnThemMon.Size = new System.Drawing.Size(150, 42);
             this.btnThemMon.TabIndex = 6;
             this.btnThemMon.Text = "Thêm món";
+            this.btnThemMon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnThemMon.UseCompatibleTextRendering = false;
+            this.btnThemMon.UseVisualStyleBackColor = true;
             this.btnThemMon.Click += new System.EventHandler(this.btnThemMon_Click);
             // 
             // lblTongTien
@@ -157,11 +163,16 @@ namespace PhoManager.UI.Forms
             // 
             // btnXoaMon
             // 
+            this.btnXoaMon.AutoSize = false;
+            this.btnXoaMon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnXoaMon.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnXoaMon.Location = new System.Drawing.Point(1191, 465);
             this.btnXoaMon.Name = "btnXoaMon";
-            this.btnXoaMon.Size = new System.Drawing.Size(75, 23);
+            this.btnXoaMon.Size = new System.Drawing.Size(150, 42);
             this.btnXoaMon.TabIndex = 8;
-            this.btnXoaMon.Text = "Xóa Món";
+            this.btnXoaMon.Text = "Xóa món";
+            this.btnXoaMon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnXoaMon.UseCompatibleTextRendering = false;
             this.btnXoaMon.UseVisualStyleBackColor = true;
             this.btnXoaMon.Click += new System.EventHandler(this.btnXoaMon_Click_1);
             // 

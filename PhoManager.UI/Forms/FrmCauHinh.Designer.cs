@@ -66,11 +66,16 @@ namespace PhoManager.UI.Forms
             // 
             // btnChangeLogo
             // 
+            this.btnChangeLogo.AutoSize = false;
+            this.btnChangeLogo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChangeLogo.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
             this.btnChangeLogo.Location = new System.Drawing.Point(320, 80);
             this.btnChangeLogo.Name = "btnChangeLogo";
-            this.btnChangeLogo.Size = new System.Drawing.Size(100, 30);
+            this.btnChangeLogo.Size = new System.Drawing.Size(140, 32);
             this.btnChangeLogo.TabIndex = 4;
             this.btnChangeLogo.Text = "Chọn logo";
+            this.btnChangeLogo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnChangeLogo.UseCompatibleTextRendering = false;
             this.btnChangeLogo.UseVisualStyleBackColor = true;
             this.btnChangeLogo.Click += new System.EventHandler(this.btnChangeLogo_Click);
 
@@ -82,11 +87,16 @@ namespace PhoManager.UI.Forms
             // 
             // btnLuu
             // 
+            this.btnLuu.AutoSize = false;
+            this.btnLuu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLuu.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnLuu.Location = new System.Drawing.Point(50, 220);
             this.btnLuu.Name = "btnLuu";
-            this.btnLuu.Size = new System.Drawing.Size(150, 40);
+            this.btnLuu.Size = new System.Drawing.Size(110, 42);
             this.btnLuu.TabIndex = 5;
             this.btnLuu.Text = "Lưu";
+            this.btnLuu.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnLuu.UseCompatibleTextRendering = false;
             this.btnLuu.UseVisualStyleBackColor = true;
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
 

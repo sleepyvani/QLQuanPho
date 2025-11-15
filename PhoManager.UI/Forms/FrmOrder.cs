@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using PhoManager.BLL;
 using PhoManager.DTO;
@@ -29,8 +30,21 @@ namespace PhoManager.UI.Forms
             ThemeManager.StyleComboBox(cboKichCo);
             ThemeManager.StyleTextBox(txtSoLuong);
             ThemeManager.StyleTextBox(txtGhiChuMon);
-            ThemeManager.StyleButton(btnThemMon, ButtonVariant.Primary, IconGlyphs.Add);
-            ThemeManager.StyleButton(btnXoaMon, ButtonVariant.Danger, IconGlyphs.Delete);
+            ThemeManager.StyleButton(btnThemMon, ButtonVariant.Primary);
+            ThemeManager.StyleButton(btnXoaMon, ButtonVariant.Danger);
+            
+            // Maintain critical properties after StyleButton - remove icons and ensure no wrapping
+            btnThemMon.AutoSize = false;
+            btnThemMon.TextAlign = ContentAlignment.MiddleCenter;
+            btnThemMon.UseCompatibleTextRendering = false;
+            btnThemMon.Image = null;
+            btnThemMon.Width = 150;
+            btnXoaMon.AutoSize = false;
+            btnXoaMon.TextAlign = ContentAlignment.MiddleCenter;
+            btnXoaMon.UseCompatibleTextRendering = false;
+            btnXoaMon.Image = null;
+            btnXoaMon.Width = 150;
+            
             LoadDanhSachBan();
             LoadDanhSachMonAn();
             btnXoaMon.Click += btnXoaMon_Click;

@@ -42,17 +42,30 @@ namespace PhoManager.UI.Forms
             }
             if (this.btnXem != null)
             {
-                ThemeManager.StyleButton(btnXem, ButtonVariant.Primary, IconGlyphs.Search);
+                ThemeManager.StyleButton(btnXem, ButtonVariant.Primary);
+                btnXem.AutoSize = false;
+                btnXem.TextAlign = ContentAlignment.MiddleCenter;
+                btnXem.UseCompatibleTextRendering = false;
+                btnXem.Image = null;
+                btnXem.Width = 150;
             }
-
-            // Style cho các nút xuất và in hóa đơn nếu đã khởi tạo.
             if (this.btnExport != null)
             {
-                ThemeManager.StyleButton(btnExport, ButtonVariant.Secondary, IconGlyphs.Save);
+                ThemeManager.StyleButton(btnExport, ButtonVariant.Secondary);
+                btnExport.AutoSize = false;
+                btnExport.TextAlign = ContentAlignment.MiddleCenter;
+                btnExport.UseCompatibleTextRendering = false;
+                btnExport.Image = null;
+                btnExport.Width = 150;
             }
             if (this.btnPrint != null)
             {
-                ThemeManager.StyleButton(btnPrint, ButtonVariant.Secondary, IconGlyphs.Report);
+                ThemeManager.StyleButton(btnPrint, ButtonVariant.Secondary);
+                btnPrint.AutoSize = false;
+                btnPrint.TextAlign = ContentAlignment.MiddleCenter;
+                btnPrint.UseCompatibleTextRendering = false;
+                btnPrint.Image = null;
+                btnPrint.Width = 150;
             }
 
             // Khởi tạo PrintDocument và gắn sự kiện PrintPage để vẽ nội dung hóa đơn khi in.

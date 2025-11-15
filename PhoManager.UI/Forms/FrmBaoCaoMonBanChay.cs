@@ -33,7 +33,12 @@ namespace PhoManager.UI.Forms
             }
             if (this.btnXem != null)
             {
-                ThemeManager.StyleButton(btnXem, ButtonVariant.Primary, IconGlyphs.Search);
+                ThemeManager.StyleButton(btnXem, ButtonVariant.Primary);
+                btnXem.AutoSize = false;
+                btnXem.TextAlign = ContentAlignment.MiddleCenter;
+                btnXem.UseCompatibleTextRendering = false;
+                btnXem.Image = null;
+                btnXem.Width = 150;
             }
 
             // Đăng ký sự kiện sắp xếp cho DataGridView

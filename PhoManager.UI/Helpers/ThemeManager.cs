@@ -227,6 +227,11 @@ namespace PhoManager.UI.Helpers
             grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10F);
             grid.ColumnHeadersDefaultCellStyle.Padding = new Padding(12, 8, 12, 8);
             grid.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            // Set minimum header height to ensure text is visible
+            if (grid.ColumnHeadersHeight < 45)
+            {
+                grid.ColumnHeadersHeight = 45;
+            }
             grid.DefaultCellStyle.SelectionBackColor = PrimaryLight;
             grid.DefaultCellStyle.SelectionForeColor = TextColor;
             grid.RowTemplate.Height = 42;
@@ -309,6 +314,7 @@ namespace PhoManager.UI.Helpers
 
             button.FlatStyle = FlatStyle.Flat;
             button.UseVisualStyleBackColor = false;
+            button.AutoSize = false; // Prevent text wrapping
             button.FlatAppearance.BorderSize = variant == ButtonVariant.Secondary || variant == ButtonVariant.Ghost ? 1 : 0;
             if (button.FlatAppearance.BorderSize > 0)
             {
@@ -317,7 +323,18 @@ namespace PhoManager.UI.Helpers
             // Note: Flat buttons don't have rounded corners by default in WinForms
             button.BackColor = backColor;
             button.ForeColor = foreColor;
-            button.Font = new Font("Segoe UI Semibold", 10F);
+            // Preserve font size if button already has a smaller font (e.g., navbar buttons with 8.5F)
+            // Only set default font if button doesn't have a custom font size smaller than 10F
+            float currentFontSize = button.Font.Size;
+            if (currentFontSize >= 10F || (currentFontSize < 8.5F && button.Font.Name != "Segoe UI Semibold"))
+            {
+                button.Font = new Font("Segoe UI Semibold", 10F);
+            }
+            // If font size is between 8.5F and 10F, preserve it but ensure font name is correct
+            else if (currentFontSize < 10F && currentFontSize >= 8F)
+            {
+                button.Font = new Font("Segoe UI Semibold", currentFontSize);
+            }
             
             // Adjust height only for regular buttons (not large quick action buttons)
             if (button.Height < 50)
@@ -328,26 +345,41 @@ namespace PhoManager.UI.Helpers
             // Adjust padding and alignment based on button size and glyph
             if (button.Height >= 80)
             {
-                // Large buttons: vertical layout
+                // Large buttons: vertical layout with icon above text
+                // CRITICAL: Set these properties in correct order
                 button.TextImageRelation = TextImageRelation.ImageAboveText;
+                // Icon at top center - horizontally centered at top
                 button.ImageAlign = ContentAlignment.TopCenter;
+                // Text at bottom center - horizontally centered in bottom portion
                 button.TextAlign = ContentAlignment.BottomCenter;
-                button.Padding = new Padding(12, 12, 12, 8);
+                // Padding: symmetric left/right (8px), top for icon space (32px), bottom for text (8px)
+                button.Padding = new Padding(8, 32, 8, 8);
                 if (!string.IsNullOrEmpty(glyph))
                 {
-                    button.Image = CreateGlyphIcon(glyph, foreColor, 32);
+                    // Create icon with exact size
+                    button.Image = CreateGlyphIcon(glyph, foreColor, 28);
                 }
             }
             else
             {
                 // Regular buttons: horizontal layout
-                button.Padding = new Padding(glyph == null ? 18 : 50, 0, 20, 0);
-                button.TextAlign = ContentAlignment.MiddleLeft;
-                button.ImageAlign = ContentAlignment.MiddleLeft;
-                button.TextImageRelation = TextImageRelation.ImageBeforeText;
                 if (!string.IsNullOrEmpty(glyph))
                 {
+                    // Button with icon: icon on left, text centered horizontally
+                    // Padding: left for icon space (18px icon + 8px margin), right for balance
+                    button.Padding = new Padding(32, 0, 10, 0);
+                    button.TextAlign = ContentAlignment.MiddleCenter;
+                    button.ImageAlign = ContentAlignment.MiddleLeft;
+                    button.TextImageRelation = TextImageRelation.ImageBeforeText;
                     button.Image = CreateGlyphIcon(glyph, foreColor, 18);
+                }
+                else
+                {
+                    // Button without icon: text centered, symmetric padding
+                    button.Padding = new Padding(10, 0, 10, 0);
+                    button.TextAlign = ContentAlignment.MiddleCenter;
+                    button.ImageAlign = ContentAlignment.MiddleCenter;
+                    button.TextImageRelation = TextImageRelation.Overlay;
                 }
             }
 

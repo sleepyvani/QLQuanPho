@@ -22,11 +22,15 @@ namespace PhoManager.UI.Forms
             InitializeState();
         }
 
+        private const string PLACEHOLDER_USERNAME = "Nhập tài khoản";
+        private const string PLACEHOLDER_PASSWORD = "Nhập mật khẩu";
+        private Color placeholderColor = ThemeManager.TextMuted;
+        private Color textColor = ThemeManager.TextColor;
+
         private void LoadVisuals()
         {
             lblBadge.Text = "Pho Manager 2025";
             lblTitle.Text = "Chào mừng trở lại!";
-            lblSubtitle.Text = "Nhập thông tin tài khoản để tiếp tục truy cập hệ thống";
 
             picUserIcon.Image = ThemeManager.CreateGlyphIcon(IconGlyphs.People, ThemeManager.TextMuted, 24);
             picPasswordIcon.Image = ThemeManager.CreateGlyphIcon(IconGlyphs.Lock, ThemeManager.TextMuted, 24);
@@ -37,6 +41,49 @@ namespace PhoManager.UI.Forms
             btnTogglePassword.FlatAppearance.BorderSize = 0;
             btnTogglePassword.ForeColor = ThemeManager.TextMuted;
             btnTogglePassword.Cursor = Cursors.Hand;
+
+            // Setup placeholders
+            SetupPlaceholder(txtTaiKhoan, PLACEHOLDER_USERNAME);
+            SetupPlaceholder(txtMatKhau, PLACEHOLDER_PASSWORD);
+        }
+
+        private void SetupPlaceholder(TextBox textBox, string placeholder)
+        {
+            // Set initial placeholder
+            if (string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                textBox.Text = placeholder;
+                textBox.ForeColor = placeholderColor;
+            }
+
+            // TableLayoutPanel will handle vertical centering automatically
+            textBox.Multiline = false;
+
+            textBox.Enter += (s, e) =>
+            {
+                if (textBox.Text == placeholder)
+                {
+                    textBox.Text = "";
+                    textBox.ForeColor = textColor;
+                    if (textBox == txtMatKhau)
+                    {
+                        textBox.PasswordChar = '•';
+                    }
+                }
+            };
+
+            textBox.Leave += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(textBox.Text))
+                {
+                    textBox.Text = placeholder;
+                    textBox.ForeColor = placeholderColor;
+                    if (textBox == txtMatKhau)
+                    {
+                        textBox.PasswordChar = '\0';
+                    }
+                }
+            };
         }
 
         protected override void OnShown(EventArgs e)
@@ -62,6 +109,10 @@ namespace PhoManager.UI.Forms
 
             string taiKhoan = txtTaiKhoan.Text.Trim();
             string matKhau = txtMatKhau.Text.Trim();
+            
+            // Remove placeholder if present
+            if (taiKhoan == PLACEHOLDER_USERNAME) taiKhoan = "";
+            if (matKhau == PLACEHOLDER_PASSWORD) matKhau = "";
 
             NhanVienDTO nhanVien = nhanVienBLL.DangNhap(taiKhoan, matKhau);
             
@@ -78,7 +129,9 @@ namespace PhoManager.UI.Forms
             {
                 MessageBox.Show("Tài khoản hoặc mật khẩu không đúng!", "Lỗi đăng nhập", 
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtMatKhau.Clear();
+                txtMatKhau.Text = PLACEHOLDER_PASSWORD;
+                txtMatKhau.ForeColor = placeholderColor;
+                txtMatKhau.PasswordChar = '\0';
                 txtTaiKhoan.Focus();
             }
         }
@@ -98,25 +151,29 @@ namespace PhoManager.UI.Forms
 
         private void InitializeState()
         {
-            if (Settings.Default.RememberAccount)
+            if (Settings.Default.RememberAccount && !string.IsNullOrWhiteSpace(Settings.Default.RememberedUsername))
             {
                 txtTaiKhoan.Text = Settings.Default.RememberedUsername;
+                txtTaiKhoan.ForeColor = textColor;
                 chkGhiNho.Checked = true;
             }
             passwordVisible = false;
-            txtMatKhau.PasswordChar = '•';
+            txtMatKhau.PasswordChar = '\0'; // Will be set when user enters
         }
 
         private bool ValidateInputs(out string message)
         {
-            if (string.IsNullOrWhiteSpace(txtTaiKhoan.Text))
+            string taiKhoan = txtTaiKhoan.Text.Trim();
+            string matKhau = txtMatKhau.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(taiKhoan) || taiKhoan == PLACEHOLDER_USERNAME)
             {
                 txtTaiKhoan.Focus();
                 message = "Vui lòng nhập tài khoản.";
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(txtMatKhau.Text))
+            if (string.IsNullOrWhiteSpace(matKhau) || matKhau == PLACEHOLDER_PASSWORD)
             {
                 txtMatKhau.Focus();
                 message = "Vui lòng nhập mật khẩu.";
@@ -139,6 +196,16 @@ namespace PhoManager.UI.Forms
             passwordVisible = !passwordVisible;
             txtMatKhau.PasswordChar = passwordVisible ? '\0' : '•';
             btnTogglePassword.Text = passwordVisible ? "\uE70D" : "\uE722";
+        }
+
+        private void pnlPassword_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lblTitle_Click(object sender, EventArgs e)
+        {
+
         }
 
     }
