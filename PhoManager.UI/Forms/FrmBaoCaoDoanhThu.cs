@@ -33,12 +33,7 @@ namespace PhoManager.UI.Forms
             }
             if (this.btnXem != null)
             {
-                ThemeManager.StyleButton(btnXem, ButtonVariant.Primary);
-                btnXem.AutoSize = false;
-                btnXem.TextAlign = ContentAlignment.MiddleCenter;
-                btnXem.UseCompatibleTextRendering = false;
-                btnXem.Image = null;
-                btnXem.Width = 150;
+                ThemeManager.StyleButton(btnXem, ButtonVariant.Primary, IconGlyphs.Search);
             }
 
             // Gắn sự kiện sắp xếp cho DataGridView nếu đã khởi tạo

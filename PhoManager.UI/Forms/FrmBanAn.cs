@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 using PhoManager.BLL;
 using PhoManager.DTO;
@@ -24,33 +23,10 @@ namespace PhoManager.UI.Forms
             ThemeManager.StyleTextBox(txtTimKiemBan);
             ThemeManager.StyleTextBox(txtTenBan);
             ThemeManager.StyleTextBox(txtGhiChu);
-            ThemeManager.StyleButton(btnTimKiemBan, ButtonVariant.Primary);
-            ThemeManager.StyleButton(btnThem, ButtonVariant.Primary);
-            ThemeManager.StyleButton(btnSua, ButtonVariant.Secondary);
-            ThemeManager.StyleButton(btnXoa, ButtonVariant.Danger);
-            
-            // Maintain critical properties after StyleButton - remove icons and ensure no wrapping
-            btnTimKiemBan.AutoSize = false;
-            btnTimKiemBan.TextAlign = ContentAlignment.MiddleCenter;
-            btnTimKiemBan.UseCompatibleTextRendering = false;
-            btnTimKiemBan.Image = null;
-            btnTimKiemBan.Width = 140;
-            btnThem.AutoSize = false;
-            btnThem.TextAlign = ContentAlignment.MiddleCenter;
-            btnThem.UseCompatibleTextRendering = false;
-            btnThem.Image = null;
-            btnThem.Width = 120;
-            btnSua.AutoSize = false;
-            btnSua.TextAlign = ContentAlignment.MiddleCenter;
-            btnSua.UseCompatibleTextRendering = false;
-            btnSua.Image = null;
-            btnSua.Width = 120;
-            btnXoa.AutoSize = false;
-            btnXoa.TextAlign = ContentAlignment.MiddleCenter;
-            btnXoa.UseCompatibleTextRendering = false;
-            btnXoa.Image = null;
-            btnXoa.Width = 120;
-            
+            ThemeManager.StyleButton(btnTimKiemBan, ButtonVariant.Primary, IconGlyphs.Search);
+            ThemeManager.StyleButton(btnThem, ButtonVariant.Primary, IconGlyphs.Add);
+            ThemeManager.StyleButton(btnSua, ButtonVariant.Secondary, IconGlyphs.Edit);
+            ThemeManager.StyleButton(btnXoa, ButtonVariant.Danger, IconGlyphs.Delete);
             LoadDanhSachBanAn(); 
             // Register events for sorting and selection
             this.dgvBanAn.SelectionChanged += dgvBanAn_SelectionChanged;

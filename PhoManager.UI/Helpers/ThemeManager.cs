@@ -52,57 +52,40 @@ namespace PhoManager.UI.Helpers
 
         /// <summary>
         /// The primary accent colour used for important buttons and highlights.
-        /// Modern blue color - #3B82F6 (Blue-500)
+        /// This value changes when the theme is toggled.  Do not treat this
+        /// value as constant – use it at the point of drawing or styling.
         /// </summary>
-        public static Color PrimaryColor = Color.FromArgb(59, 130, 246);
+        public static Color PrimaryColor = Color.FromArgb(26, 188, 156);
 
         /// <summary>
         /// A darker variation of the primary colour used on hover states.
-        /// #2563EB (Blue-600)
         /// </summary>
-        public static Color PrimaryDark = Color.FromArgb(37, 99, 235);
-
-        /// <summary>
-        /// A lighter variation of the primary colour for backgrounds.
-        /// #DBEAFE (Blue-100)
-        /// </summary>
-        public static Color PrimaryLight = Color.FromArgb(219, 234, 254);
+        public static Color PrimaryDark = Color.FromArgb(22, 160, 133);
 
         /// <summary>
         /// A secondary accent colour used sparingly.
-        /// #60A5FA (Blue-400)
         /// </summary>
-        public static Color AccentColor = Color.FromArgb(96, 165, 250);
+        public static Color AccentColor = Color.FromArgb(52, 152, 219);
 
         /// <summary>
         /// Colour used for destructive actions like delete buttons.
-        /// #EF4444 (Red-500)
         /// </summary>
-        public static Color DangerColor = Color.FromArgb(239, 68, 68);
+        public static Color DangerColor = Color.FromArgb(235, 87, 87);
 
         /// <summary>
         /// Main text colour.  Adjusted depending on light/dark mode.
-        /// #1E293B (Slate-800)
         /// </summary>
-        public static Color TextColor = Color.FromArgb(30, 41, 59);
-
-        /// <summary>
-        /// Secondary text colour.
-        /// #475569 (Slate-600)
-        /// </summary>
-        public static Color TextSecondary = Color.FromArgb(71, 85, 105);
+        public static Color TextColor = Color.FromArgb(35, 45, 63);
 
         /// <summary>
         /// Muted text colour for secondary captions.
-        /// #64748B (Slate-500)
         /// </summary>
-        public static Color TextMuted = Color.FromArgb(100, 116, 139);
+        public static Color TextMuted = Color.FromArgb(112, 123, 140);
 
         /// <summary>
         /// Background colour for the main window and large panels.
-        /// #F8FAFC (Slate-50)
         /// </summary>
-        public static Color BackgroundColor = Color.FromArgb(248, 250, 252);
+        public static Color BackgroundColor = Color.FromArgb(245, 247, 250);
 
         /// <summary>
         /// Background colour for card-like panels and containers.
@@ -110,28 +93,14 @@ namespace PhoManager.UI.Helpers
         public static Color PanelColor = Color.White;
 
         /// <summary>
-        /// Background colour for input fields.
-        /// #F1F5F9 (Slate-100)
-        /// </summary>
-        public static Color InputBackground = Color.FromArgb(241, 245, 249);
-
-        /// <summary>
         /// Background colour for the sidebar.
-        /// #1E293B (Slate-800)
         /// </summary>
-        public static Color SidebarColor = Color.FromArgb(30, 41, 59);
+        public static Color SidebarColor = Color.FromArgb(33, 42, 62);
 
         /// <summary>
         /// Background colour for the active sidebar button.
-        /// Uses primary blue color
         /// </summary>
-        public static Color SidebarActive = Color.FromArgb(59, 130, 246);
-
-        /// <summary>
-        /// Border color for subtle separators.
-        /// #E2E8F0 (Slate-200)
-        /// </summary>
-        public static Color BorderColor = Color.FromArgb(226, 232, 240);
+        public static Color SidebarActive = Color.FromArgb(60, 75, 99);
 
         /// <summary>
         /// When the user selects a custom logo this property is set.  If null then
@@ -156,39 +125,31 @@ namespace PhoManager.UI.Helpers
             IsDarkTheme = dark;
             if (dark)
             {
-                // Dark theme values - keeping blue as primary
-                PrimaryColor = Color.FromArgb(59, 130, 246); // Blue-500
-                PrimaryDark = Color.FromArgb(37, 99, 235); // Blue-600
-                PrimaryLight = Color.FromArgb(30, 58, 138); // Blue-800
-                AccentColor = Color.FromArgb(96, 165, 250); // Blue-400
-                DangerColor = Color.FromArgb(239, 68, 68); // Red-500
-                TextColor = Color.FromArgb(248, 250, 252); // Slate-50
-                TextSecondary = Color.FromArgb(203, 213, 225); // Slate-300
-                TextMuted = Color.FromArgb(148, 163, 184); // Slate-400
-                BackgroundColor = Color.FromArgb(15, 23, 42); // Slate-900
-                PanelColor = Color.FromArgb(30, 41, 59); // Slate-800
-                InputBackground = Color.FromArgb(51, 65, 85); // Slate-700
-                SidebarColor = Color.FromArgb(15, 23, 42); // Slate-900
-                SidebarActive = Color.FromArgb(59, 130, 246); // Blue-500
-                BorderColor = Color.FromArgb(51, 65, 85); // Slate-700
+                // Dark theme values
+                PrimaryColor = Color.FromArgb(52, 73, 94);
+                PrimaryDark = Color.FromArgb(44, 62, 80);
+                AccentColor = Color.FromArgb(93, 173, 226);
+                DangerColor = Color.FromArgb(192, 57, 43);
+                TextColor = Color.FromArgb(236, 240, 241);
+                TextMuted = Color.FromArgb(149, 165, 166);
+                BackgroundColor = Color.FromArgb(24, 33, 46);
+                PanelColor = Color.FromArgb(29, 40, 56);
+                SidebarColor = Color.FromArgb(33, 42, 62);
+                SidebarActive = Color.FromArgb(60, 75, 99);
             }
             else
             {
-                // Light theme values - Modern blue theme
-                PrimaryColor = Color.FromArgb(59, 130, 246); // Blue-500
-                PrimaryDark = Color.FromArgb(37, 99, 235); // Blue-600
-                PrimaryLight = Color.FromArgb(219, 234, 254); // Blue-100
-                AccentColor = Color.FromArgb(96, 165, 250); // Blue-400
-                DangerColor = Color.FromArgb(239, 68, 68); // Red-500
-                TextColor = Color.FromArgb(30, 41, 59); // Slate-800
-                TextSecondary = Color.FromArgb(71, 85, 105); // Slate-600
-                TextMuted = Color.FromArgb(100, 116, 139); // Slate-500
-                BackgroundColor = Color.FromArgb(248, 250, 252); // Slate-50
+                // Light theme values
+                PrimaryColor = Color.FromArgb(26, 188, 156);
+                PrimaryDark = Color.FromArgb(22, 160, 133);
+                AccentColor = Color.FromArgb(52, 152, 219);
+                DangerColor = Color.FromArgb(235, 87, 87);
+                TextColor = Color.FromArgb(35, 45, 63);
+                TextMuted = Color.FromArgb(112, 123, 140);
+                BackgroundColor = Color.FromArgb(245, 247, 250);
                 PanelColor = Color.White;
-                InputBackground = Color.FromArgb(241, 245, 249); // Slate-100
-                SidebarColor = Color.FromArgb(30, 41, 59); // Slate-800
-                SidebarActive = Color.FromArgb(59, 130, 246); // Blue-500
-                BorderColor = Color.FromArgb(226, 232, 240); // Slate-200
+                SidebarColor = Color.FromArgb(33, 42, 62);
+                SidebarActive = Color.FromArgb(60, 75, 99);
             }
         }
 
@@ -227,15 +188,10 @@ namespace PhoManager.UI.Helpers
             grid.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 10F);
             grid.ColumnHeadersDefaultCellStyle.Padding = new Padding(12, 8, 12, 8);
             grid.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            // Set minimum header height to ensure text is visible
-            if (grid.ColumnHeadersHeight < 45)
-            {
-                grid.ColumnHeadersHeight = 45;
-            }
-            grid.DefaultCellStyle.SelectionBackColor = PrimaryLight;
+            grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(242, 250, 248);
             grid.DefaultCellStyle.SelectionForeColor = TextColor;
             grid.RowTemplate.Height = 42;
-            grid.GridColor = BorderColor;
+            grid.GridColor = Color.FromArgb(235, 238, 245);
         }
 
         public static void StyleTextBox(TextBox textBox)
@@ -291,97 +247,49 @@ namespace PhoManager.UI.Helpers
                     foreColor = Color.White;
                     break;
                 case ButtonVariant.Secondary:
-                    backColor = Color.FromArgb(241, 245, 249); // Slate-100
-                    hoverColor = Color.FromArgb(226, 232, 240); // Slate-200
+                    backColor = Color.FromArgb(230, 233, 240);
+                    hoverColor = Color.FromArgb(210, 214, 223);
                     foreColor = TextColor;
                     break;
                 case ButtonVariant.Tertiary:
-                    backColor = Color.White;
-                    hoverColor = Color.FromArgb(248, 250, 252); // Slate-50
+                    backColor = Color.FromArgb(245, 246, 250);
+                    hoverColor = Color.FromArgb(230, 233, 240);
                     foreColor = TextColor;
                     break;
                 case ButtonVariant.Danger:
                     backColor = DangerColor;
-                    hoverColor = Color.FromArgb(220, 38, 38); // Red-600
+                    hoverColor = Color.FromArgb(215, 83, 83);
                     foreColor = Color.White;
                     break;
                 default:
                     backColor = Color.Transparent;
-                    hoverColor = Color.FromArgb(241, 245, 249); // Slate-100
+                    hoverColor = Color.FromArgb(240, 242, 246);
                     foreColor = TextColor;
                     break;
             }
 
             button.FlatStyle = FlatStyle.Flat;
             button.UseVisualStyleBackColor = false;
-            button.AutoSize = false; // Prevent text wrapping
             button.FlatAppearance.BorderSize = variant == ButtonVariant.Secondary || variant == ButtonVariant.Ghost ? 1 : 0;
             if (button.FlatAppearance.BorderSize > 0)
             {
-                button.FlatAppearance.BorderColor = variant == ButtonVariant.Secondary ? BorderColor : BorderColor;
+                button.FlatAppearance.BorderColor = variant == ButtonVariant.Secondary ? Color.FromArgb(220, 222, 230) : backColor;
             }
-            // Note: Flat buttons don't have rounded corners by default in WinForms
             button.BackColor = backColor;
             button.ForeColor = foreColor;
-            // Preserve font size if button already has a smaller font (e.g., navbar buttons with 8.5F)
-            // Only set default font if button doesn't have a custom font size smaller than 10F
-            float currentFontSize = button.Font.Size;
-            if (currentFontSize >= 10F || (currentFontSize < 8.5F && button.Font.Name != "Segoe UI Semibold"))
+            button.Font = new Font("Segoe UI Semibold", 10F);
+            button.Height = Math.Max(button.Height, 42);
+            button.Padding = new Padding(glyph == null ? 18 : 50, 0, 20, 0);
+            button.TextAlign = ContentAlignment.MiddleLeft;
+            button.ImageAlign = ContentAlignment.MiddleLeft;
+            button.TextImageRelation = TextImageRelation.ImageBeforeText;
+
+            if (!string.IsNullOrEmpty(glyph))
             {
-                button.Font = new Font("Segoe UI Semibold", 10F);
+                button.Image = CreateGlyphIcon(glyph, foreColor);
             }
-            // If font size is between 8.5F and 10F, preserve it but ensure font name is correct
-            else if (currentFontSize < 10F && currentFontSize >= 8F)
-            {
-                button.Font = new Font("Segoe UI Semibold", currentFontSize);
-            }
-            
-            // Adjust height only for regular buttons (not large quick action buttons)
-            if (button.Height < 50)
-            {
-                button.Height = Math.Max(button.Height, 42);
-            }
-            
-            // Adjust padding and alignment based on button size and glyph
-            if (button.Height >= 80)
-            {
-                // Large buttons: vertical layout with icon above text
-                // CRITICAL: Set these properties in correct order
-                button.TextImageRelation = TextImageRelation.ImageAboveText;
-                // Icon at top center - horizontally centered at top
-                button.ImageAlign = ContentAlignment.TopCenter;
-                // Text at bottom center - horizontally centered in bottom portion
-                button.TextAlign = ContentAlignment.BottomCenter;
-                // Padding: symmetric left/right (8px), top for icon space (32px), bottom for text (8px)
-                button.Padding = new Padding(8, 32, 8, 8);
-                if (!string.IsNullOrEmpty(glyph))
-                {
-                    // Create icon with exact size
-                    button.Image = CreateGlyphIcon(glyph, foreColor, 28);
-                }
-            }
-            else
-            {
-                // Regular buttons: horizontal layout
-                if (!string.IsNullOrEmpty(glyph))
-                {
-                    // Button with icon: icon on left, text centered horizontally
-                    // Padding: left for icon space (18px icon + 8px margin), right for balance
-                    button.Padding = new Padding(32, 0, 10, 0);
-                    button.TextAlign = ContentAlignment.MiddleCenter;
-                    button.ImageAlign = ContentAlignment.MiddleLeft;
-                    button.TextImageRelation = TextImageRelation.ImageBeforeText;
-                    button.Image = CreateGlyphIcon(glyph, foreColor, 18);
-                }
-                else
-                {
-                    // Button without icon: text centered, symmetric padding
-                    button.Padding = new Padding(10, 0, 10, 0);
-                    button.TextAlign = ContentAlignment.MiddleCenter;
-                    button.ImageAlign = ContentAlignment.MiddleCenter;
-                    button.TextImageRelation = TextImageRelation.Overlay;
-                }
-            }
+
+            ApplyRoundedCorners(button, 20);
 
             ButtonStates.Remove(button);
             ButtonStates.Add(button, new ButtonStyleState(backColor, hoverColor));
@@ -421,10 +329,17 @@ namespace PhoManager.UI.Helpers
                 var bounds = panel.ClientRectangle;
                 bounds.Width -= 1;
                 bounds.Height -= 1;
-                // Draw border without rounded corners
-                using (var pen = new Pen(BorderColor, 1))
+                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                using (GraphicsPath path = CreateRoundedRectangle(bounds, 18))
                 {
-                    e.Graphics.DrawRectangle(pen, bounds);
+                    using (var fill = new SolidBrush(panel.BackColor))
+                    {
+                        e.Graphics.FillPath(fill, path);
+                    }
+                    using (var pen = new Pen(Color.FromArgb(235, 238, 245), 1))
+                    {
+                        e.Graphics.DrawPath(pen, path);
+                    }
                 }
             };
         }

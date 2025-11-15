@@ -12,26 +12,14 @@ namespace PhoManager.UI.Forms
             this.btnInHoaDon = new System.Windows.Forms.Button();
             this.SuspendLayout();
             
-            this.btnXemHoaDon.AutoSize = false;
-            this.btnXemHoaDon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXemHoaDon.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnXemHoaDon.Location = new System.Drawing.Point(50, 50);
-            this.btnXemHoaDon.Size = new System.Drawing.Size(150, 42);
+            this.btnXemHoaDon.Size = new System.Drawing.Size(150, 40);
             this.btnXemHoaDon.Text = "Xem hóa đơn";
-            this.btnXemHoaDon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnXemHoaDon.UseCompatibleTextRendering = false;
-            this.btnXemHoaDon.UseVisualStyleBackColor = true;
             this.btnXemHoaDon.Click += new System.EventHandler(this.btnXemHoaDon_Click);
             
-            this.btnInHoaDon.AutoSize = false;
-            this.btnInHoaDon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInHoaDon.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnInHoaDon.Location = new System.Drawing.Point(170, 50);
-            this.btnInHoaDon.Size = new System.Drawing.Size(150, 42);
+            this.btnInHoaDon.Location = new System.Drawing.Point(220, 50);
+            this.btnInHoaDon.Size = new System.Drawing.Size(150, 40);
             this.btnInHoaDon.Text = "In hóa đơn";
-            this.btnInHoaDon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnInHoaDon.UseCompatibleTextRendering = false;
-            this.btnInHoaDon.UseVisualStyleBackColor = true;
             this.btnInHoaDon.Click += new System.EventHandler(this.btnInHoaDon_Click);
             
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

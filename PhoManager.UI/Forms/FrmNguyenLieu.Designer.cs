@@ -232,74 +232,62 @@ namespace PhoManager.UI.Forms
             this.panelButtons.Location = new System.Drawing.Point(3, 128);
             this.panelButtons.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(460, 43);
+            this.panelButtons.Size = new System.Drawing.Size(332, 43);
             this.panelButtons.TabIndex = 8;
             // 
             // btnThem
             // 
             this.btnThem.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnThem.AutoSize = false;
-            this.btnThem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnThem.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnThem.AutoSize = true;
+            this.btnThem.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.btnThem.Location = new System.Drawing.Point(3, 5);
             this.btnThem.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(110, 42);
+            this.btnThem.Size = new System.Drawing.Size(69, 33);
             this.btnThem.TabIndex = 0;
             this.btnThem.Text = "Thêm";
-            this.btnThem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnThem.UseCompatibleTextRendering = false;
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnSua
             // 
             this.btnSua.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnSua.AutoSize = false;
-            this.btnSua.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSua.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnSua.Location = new System.Drawing.Point(119, 5);
+            this.btnSua.AutoSize = true;
+            this.btnSua.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.btnSua.Location = new System.Drawing.Point(78, 5);
             this.btnSua.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(110, 42);
+            this.btnSua.Size = new System.Drawing.Size(69, 33);
             this.btnSua.TabIndex = 1;
             this.btnSua.Text = "Sửa";
-            this.btnSua.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnSua.UseCompatibleTextRendering = false;
             this.btnSua.UseVisualStyleBackColor = true;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
             // 
             this.btnXoa.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnXoa.AutoSize = false;
-            this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXoa.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnXoa.Location = new System.Drawing.Point(235, 5);
+            this.btnXoa.AutoSize = true;
+            this.btnXoa.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.btnXoa.Location = new System.Drawing.Point(153, 5);
             this.btnXoa.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(110, 42);
+            this.btnXoa.Size = new System.Drawing.Size(69, 33);
             this.btnXoa.TabIndex = 2;
             this.btnXoa.Text = "Xóa";
-            this.btnXoa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnXoa.UseCompatibleTextRendering = false;
             this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnLamMoi
             // 
             this.btnLamMoi.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnLamMoi.AutoSize = false;
-            this.btnLamMoi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLamMoi.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
-            this.btnLamMoi.Location = new System.Drawing.Point(351, 5);
+            this.btnLamMoi.AutoSize = true;
+            this.btnLamMoi.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.btnLamMoi.Location = new System.Drawing.Point(228, 5);
             this.btnLamMoi.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnLamMoi.Name = "btnLamMoi";
-            this.btnLamMoi.Size = new System.Drawing.Size(140, 32);
+            this.btnLamMoi.Size = new System.Drawing.Size(94, 33);
             this.btnLamMoi.TabIndex = 3;
             this.btnLamMoi.Text = "Làm mới";
-            this.btnLamMoi.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnLamMoi.UseCompatibleTextRendering = false;
             this.btnLamMoi.UseVisualStyleBackColor = true;
             this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
             // 

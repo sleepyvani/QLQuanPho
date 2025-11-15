@@ -24,33 +24,10 @@ namespace PhoManager.UI.Forms
             PhoManager.UI.Helpers.ThemeManager.ApplyBaseFormStyle(this);
             // Áp dụng style cho lưới và các control nếu có
             PhoManager.UI.Helpers.ThemeManager.StyleDataGridView(dgvNguyenLieu);
-            PhoManager.UI.Helpers.ThemeManager.StyleButton(btnThem, PhoManager.UI.Helpers.ButtonVariant.Primary);
-            PhoManager.UI.Helpers.ThemeManager.StyleButton(btnSua, PhoManager.UI.Helpers.ButtonVariant.Secondary);
-            PhoManager.UI.Helpers.ThemeManager.StyleButton(btnXoa, PhoManager.UI.Helpers.ButtonVariant.Danger);
-            PhoManager.UI.Helpers.ThemeManager.StyleButton(btnLamMoi, PhoManager.UI.Helpers.ButtonVariant.Tertiary);
-            
-            // Maintain critical properties after StyleButton - remove icons and ensure no wrapping
-            btnThem.AutoSize = false;
-            btnThem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            btnThem.UseCompatibleTextRendering = false;
-            btnThem.Image = null;
-            btnThem.Width = 120;
-            btnSua.AutoSize = false;
-            btnSua.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            btnSua.UseCompatibleTextRendering = false;
-            btnSua.Image = null;
-            btnSua.Width = 120;
-            btnXoa.AutoSize = false;
-            btnXoa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            btnXoa.UseCompatibleTextRendering = false;
-            btnXoa.Image = null;
-            btnXoa.Width = 120;
-            btnLamMoi.AutoSize = false;
-            btnLamMoi.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            btnLamMoi.UseCompatibleTextRendering = false;
-            btnLamMoi.Image = null;
-            btnLamMoi.Width = 140;
-            
+            PhoManager.UI.Helpers.ThemeManager.StyleButton(btnThem, PhoManager.UI.Helpers.ButtonVariant.Primary, PhoManager.UI.Helpers.IconGlyphs.Add);
+            PhoManager.UI.Helpers.ThemeManager.StyleButton(btnSua, PhoManager.UI.Helpers.ButtonVariant.Secondary, PhoManager.UI.Helpers.IconGlyphs.Edit);
+            PhoManager.UI.Helpers.ThemeManager.StyleButton(btnXoa, PhoManager.UI.Helpers.ButtonVariant.Danger, PhoManager.UI.Helpers.IconGlyphs.Delete);
+            PhoManager.UI.Helpers.ThemeManager.StyleButton(btnLamMoi, PhoManager.UI.Helpers.ButtonVariant.Tertiary, PhoManager.UI.Helpers.IconGlyphs.Refresh);
             PhoManager.UI.Helpers.ThemeManager.StyleTextBox(txtTen);
             PhoManager.UI.Helpers.ThemeManager.StyleTextBox(txtDonVi);
             PhoManager.UI.Helpers.ThemeManager.StyleTextBox(txtGiaNhap);

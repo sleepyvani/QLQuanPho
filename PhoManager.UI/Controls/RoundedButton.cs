@@ -184,15 +184,15 @@ namespace PhoManager.UI.Controls
                     borderWidth = 0;
                     break;
                 case ButtonVariant.Secondary:
-                    BackColor = Color.FromArgb(241, 245, 249); // Slate-100
+                    BackColor = Color.FromArgb(245, 246, 250);
                     ForeColor = ThemeManager.TextColor;
-                    borderColor = ThemeManager.BorderColor;
+                    borderColor = Color.FromArgb(220, 224, 232);
                     borderWidth = 1;
                     break;
                 case ButtonVariant.Tertiary:
                     BackColor = Color.White;
                     ForeColor = ThemeManager.TextColor;
-                    borderColor = ThemeManager.BorderColor;
+                    borderColor = Color.FromArgb(235, 238, 245);
                     borderWidth = 1;
                     break;
                 case ButtonVariant.Danger:
@@ -204,7 +204,7 @@ namespace PhoManager.UI.Controls
                 default:
                     BackColor = Color.Transparent;
                     ForeColor = ThemeManager.TextColor;
-                    borderColor = ThemeManager.BorderColor;
+                    borderColor = Color.FromArgb(220, 224, 232);
                     borderWidth = 1;
                     break;
             }
