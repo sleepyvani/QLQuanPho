@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using PhoManager.BLL;
 using PhoManager.DTO;
-using System.Linq;
-using PhoManager.UI.Helpers;
 
 namespace PhoManager.UI.Forms
 {
@@ -14,53 +11,11 @@ namespace PhoManager.UI.Forms
         private readonly MonAnBLL monAnBLL = new MonAnBLL();
         private List<MonAnDTO> danhSachMonAn;
 
-        // Lưu trạng thái sắp xếp cho từng cột trong bảng món ăn
-        private readonly Dictionary<string, bool> sortDirections = new Dictionary<string, bool>();
-
         public FrmMonAn()
         {
             InitializeComponent();
-            ThemeManager.ApplyBaseFormStyle(this);
-            ThemeManager.StyleDataGridView(dgvMonAn);
-            ThemeManager.StyleButton(btnTimKiem, ButtonVariant.Primary);
-            ThemeManager.StyleButton(btnLamMoi, ButtonVariant.Secondary);
-            ThemeManager.StyleButton(btnThem, ButtonVariant.Primary);
-            ThemeManager.StyleButton(btnSua, ButtonVariant.Secondary);
-            ThemeManager.StyleButton(btnXoa, ButtonVariant.Danger);
-            
-            // Maintain critical properties after StyleButton - remove icons and ensure no wrapping
-            btnTimKiem.AutoSize = false;
-            btnTimKiem.TextAlign = ContentAlignment.MiddleCenter;
-            btnTimKiem.UseCompatibleTextRendering = false;
-            btnTimKiem.Image = null;
-            btnTimKiem.Width = 140;
-            btnLamMoi.AutoSize = false;
-            btnLamMoi.TextAlign = ContentAlignment.MiddleCenter;
-            btnLamMoi.UseCompatibleTextRendering = false;
-            btnLamMoi.Image = null;
-            btnLamMoi.Width = 140;
-            btnThem.AutoSize = false;
-            btnThem.TextAlign = ContentAlignment.MiddleCenter;
-            btnThem.UseCompatibleTextRendering = false;
-            btnThem.Image = null;
-            btnThem.Width = 120;
-            btnSua.AutoSize = false;
-            btnSua.TextAlign = ContentAlignment.MiddleCenter;
-            btnSua.UseCompatibleTextRendering = false;
-            btnSua.Image = null;
-            btnSua.Width = 150;
-            btnXoa.AutoSize = false;
-            btnXoa.TextAlign = ContentAlignment.MiddleCenter;
-            btnXoa.UseCompatibleTextRendering = false;
-            btnXoa.Image = null;
-            btnXoa.Width = 120;
-            
-            ThemeManager.StyleTextBox(txtTimKiem);
             ConfigureGrid();
             LoadDanhSachMonAn();
-
-            // Gắn sự kiện sắp xếp dữ liệu khi nhấn vào tiêu đề cột
-            this.dgvMonAn.ColumnHeaderMouseClick += dgvMonAn_ColumnHeaderMouseClick;
         }
 
         private void LoadDanhSachMonAn()
@@ -195,42 +150,6 @@ namespace PhoManager.UI.Forms
             chkTrangThai.Checked = true;
         }
 
-        /// <summary>
-        /// Xử lý sự kiện nhấn vào tiêu đề cột của DataGridView món ăn để sắp xếp dữ liệu.
-        /// </summary>
-        private void dgvMonAn_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            string propName = dgvMonAn.Columns[e.ColumnIndex].DataPropertyName;
-            if (string.IsNullOrEmpty(propName))
-            {
-                propName = dgvMonAn.Columns[e.ColumnIndex].Name;
-            }
-            if (string.IsNullOrEmpty(propName)) return;
-            if (danhSachMonAn == null || danhSachMonAn.Count == 0) return;
-
-            bool ascending = true;
-            if (sortDirections.ContainsKey(propName))
-            {
-                ascending = !sortDirections[propName];
-            }
-            sortDirections[propName] = ascending;
-
-            var propInfo = typeof(MonAnDTO).GetProperty(propName);
-            if (propInfo == null) return;
-            IEnumerable<MonAnDTO> sorted;
-            if (ascending)
-            {
-                sorted = danhSachMonAn.OrderBy(ma => propInfo.GetValue(ma, null));
-            }
-            else
-            {
-                sorted = danhSachMonAn.OrderByDescending(ma => propInfo.GetValue(ma, null));
-            }
-            danhSachMonAn = new List<MonAnDTO>(sorted);
-            dgvMonAn.DataSource = null;
-            dgvMonAn.DataSource = danhSachMonAn;
-        }
-
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
             txtTimKiem.Clear();
@@ -310,11 +229,6 @@ namespace PhoManager.UI.Forms
                 HeaderText = "Đang bán",
                 Width = 80
             });
-        }
-
-        private void actionPanel_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

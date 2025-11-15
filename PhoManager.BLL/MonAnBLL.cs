@@ -67,9 +67,13 @@ namespace PhoManager.BLL
 
         public string XoaMonAn(int maMon)
         {
-            return monAnDAL.XoaMonAn(maMon);
-        }
+            if (monAnDAL.XoaMonAn(maMon))
+            {
+                return "Xóa món ăn thành công!";
+            }
 
+            return "Xóa món ăn thất bại!";
+        }
 
         public List<MonAnDTO> TimKiemMonAn(string tenMon)
         {

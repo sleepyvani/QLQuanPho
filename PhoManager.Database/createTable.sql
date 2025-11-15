@@ -26,7 +26,7 @@ BEGIN
         [HoTen] [nvarchar](100) NOT NULL,
         [TaiKhoan] [nvarchar](50) NOT NULL,
         [MatKhau] [nvarchar](255) NOT NULL,
-        [ChucVu] [nvarchar](50) NOT NULL, -- Quản lý / Thu ngân / Bếp / Phục vụ / Pha chế
+        [ChucVu] [nvarchar](50) NOT NULL, -- Quản lý / Thu ngân / Bếp
         [NgayTao] [datetime] NOT NULL DEFAULT GETDATE(),
         [TrangThai] [bit] NOT NULL DEFAULT 1, -- 1: Hoạt động, 0: Ngừng hoạt động
         CONSTRAINT [PK_NhanVien] PRIMARY KEY CLUSTERED ([MaNV] ASC),
@@ -170,5 +170,6 @@ BEGIN
 END
 GO
 
-PRINT N'Tạo các bảng thành công!';
+PRINT 'Tạo các bảng thành công!';
 GO
+

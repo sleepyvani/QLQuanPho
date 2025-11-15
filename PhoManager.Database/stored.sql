@@ -148,5 +148,6 @@ BEGIN
 END
 GO
 
-PRINT N'Tạo các Stored Procedures thành công!';
+PRINT 'Tạo các Stored Procedures thành công!';
 GO
+
