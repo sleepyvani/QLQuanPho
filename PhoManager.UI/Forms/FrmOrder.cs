@@ -1,7 +1,11 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using PhoManager.BLL;
 using PhoManager.DTO;
+using System.Linq;
+using System.Collections.Generic;
+using PhoManager.UI.Helpers;
 
 namespace PhoManager.UI.Forms
 {
@@ -12,12 +16,45 @@ namespace PhoManager.UI.Forms
         private BanAnBLL banAnBLL = new BanAnBLL();
         private HoaDonBLL hoaDonBLL = new HoaDonBLL();
         private int maBanHienTai = 0;
+        private HoaDonDTO hoaDonHienTai;
+        // Dictionary to remember sort direction (ascending/descending) for each column
+        private Dictionary<string, bool> sortDirections;
 
         public FrmOrder()
         {
             InitializeComponent();
+            ThemeManager.ApplyBaseFormStyle(this);
+            ThemeManager.StyleDataGridView(dgvMonAn);
+            ThemeManager.StyleDataGridView(dgvChiTiet);
+            ThemeManager.StyleComboBox(cboBan);
+            ThemeManager.StyleComboBox(cboKichCo);
+            ThemeManager.StyleTextBox(txtSoLuong);
+            ThemeManager.StyleTextBox(txtGhiChuMon);
+            ThemeManager.StyleButton(btnThemMon, ButtonVariant.Primary);
+            ThemeManager.StyleButton(btnXoaMon, ButtonVariant.Danger);
+            
+            // Maintain critical properties after StyleButton - remove icons and ensure no wrapping
+            btnThemMon.AutoSize = false;
+            btnThemMon.TextAlign = ContentAlignment.MiddleCenter;
+            btnThemMon.UseCompatibleTextRendering = false;
+            btnThemMon.Image = null;
+            btnThemMon.Width = 150;
+            btnXoaMon.AutoSize = false;
+            btnXoaMon.TextAlign = ContentAlignment.MiddleCenter;
+            btnXoaMon.UseCompatibleTextRendering = false;
+            btnXoaMon.Image = null;
+            btnXoaMon.Width = 150;
+            
             LoadDanhSachBan();
             LoadDanhSachMonAn();
+            btnXoaMon.Click += btnXoaMon_Click;
+
+            // Initialize sorting direction dictionary
+            sortDirections = new Dictionary<string, bool>();
+            // Attach event handlers for sorting when clicking column headers
+            dgvMonAn.ColumnHeaderMouseClick += dgvMonAn_ColumnHeaderMouseClick;
+            dgvChiTiet.ColumnHeaderMouseClick += dgvChiTiet_ColumnHeaderMouseClick;
+
         }
 
         private void LoadDanhSachBan()
@@ -43,40 +80,177 @@ namespace PhoManager.UI.Forms
 
             int maBan = (int)cboBan.SelectedValue;
             MonAnDTO monAn = (MonAnDTO)dgvMonAn.SelectedRows[0].DataBoundItem;
-            
+
+            if (!int.TryParse(txtSoLuong.Text.Trim(), out int soLuong) || soLuong <= 0)
+            {
+                MessageBox.Show("Số lượng phải là số nguyên dương!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtSoLuong.Focus();
+                return;
+            }
+
+            string kichCo = cboKichCo.Text?.Trim();
+            if (string.IsNullOrEmpty(kichCo))
+            {
+                MessageBox.Show("Vui lòng chọn kích cỡ món ăn!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboKichCo.Focus();
+                return;
+            }
+
             ChiTietHoaDonDTO chiTiet = new ChiTietHoaDonDTO
             {
                 MaMon = monAn.MaMon,
-                SoLuong = int.Parse(txtSoLuong.Text),
-                KichCo = cboKichCo.Text,
-                GhiChu = txtGhiChuMon.Text
+                SoLuong = soLuong,
+                KichCo = kichCo,
+                GhiChu = txtGhiChuMon.Text?.Trim()
             };
 
             if (FrmLogin.NhanVienDangNhap != null)
             {
                 string result = orderBLL.TaoOrder(maBan, FrmLogin.NhanVienDangNhap.MaNV, chiTiet);
-                MessageBox.Show(result);
+                MessageBox.Show(result, "Thông báo", MessageBoxButtons.OK, result.Contains("thành công") ? MessageBoxIcon.Information : MessageBoxIcon.Error);
                 LoadChiTietHoaDon(maBan);
             }
         }
 
+        private void btnXoaMon_Click(object sender, EventArgs e)
+        {
+            if (hoaDonHienTai == null || dgvChiTiet.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn món cần xóa!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            ChiTietHoaDonDTO chiTiet = (ChiTietHoaDonDTO)dgvChiTiet.SelectedRows[0].DataBoundItem;
+
+            string result = orderBLL.XoaMonKhoiOrder(chiTiet.MaCTHD, hoaDonHienTai.MaHD);
+            MessageBox.Show(result, "Thông báo",
+                MessageBoxButtons.OK,
+                result.Contains("thành công") ? MessageBoxIcon.Information : MessageBoxIcon.Error);
+
+            LoadChiTietHoaDon(hoaDonHienTai.MaBan);
+        }
+
         private void LoadChiTietHoaDon(int maBan)
         {
-            HoaDonDTO hoaDon = hoaDonBLL.LayHoaDonChuaThanhToanTheoBan(maBan);
-            if (hoaDon != null)
+            hoaDonHienTai = hoaDonBLL.LayHoaDonChuaThanhToanTheoBan(maBan);
+            if (hoaDonHienTai != null)
             {
-                dgvChiTiet.DataSource = hoaDon.ChiTietHoaDon;
-                lblTongTien.Text = $"Tổng tiền: {hoaDon.ThanhTien:N0} VNĐ";
+                dgvChiTiet.DataSource = hoaDonHienTai.ChiTietHoaDon;
+                lblTongTien.Text = $"Tổng tiền: {hoaDonHienTai.ThanhTien:N0} VNĐ";
+            }
+            else
+            {
+                dgvChiTiet.DataSource = null;
+                lblTongTien.Text = "Tổng tiền: 0 VNĐ";
             }
         }
 
+
         private void cboBan_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cboBan.SelectedValue != null)
+            if (cboBan.SelectedItem is BanAnDTO selectedBan)
             {
-                maBanHienTai = (int)cboBan.SelectedValue;
+                maBanHienTai = selectedBan.MaBan;
                 LoadChiTietHoaDon(maBanHienTai);
             }
+        }
+
+        private void btnXoaMon_Click_1(object sender, EventArgs e)
+        {
+
+            if(hoaDonHienTai == null || dgvChiTiet.SelectedRows.Count == 0)
+    {
+                MessageBox.Show("Vui lòng chọn món cần xóa!", "Thông báo",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            ChiTietHoaDonDTO chiTiet = (ChiTietHoaDonDTO)dgvChiTiet.SelectedRows[0].DataBoundItem;
+
+            string result = orderBLL.XoaMonKhoiOrder(chiTiet.MaCTHD, hoaDonHienTai.MaHD);
+            MessageBox.Show(result, "Thông báo",
+                MessageBoxButtons.OK,
+                result.Contains("thành công") ? MessageBoxIcon.Information : MessageBoxIcon.Error);
+
+            LoadChiTietHoaDon(hoaDonHienTai.MaBan);
+        }
+
+        /// <summary>
+        /// Handles sorting of the list of món ăn when user clicks a column header.
+        /// </summary>
+        private void dgvMonAn_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (dgvMonAn.DataSource == null) return;
+            // Determine the property name associated with the clicked column
+            string columnName = dgvMonAn.Columns[e.ColumnIndex].DataPropertyName;
+            if (string.IsNullOrEmpty(columnName))
+            {
+                columnName = dgvMonAn.Columns[e.ColumnIndex].Name;
+            }
+            if (string.IsNullOrEmpty(columnName)) return;
+
+            // Toggle sort direction: default ascending if not present
+            bool ascending = !sortDirections.ContainsKey(columnName) || !sortDirections[columnName];
+            sortDirections[columnName] = ascending;
+
+            // Check if data source is a list of MonAnDTO
+            if (dgvMonAn.DataSource is IList<MonAnDTO> listMon)
+            {
+                IEnumerable<MonAnDTO> sorted;
+                if (ascending)
+                {
+                    sorted = listMon.OrderBy(item => GetPropertyValue(item, columnName));
+                }
+                else
+                {
+                    sorted = listMon.OrderByDescending(item => GetPropertyValue(item, columnName));
+                }
+                dgvMonAn.DataSource = sorted.ToList();
+            }
+        }
+
+        /// <summary>
+        /// Handles sorting of the chi tiết order list when user clicks a column header.
+        /// </summary>
+        private void dgvChiTiet_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (dgvChiTiet.DataSource == null) return;
+            string columnName = dgvChiTiet.Columns[e.ColumnIndex].DataPropertyName;
+            if (string.IsNullOrEmpty(columnName))
+            {
+                columnName = dgvChiTiet.Columns[e.ColumnIndex].Name;
+            }
+            if (string.IsNullOrEmpty(columnName)) return;
+
+            bool ascending = !sortDirections.ContainsKey(columnName) || !sortDirections[columnName];
+            sortDirections[columnName] = ascending;
+
+            if (dgvChiTiet.DataSource is IList<ChiTietHoaDonDTO> listChiTiet)
+            {
+                IEnumerable<ChiTietHoaDonDTO> sorted;
+                if (ascending)
+                {
+                    sorted = listChiTiet.OrderBy(item => GetPropertyValue(item, columnName));
+                }
+                else
+                {
+                    sorted = listChiTiet.OrderByDescending(item => GetPropertyValue(item, columnName));
+                }
+                dgvChiTiet.DataSource = sorted.ToList();
+            }
+        }
+
+        /// <summary>
+        /// Helper method to retrieve property values via reflection.
+        /// </summary>
+        private object GetPropertyValue(object obj, string propertyName)
+        {
+            if (obj == null || string.IsNullOrEmpty(propertyName)) return null;
+            var prop = obj.GetType().GetProperty(propertyName);
+            return prop != null ? prop.GetValue(obj) : null;
         }
     }
 }
