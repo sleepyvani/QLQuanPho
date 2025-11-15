@@ -24,25 +24,19 @@ namespace PhoManager.UI.Forms
 
         private void LoadVisuals()
         {
-            lblHeroTitle.Text = "Quản lý quán phở\nnhanh và trực quan";
-            lblHeroSubtitle.Text = "Giao diện mới giúp bạn theo dõi trạng thái bàn, doanh thu và ca làm một cách thoải mái.";
-            lblHeroBullet1.Text = "• Vận hành gọn gàng, phối hợp mượt mà.";
-            lblHeroBullet2.Text = "• Báo cáo tức thời, kiểm soát doanh thu.";
-            lblBranding.Text = "Pho Manager";
-            lblBadge.Text = "Đã tối ưu cho ca làm sáng";
+            lblBadge.Text = "Pho Manager 2025";
+            lblTitle.Text = "Chào mừng trở lại!";
+            lblSubtitle.Text = "Nhập thông tin tài khoản để tiếp tục truy cập hệ thống";
 
-            picUserIcon.Image = ThemeManager.CreateGlyphIcon(IconGlyphs.People, Color.FromArgb(150, 155, 168), 26);
-            picPasswordIcon.Image = ThemeManager.CreateGlyphIcon(IconGlyphs.Lock, Color.FromArgb(150, 155, 168), 26);
+            picUserIcon.Image = ThemeManager.CreateGlyphIcon(IconGlyphs.People, ThemeManager.TextMuted, 24);
+            picPasswordIcon.Image = ThemeManager.CreateGlyphIcon(IconGlyphs.Lock, ThemeManager.TextMuted, 24);
 
-            ThemeManager.ApplyRoundedCorners(pnlCard, 26);
-            ThemeManager.ApplyRoundedCorners(pnlUser, 20);
-            ThemeManager.ApplyRoundedCorners(pnlPassword, 20);
-
-            ThemeManager.StyleButton(btnDangNhap, ButtonVariant.Primary, IconGlyphs.Lock);
-            ThemeManager.StyleButton(btnThoat, ButtonVariant.Secondary, IconGlyphs.Logout);
+            ThemeManager.StyleButton(btnDangNhap, ButtonVariant.Primary);
+            ThemeManager.StyleButton(btnThoat, ButtonVariant.Secondary);
 
             btnTogglePassword.FlatAppearance.BorderSize = 0;
-            btnTogglePassword.ForeColor = Color.FromArgb(120, 130, 145);
+            btnTogglePassword.ForeColor = ThemeManager.TextMuted;
+            btnTogglePassword.Cursor = Cursors.Hand;
         }
 
         protected override void OnShown(EventArgs e)
@@ -147,44 +141,6 @@ namespace PhoManager.UI.Forms
             btnTogglePassword.Text = passwordVisible ? "\uE70D" : "\uE722";
         }
 
-        private void pnlLeft_Paint(object sender, PaintEventArgs e)
-        {
-            using (var brush = new LinearGradientBrush(pnlLeft.ClientRectangle,
-                       Color.FromArgb(18, 38, 63),
-                       Color.FromArgb(32, 84, 145),
-                       LinearGradientMode.Vertical))
-            {
-                e.Graphics.FillRectangle(brush, pnlLeft.ClientRectangle);
-            }
-        }
-
-        private void pnlHeroArt_Paint(object sender, PaintEventArgs e)
-        {
-            var g = e.Graphics;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            var rect = pnlHeroArt.ClientRectangle;
-            rect.Inflate(-6, -6);
-            using (var bowlBrush = new SolidBrush(Color.FromArgb(248, 250, 253)))
-            using (var rimPen = new Pen(Color.FromArgb(191, 226, 255), 3))
-            using (var accentPen = new Pen(Color.FromArgb(26, 188, 156), 3))
-            {
-                var center = new Point(rect.Width / 2, rect.Height / 2 + 15);
-                var size = new Size(rect.Width - 30, rect.Height / 2);
-                var bowlRect = new Rectangle(center.X - size.Width / 2, center.Y - size.Height / 2, size.Width, size.Height);
-                var path = new GraphicsPath();
-                path.AddArc(bowlRect.X, bowlRect.Y, bowlRect.Width, bowlRect.Height, 0, 180);
-                path.AddLine(bowlRect.X, center.Y, bowlRect.Right, center.Y);
-                g.FillPath(bowlBrush, path);
-                g.DrawPath(rimPen, path);
-                g.DrawCurve(accentPen, new[]
-                {
-                    new Point(bowlRect.X + 18, bowlRect.Y + 4),
-                    new Point(center.X, bowlRect.Y - 28),
-                    new Point(bowlRect.Right - 18, bowlRect.Y + 4)
-                });
-                g.DrawLine(rimPen, bowlRect.X + 25, center.Y + 6, bowlRect.Right - 25, center.Y + 6);
-            }
-        }
     }
 }
 

@@ -1,3 +1,5 @@
+using PhoManager.UI.Helpers;
+
 namespace PhoManager.UI.Forms
 {
     partial class FrmBanAn
@@ -165,6 +167,7 @@ namespace PhoManager.UI.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = ThemeManager.BackgroundColor;
             this.ClientSize = new System.Drawing.Size(1333, 554);
             this.Controls.Add(this.btnTimKiemBan);
             this.Controls.Add(this.txtTimKiemBan);

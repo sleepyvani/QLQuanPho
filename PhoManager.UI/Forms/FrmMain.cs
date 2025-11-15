@@ -1,17 +1,15 @@
 using System;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 using PhoManager.DAL;
 using PhoManager.UI.Helpers;
-using PhoManager.UI.Controls;
 
 namespace PhoManager.UI.Forms
 {
     public partial class FrmMain : Form
     {
         private bool isLoggingOut;
-        private SidebarButton currentNav;
+        private Button currentNavButton;
 
         public FrmMain()
         {
@@ -19,8 +17,9 @@ namespace PhoManager.UI.Forms
             ThemeManager.ApplyPanelCardStyle(cardRevenue);
             ThemeManager.ApplyPanelCardStyle(cardOrders);
             ThemeManager.ApplyPanelCardStyle(cardTables);
-            LoadLogo();
             LoadMenu();
+            StyleNavigationButtons();
+            StyleQuickActionButtons();
             UpdateDatabaseStatus();
             timerClock_Tick(this, EventArgs.Empty);
 
@@ -29,17 +28,14 @@ namespace PhoManager.UI.Forms
         }
 
         /// <summary>
-        /// Re-applies theme colours and logo to the main form.  Call this method after
-        /// toggling between light and dark modes or changing the logo.  It will
-        /// update backgrounds, card styles, sidebar colours and quick action
-        /// buttons accordingly.  Existing navigation state is preserved.
+        /// Re-applies theme colours to the main form.  Call this method after
+        /// toggling between light and dark modes.  It will update backgrounds,
+        /// card styles and buttons accordingly.
         /// </summary>
         public void ReloadTheme()
         {
             // Update primary panels
-            this.pnlSidebar.BackColor = ThemeManager.SidebarColor;
-            this.pnlSidebarHeader.BackColor = ThemeManager.SidebarColor;
-            this.pnlSidebarFooter.BackColor = ThemeManager.SidebarColor;
+            this.pnlTopBar.BackColor = ThemeManager.PanelColor;
             this.pnlMain.BackColor = ThemeManager.BackgroundColor;
 
             // Update cards
@@ -47,73 +43,43 @@ namespace PhoManager.UI.Forms
             ThemeManager.ApplyPanelCardStyle(cardOrders);
             ThemeManager.ApplyPanelCardStyle(cardTables);
 
-            // Update sidebar buttons state to refresh colours and icons
-            var buttons = new[] { navDashboard, navOrder, navTables, navMenu, navStaff, navInvoices, navAnalytics, navSettings, navLogout };
-            foreach (var btn in buttons)
-            {
-                // Trigger the setter to force UpdateState and refresh icon
-                bool active = btn.IsActive;
-                btn.IsActive = active;
-            }
-
-            // Update quick action buttons: reapply variant to update colours
-            var actions = new[] { btnQuanLyMonAn, btnQuanLyNhanVien, btnQuanLyBanAn, btnOrder, btnHoaDon, btnThongKe, btnCauHinh, btnDangXuat };
-            foreach (var act in actions)
-            {
-                // Reset variant to itself so the setter calls ApplyVariant
-                var variant = act.Variant;
-                act.Variant = variant;
-            }
-
-            // Reload the logo if a custom logo is set
-            LoadLogo();
+            // Re-style navigation and action buttons
+            StyleNavigationButtons();
+            StyleQuickActionButtons();
+            
             this.Invalidate();
         }
 
-        private void LoadLogo()
+        private void StyleNavigationButtons()
         {
-            try
+            var navButtons = new[] { btnNavOrder, btnNavTables, btnNavMenu, btnNavStaff, btnNavInvoices, btnNavAnalytics, btnNavSettings, btnNavLogout };
+            foreach (var btn in navButtons)
             {
-                string logoPath = Path.Combine(Application.StartupPath, "Resources", "logo.png");
-                if (File.Exists(logoPath))
-                {
-                    picLogo.Image = Image.FromFile(logoPath);
-                    return;
-                }
-
-                logoPath = Path.Combine(Application.StartupPath, "logo.png");
-                if (File.Exists(logoPath))
-                {
-                    picLogo.Image = Image.FromFile(logoPath);
-                    return;
-                }
+                ThemeManager.StyleButton(btn, ButtonVariant.Ghost);
             }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Error loading logo from file: {ex.Message}");
-            }
-
-            picLogo.Image = CreatePlaceholderLogo(picLogo.Width, picLogo.Height);
+            ThemeManager.StyleButton(btnQuickOrder, ButtonVariant.Primary, IconGlyphs.Order);
         }
 
-        private Image CreatePlaceholderLogo(int width, int height)
+        private void StyleQuickActionButtons()
         {
-            Bitmap bmp = new Bitmap(width, height);
-            using (Graphics g = Graphics.FromImage(bmp))
+            ThemeManager.StyleButton(btnQuanLyMonAn, ButtonVariant.Tertiary, IconGlyphs.Bowl);
+            ThemeManager.StyleButton(btnQuanLyNhanVien, ButtonVariant.Tertiary, IconGlyphs.People);
+            ThemeManager.StyleButton(btnQuanLyBanAn, ButtonVariant.Tertiary, IconGlyphs.Table);
+            ThemeManager.StyleButton(btnOrder, ButtonVariant.Primary, IconGlyphs.Order);
+            ThemeManager.StyleButton(btnHoaDon, ButtonVariant.Tertiary, IconGlyphs.Invoice);
+            ThemeManager.StyleButton(btnThongKe, ButtonVariant.Tertiary, IconGlyphs.Chart);
+            ThemeManager.StyleButton(btnCauHinh, ButtonVariant.Tertiary, IconGlyphs.Settings);
+            ThemeManager.StyleButton(btnDangXuat, ButtonVariant.Danger, IconGlyphs.Logout);
+            
+            // Set button sizes for quick actions
+            var quickActions = new[] { btnQuanLyMonAn, btnQuanLyNhanVien, btnQuanLyBanAn, btnOrder, btnHoaDon, btnThongKe, btnCauHinh, btnDangXuat };
+            foreach (var btn in quickActions)
             {
-                g.Clear(Color.Transparent);
-                using (Font font = new Font("Segoe UI", Math.Min(width, height) / 3, FontStyle.Bold))
-                using (SolidBrush brush = new SolidBrush(Color.White))
-                {
-                    StringFormat sf = new StringFormat
-                    {
-                        Alignment = StringAlignment.Center,
-                        LineAlignment = StringAlignment.Center
-                    };
-                    g.DrawString("PHỞ", font, brush, new RectangleF(0, 0, width, height), sf);
-                }
+                btn.Size = new Size(210, 90);
+                btn.TextImageRelation = TextImageRelation.ImageAboveText;
+                btn.ImageAlign = ContentAlignment.TopCenter;
+                btn.TextAlign = ContentAlignment.BottomCenter;
             }
-            return bmp;
         }
 
         private void LoadMenu()
@@ -127,16 +93,13 @@ namespace PhoManager.UI.Forms
                 lblPageTitle.Text = $"Chào {lastName}, chúc một ngày tốt lành!";
             }
 
-            currentNav = navDashboard;
-            navDashboard.IsActive = true;
-
             string chucVu = FrmLogin.NhanVienDangNhap?.ChucVu ?? "";
             bool isManager = string.Equals(chucVu, "Quản lý", StringComparison.OrdinalIgnoreCase);
 
-            navMenu.Enabled = isManager;
-            navStaff.Enabled = isManager;
-            navAnalytics.Enabled = isManager;
-            navSettings.Enabled = isManager;
+            btnNavMenu.Enabled = isManager;
+            btnNavStaff.Enabled = isManager;
+            btnNavAnalytics.Enabled = isManager;
+            btnNavSettings.Enabled = isManager;
 
             btnQuanLyMonAn.Enabled = isManager;
             btnQuanLyNhanVien.Enabled = isManager;
@@ -144,16 +107,18 @@ namespace PhoManager.UI.Forms
             btnCauHinh.Enabled = isManager;
         }
 
-        private void SetActiveNav(SidebarButton target)
+        private void SetActiveNavButton(Button target)
         {
-            if (currentNav != null)
+            if (currentNavButton != null)
             {
-                currentNav.IsActive = false;
+                currentNavButton.BackColor = ThemeManager.PanelColor;
+                currentNavButton.ForeColor = ThemeManager.TextColor;
             }
-            currentNav = target;
-            if (currentNav != null)
+            currentNavButton = target;
+            if (currentNavButton != null)
             {
-                currentNav.IsActive = true;
+                currentNavButton.BackColor = ThemeManager.PrimaryLight;
+                currentNavButton.ForeColor = ThemeManager.PrimaryColor;
             }
         }
 
@@ -163,12 +128,12 @@ namespace PhoManager.UI.Forms
             {
                 bool ok = QLQuanPhoDataContext.TestConnection();
                 statusDatabase.Text = ok ? "Database: Kết nối thành công" : "Database: Không thể kết nối";
-                statusDatabase.ForeColor = ok ? Color.FromArgb(35, 96, 67) : Color.FromArgb(212, 68, 55);
+                statusDatabase.ForeColor = ok ? ThemeManager.PrimaryColor : ThemeManager.DangerColor;
             }
             catch (Exception ex)
             {
                 statusDatabase.Text = $"Database: Lỗi - {ex.Message}";
-                statusDatabase.ForeColor = Color.FromArgb(212, 68, 55);
+                statusDatabase.ForeColor = ThemeManager.DangerColor;
             }
         }
 
@@ -271,7 +236,7 @@ namespace PhoManager.UI.Forms
 
         private void btnQuanLyMonAn_Click(object sender, EventArgs e)
         {
-            SetActiveNav(navMenu);
+            SetActiveNavButton(btnNavMenu);
             using (var frm = new FrmMonAn())
             {
                 frm.ShowDialog();
@@ -280,7 +245,7 @@ namespace PhoManager.UI.Forms
 
         private void btnQuanLyNhanVien_Click(object sender, EventArgs e)
         {
-            SetActiveNav(navStaff);
+            SetActiveNavButton(btnNavStaff);
             using (var frm = new FrmNhanVien())
             {
                 frm.ShowDialog();
@@ -289,7 +254,7 @@ namespace PhoManager.UI.Forms
 
         private void btnQuanLyBanAn_Click(object sender, EventArgs e)
         {
-            SetActiveNav(navTables);
+            SetActiveNavButton(btnNavTables);
             using (var frm = new FrmBanAn())
             {
                 frm.ShowDialog();
@@ -298,7 +263,7 @@ namespace PhoManager.UI.Forms
 
         private void btnOrder_Click(object sender, EventArgs e)
         {
-            SetActiveNav(navOrder);
+            SetActiveNavButton(btnNavOrder);
             using (var frm = new FrmOrder())
             {
                 frm.ShowDialog();
@@ -312,10 +277,7 @@ namespace PhoManager.UI.Forms
 
         private void btnHoaDon_Click(object sender, EventArgs e)
         {
-            // Khi người dùng nhấn vào mục "Hóa đơn" trên thanh điều hướng, chúng ta mở form
-            // báo cáo hóa đơn để hiển thị lịch sử hóa đơn và cho phép xuất/in. Form FrmHoaDon
-            // cũ chỉ có nút stub nên được thay thế bằng FrmBaoCaoHoaDon.
-            SetActiveNav(navInvoices);
+            SetActiveNavButton(btnNavInvoices);
             using (var frm = new FrmBaoCaoHoaDon())
             {
                 frm.ShowDialog();
@@ -328,7 +290,7 @@ namespace PhoManager.UI.Forms
 
         private void btnThongKe_Click(object sender, EventArgs e)
         {
-            SetActiveNav(navAnalytics);
+            SetActiveNavButton(btnNavAnalytics);
             using (var frm = new FrmThongKe())
             {
                 frm.ShowDialog();
@@ -337,7 +299,7 @@ namespace PhoManager.UI.Forms
 
         private void btnCauHinh_Click(object sender, EventArgs e)
         {
-            SetActiveNav(navSettings);
+            SetActiveNavButton(btnNavSettings);
             using (var frm = new FrmCauHinh())
             {
                 frm.ShowDialog();
@@ -370,19 +332,14 @@ namespace PhoManager.UI.Forms
 
         private void navAnalytics_Click(object sender, EventArgs e)
         {
-            SetActiveNav(navAnalytics);
-            var location = navAnalytics.PointToScreen(new Point(navAnalytics.Width, navAnalytics.Height / 2));
+            SetActiveNavButton(btnNavAnalytics);
+            var location = btnNavAnalytics.PointToScreen(new Point(btnNavAnalytics.Width, btnNavAnalytics.Height / 2));
             ctxBaoCao.Show(location);
-        }
-
-        private void navDashboard_Click(object sender, EventArgs e)
-        {
-            SetActiveNav(navDashboard);
         }
 
         private void btnDangXuat_Click(object sender, EventArgs e)
         {
-            SetActiveNav(navLogout);
+            SetActiveNavButton(btnNavLogout);
             if (MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
@@ -405,7 +362,7 @@ namespace PhoManager.UI.Forms
 
         private void timerClock_Tick(object sender, EventArgs e)
         {
-            lblCurrentTime.Text = DateTime.Now.ToString("dddd, dd/MM/yyyy - HH:mm:ss");
+            lblCurrentTime.Text = DateTime.Now.ToString("HH:mm:ss");
         }
     }
 }
