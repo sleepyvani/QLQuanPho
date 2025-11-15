@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using PhoManager.BLL;
 using PhoManager.DTO;
@@ -22,39 +21,11 @@ namespace PhoManager.UI.Forms
             InitializeComponent();
             ThemeManager.ApplyBaseFormStyle(this);
             ThemeManager.StyleDataGridView(dgvMonAn);
-            ThemeManager.StyleButton(btnTimKiem, ButtonVariant.Primary);
-            ThemeManager.StyleButton(btnLamMoi, ButtonVariant.Secondary);
-            ThemeManager.StyleButton(btnThem, ButtonVariant.Primary);
-            ThemeManager.StyleButton(btnSua, ButtonVariant.Secondary);
-            ThemeManager.StyleButton(btnXoa, ButtonVariant.Danger);
-            
-            // Maintain critical properties after StyleButton - remove icons and ensure no wrapping
-            btnTimKiem.AutoSize = false;
-            btnTimKiem.TextAlign = ContentAlignment.MiddleCenter;
-            btnTimKiem.UseCompatibleTextRendering = false;
-            btnTimKiem.Image = null;
-            btnTimKiem.Width = 140;
-            btnLamMoi.AutoSize = false;
-            btnLamMoi.TextAlign = ContentAlignment.MiddleCenter;
-            btnLamMoi.UseCompatibleTextRendering = false;
-            btnLamMoi.Image = null;
-            btnLamMoi.Width = 140;
-            btnThem.AutoSize = false;
-            btnThem.TextAlign = ContentAlignment.MiddleCenter;
-            btnThem.UseCompatibleTextRendering = false;
-            btnThem.Image = null;
-            btnThem.Width = 120;
-            btnSua.AutoSize = false;
-            btnSua.TextAlign = ContentAlignment.MiddleCenter;
-            btnSua.UseCompatibleTextRendering = false;
-            btnSua.Image = null;
-            btnSua.Width = 150;
-            btnXoa.AutoSize = false;
-            btnXoa.TextAlign = ContentAlignment.MiddleCenter;
-            btnXoa.UseCompatibleTextRendering = false;
-            btnXoa.Image = null;
-            btnXoa.Width = 120;
-            
+            ThemeManager.StyleButton(btnTimKiem, ButtonVariant.Primary, IconGlyphs.Search);
+            ThemeManager.StyleButton(btnLamMoi, ButtonVariant.Secondary, IconGlyphs.Refresh);
+            ThemeManager.StyleButton(btnThem, ButtonVariant.Primary, IconGlyphs.Add);
+            ThemeManager.StyleButton(btnSua, ButtonVariant.Secondary, IconGlyphs.Edit);
+            ThemeManager.StyleButton(btnXoa, ButtonVariant.Danger, IconGlyphs.Delete);
             ThemeManager.StyleTextBox(txtTimKiem);
             ConfigureGrid();
             LoadDanhSachMonAn();

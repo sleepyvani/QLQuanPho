@@ -19,22 +19,7 @@ namespace PhoManager.UI.Forms
         {
             InitializeComponent();
             ThemeManager.ApplyBaseFormStyle(this);
-            ThemeManager.StyleButton(btnLuu, ButtonVariant.Primary);
-            
-            // Maintain critical properties after StyleButton - remove icons and ensure no wrapping
-            btnLuu.AutoSize = false;
-            btnLuu.TextAlign = ContentAlignment.MiddleCenter;
-            btnLuu.UseCompatibleTextRendering = false;
-            btnLuu.Image = null;
-            btnLuu.Width = 120;
-            if (btnChangeLogo != null)
-            {
-                btnChangeLogo.AutoSize = false;
-                btnChangeLogo.TextAlign = ContentAlignment.MiddleCenter;
-                btnChangeLogo.UseCompatibleTextRendering = false;
-                btnChangeLogo.Image = null;
-                btnChangeLogo.Width = 140;
-            }
+            ThemeManager.StyleButton(btnLuu, ButtonVariant.Primary, IconGlyphs.Save);
 
             // Khởi tạo lựa chọn giao diện (theme)
             cbTheme.Items.AddRange(new object[] { "Sáng", "Tối" });

@@ -1,5 +1,3 @@
-using PhoManager.UI.Helpers;
-
 namespace PhoManager.UI.Forms
 {
     partial class FrmBanAn
@@ -38,7 +36,7 @@ namespace PhoManager.UI.Forms
             // dgvBanAn
             // 
             this.dgvBanAn.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvBanAn.ColumnHeadersHeight = 45;
+            this.dgvBanAn.ColumnHeadersHeight = 29;
             this.dgvBanAn.Location = new System.Drawing.Point(27, 25);
             this.dgvBanAn.Margin = new System.Windows.Forms.Padding(4);
             this.dgvBanAn.Name = "dgvBanAn";
@@ -66,50 +64,32 @@ namespace PhoManager.UI.Forms
             // 
             // btnThem
             // 
-            this.btnThem.AutoSize = false;
-            this.btnThem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnThem.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
             this.btnThem.Location = new System.Drawing.Point(993, 266);
             this.btnThem.Margin = new System.Windows.Forms.Padding(4);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(110, 42);
+            this.btnThem.Size = new System.Drawing.Size(120, 37);
             this.btnThem.TabIndex = 4;
             this.btnThem.Text = "Thêm";
-            this.btnThem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnThem.UseCompatibleTextRendering = false;
-            this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnSua
             // 
-            this.btnSua.AutoSize = false;
-            this.btnSua.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSua.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnSua.Location = new System.Drawing.Point(1111, 266);
+            this.btnSua.Location = new System.Drawing.Point(1138, 266);
             this.btnSua.Margin = new System.Windows.Forms.Padding(4);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(110, 42);
+            this.btnSua.Size = new System.Drawing.Size(120, 37);
             this.btnSua.TabIndex = 5;
             this.btnSua.Text = "Sửa";
-            this.btnSua.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnSua.UseCompatibleTextRendering = false;
-            this.btnSua.UseVisualStyleBackColor = true;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
             // 
-            this.btnXoa.AutoSize = false;
-            this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXoa.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnXoa.Location = new System.Drawing.Point(993, 316);
+            this.btnXoa.Location = new System.Drawing.Point(993, 311);
             this.btnXoa.Margin = new System.Windows.Forms.Padding(4);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(110, 42);
+            this.btnXoa.Size = new System.Drawing.Size(120, 37);
             this.btnXoa.TabIndex = 6;
             this.btnXoa.Text = "Xóa";
-            this.btnXoa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnXoa.UseCompatibleTextRendering = false;
-            this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // numericUpDown1
@@ -146,16 +126,11 @@ namespace PhoManager.UI.Forms
             // 
             // btnTimKiemBan
             // 
-            this.btnTimKiemBan.AutoSize = false;
-            this.btnTimKiemBan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTimKiemBan.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
             this.btnTimKiemBan.Location = new System.Drawing.Point(1183, 24);
             this.btnTimKiemBan.Name = "btnTimKiemBan";
-            this.btnTimKiemBan.Size = new System.Drawing.Size(140, 32);
+            this.btnTimKiemBan.Size = new System.Drawing.Size(75, 23);
             this.btnTimKiemBan.TabIndex = 9;
             this.btnTimKiemBan.Text = "Tìm kiếm";
-            this.btnTimKiemBan.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnTimKiemBan.UseCompatibleTextRendering = false;
             this.btnTimKiemBan.UseVisualStyleBackColor = true;
             this.btnTimKiemBan.Click += new System.EventHandler(this.btnTimKiemBan_Click);
             // 
@@ -190,7 +165,6 @@ namespace PhoManager.UI.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = ThemeManager.BackgroundColor;
             this.ClientSize = new System.Drawing.Size(1333, 554);
             this.Controls.Add(this.btnTimKiemBan);
             this.Controls.Add(this.txtTimKiemBan);

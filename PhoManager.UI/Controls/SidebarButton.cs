@@ -39,7 +39,7 @@ namespace PhoManager.UI.Controls
             FlatStyle = FlatStyle.Flat;
             FlatAppearance.BorderSize = 0;
             BackColor = ThemeManager.SidebarColor;
-            ForeColor = Color.FromArgb(148, 163, 184); // Slate-400
+            ForeColor = Color.FromArgb(210, 215, 226);
             Font = new Font("Segoe UI Semibold", 10F);
             Height = 48;
             Dock = DockStyle.Top;
@@ -62,7 +62,7 @@ namespace PhoManager.UI.Controls
             base.OnMouseEnter(e);
             if (!IsActive)
             {
-                BackColor = Color.FromArgb(51, 65, 85); // Slate-700
+                BackColor = Color.FromArgb(43, 54, 77);
             }
         }
 
@@ -79,13 +79,13 @@ namespace PhoManager.UI.Controls
         {
             if (IsActive)
             {
-                BackColor = ThemeManager.SidebarActive; // Blue-500
+                BackColor = ThemeManager.SidebarActive;
                 ForeColor = Color.White;
             }
             else
             {
                 BackColor = ThemeManager.SidebarColor;
-                ForeColor = Color.FromArgb(148, 163, 184); // Slate-400
+                ForeColor = Color.FromArgb(210, 215, 226);
             }
 
             RefreshIcon();
@@ -93,7 +93,7 @@ namespace PhoManager.UI.Controls
 
         private void RefreshIcon()
         {
-            Image = ThemeManager.CreateGlyphIcon(glyph, IsActive ? Color.White : Color.FromArgb(148, 163, 184), 24);
+            Image = ThemeManager.CreateGlyphIcon(glyph, IsActive ? Color.White : Color.FromArgb(200, 205, 218), 24);
         }
     }
 }

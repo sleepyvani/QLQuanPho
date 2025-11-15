@@ -171,17 +171,13 @@ namespace PhoManager.UI.Forms
             // 
             // btnXem
             // 
-            this.btnXem.AutoSize = false;
-            this.btnXem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXem.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnXem.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.btnXem.Location = new System.Drawing.Point(595, 5);
             this.btnXem.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.btnXem.Name = "btnXem";
-            this.btnXem.Size = new System.Drawing.Size(150, 42);
+            this.btnXem.Size = new System.Drawing.Size(120, 30);
             this.btnXem.TabIndex = 6;
             this.btnXem.Text = "Xem báo cáo";
-            this.btnXem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnXem.UseCompatibleTextRendering = false;
             this.btnXem.UseVisualStyleBackColor = true;
             this.btnXem.Click += new System.EventHandler(this.btnXem_Click);
             // 

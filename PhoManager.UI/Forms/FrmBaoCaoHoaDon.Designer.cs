@@ -133,49 +133,37 @@ namespace PhoManager.UI.Forms
             // 
             // btnXem
             // 
-            this.btnXem.AutoSize = false;
-            this.btnXem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXem.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnXem.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.btnXem.Location = new System.Drawing.Point(396, 5);
             this.btnXem.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.btnXem.Name = "btnXem";
-            this.btnXem.Size = new System.Drawing.Size(150, 42);
+            this.btnXem.Size = new System.Drawing.Size(120, 30);
             this.btnXem.TabIndex = 4;
             this.btnXem.Text = "Xem báo cáo";
-            this.btnXem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnXem.UseCompatibleTextRendering = false;
             this.btnXem.UseVisualStyleBackColor = true;
             this.btnXem.Click += new System.EventHandler(this.btnXem_Click);
 
             // 
             // btnExport
             // 
-            this.btnExport.AutoSize = false;
-            this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExport.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnExport.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.btnExport.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(150, 42);
+            this.btnExport.Size = new System.Drawing.Size(130, 30);
             this.btnExport.TabIndex = 5;
             this.btnExport.Text = "Xuất hóa đơn";
-            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnExport.UseCompatibleTextRendering = false;
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
 
             // 
             // btnPrint
             // 
-            this.btnPrint.AutoSize = false;
-            this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrint.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnPrint.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.btnPrint.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(150, 42);
+            this.btnPrint.Size = new System.Drawing.Size(100, 30);
             this.btnPrint.TabIndex = 6;
             this.btnPrint.Text = "In hóa đơn";
-            this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnPrint.UseCompatibleTextRendering = false;
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 

@@ -3,6 +3,8 @@ using System.Windows.Forms;
 using PhoManager.BLL;
 using System.Linq;
 using PhoManager.UI.Helpers;
+using System.Data;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace PhoManager.UI.Forms
 {
@@ -31,7 +33,43 @@ namespace PhoManager.UI.Forms
         {
             DateTime tuNgay = dtpTuNgay.Value;
             DateTime denNgay = dtpDenNgay.Value;
-            dgvThongKe.DataSource = thongKeBLL.ThongKeDoanhThu(tuNgay, denNgay);
+            // Lấy dữ liệu thống kê theo ngày
+            DataTable table = thongKeBLL.ThongKeDoanhThu(tuNgay, denNgay);
+            dgvThongKe.DataSource = table;
+            // Vẽ biểu đồ doanh thu
+            if (this.chartThongKe != null)
+            {
+                chartThongKe.Series.Clear();
+                // Series doanh thu theo ngày
+                Series seriesDoanhThu = new Series("Doanh thu");
+                seriesDoanhThu.ChartType = SeriesChartType.Column;
+                seriesDoanhThu.XValueType = ChartValueType.String;
+                seriesDoanhThu.IsValueShownAsLabel = true;
+                // Series số hóa đơn
+                Series seriesSoHoaDon = new Series("Số hóa đơn");
+                seriesSoHoaDon.ChartType = SeriesChartType.Line;
+                seriesSoHoaDon.XValueType = ChartValueType.String;
+                seriesSoHoaDon.IsValueShownAsLabel = true;
+                // Lặp qua từng dòng dữ liệu
+                foreach (DataRow row in table.Rows)
+                {
+                    DateTime ngay = Convert.ToDateTime(row["Ngay"]);
+                    int soHoaDon = Convert.ToInt32(row["SoHoaDon"]);
+                    decimal tongDoanhThu = Convert.ToDecimal(row["TongDoanhThu"]);
+                    string xValue = ngay.ToString("dd/MM");
+                    seriesDoanhThu.Points.AddXY(xValue, tongDoanhThu);
+                    seriesSoHoaDon.Points.AddXY(xValue, soHoaDon);
+                }
+                // Thiết lập tên trục
+                chartThongKe.ChartAreas[0].AxisX.Title = "Ngày";
+                chartThongKe.ChartAreas[0].AxisY.Title = "Doanh thu";
+                chartThongKe.ChartAreas[0].AxisY2.Enabled = AxisEnabled.True;
+                chartThongKe.ChartAreas[0].AxisY2.Title = "Số hóa đơn";
+                seriesSoHoaDon.YAxisType = AxisType.Secondary;
+                chartThongKe.Series.Add(seriesDoanhThu);
+                chartThongKe.Series.Add(seriesSoHoaDon);
+                // Đặt màu sắc hài hòa theo theme nếu cần (sử dụng màu mặc định của Chart)
+            }
         }
 
         /// <summary>
