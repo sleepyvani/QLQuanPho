@@ -1,7 +1,9 @@
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using PhoManager.UI.Helpers;
 
 namespace PhoManager.UI.Controls
 {
@@ -10,6 +12,9 @@ namespace PhoManager.UI.Controls
         private int borderRadius = 15;
         private Color borderColor = Color.Transparent;
         private int borderWidth = 0;
+        private ButtonVariant variant = ButtonVariant.Primary;
+        private string glyph = string.Empty;
+        private int glyphSize = 22;
 
         public RoundedButton()
         {
@@ -19,9 +24,10 @@ namespace PhoManager.UI.Controls
             ForeColor = Color.White;
             Font = new Font("Segoe UI Semibold", 10F, FontStyle.Regular, GraphicsUnit.Point);
             Cursor = Cursors.Hand;
-            Padding = new Padding(10, 8, 10, 8);
-            Size = new Size(120, 40);
+            Padding = new Padding(14, 10, 14, 10);
+            Size = new Size(140, 44);
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer | ControlStyles.ResizeRedraw, true);
+            ApplyVariant();
         }
 
         public int BorderRadius
@@ -54,6 +60,41 @@ namespace PhoManager.UI.Controls
             }
         }
 
+        public ButtonVariant Variant
+        {
+            get => variant;
+            set
+            {
+                variant = value;
+                ApplyVariant();
+                Invalidate();
+            }
+        }
+
+        [Browsable(true)]
+        [Category("Appearance")]
+        public string Glyph
+        {
+            get => glyph;
+            set
+            {
+                glyph = value;
+                Invalidate();
+            }
+        }
+
+        [Browsable(true)]
+        [Category("Appearance")]
+        public int GlyphSize
+        {
+            get => glyphSize;
+            set
+            {
+                glyphSize = value;
+                Invalidate();
+            }
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -76,15 +117,23 @@ namespace PhoManager.UI.Controls
                 }
             }
 
-            StringFormat format = new StringFormat
+            Rectangle textRect = rect;
+            if (!string.IsNullOrEmpty(glyph))
             {
-                Alignment = StringAlignment.Center,
-                LineAlignment = StringAlignment.Center
-            };
+                var icon = ThemeManager.CreateGlyphIcon(glyph, ForeColor, glyphSize + 6);
+                int iconY = (Height - icon.Height) / 2;
+                g.DrawImage(icon, 18, iconY, icon.Width, icon.Height);
+                textRect = new Rectangle(18 + icon.Width + 8, rect.Y, rect.Width - (icon.Width + 26), rect.Height);
+            }
 
             using (SolidBrush textBrush = new SolidBrush(ForeColor))
             {
-                g.DrawString(Text, Font, textBrush, rect, format);
+                StringFormat format = new StringFormat
+                {
+                    Alignment = StringAlignment.Near,
+                    LineAlignment = StringAlignment.Center
+                };
+                g.DrawString(Text, Font, textBrush, textRect, format);
             }
 
             if (ClientRectangle.Contains(PointToClient(Cursor.Position)) && Enabled)
@@ -122,6 +171,43 @@ namespace PhoManager.UI.Controls
         {
             base.OnMouseLeave(e);
             Invalidate();
+        }
+
+        private void ApplyVariant()
+        {
+            switch (variant)
+            {
+                case ButtonVariant.Primary:
+                    BackColor = ThemeManager.PrimaryColor;
+                    ForeColor = Color.White;
+                    borderColor = Color.Transparent;
+                    borderWidth = 0;
+                    break;
+                case ButtonVariant.Secondary:
+                    BackColor = Color.FromArgb(245, 246, 250);
+                    ForeColor = ThemeManager.TextColor;
+                    borderColor = Color.FromArgb(220, 224, 232);
+                    borderWidth = 1;
+                    break;
+                case ButtonVariant.Tertiary:
+                    BackColor = Color.White;
+                    ForeColor = ThemeManager.TextColor;
+                    borderColor = Color.FromArgb(235, 238, 245);
+                    borderWidth = 1;
+                    break;
+                case ButtonVariant.Danger:
+                    BackColor = ThemeManager.DangerColor;
+                    ForeColor = Color.White;
+                    borderColor = Color.Transparent;
+                    borderWidth = 0;
+                    break;
+                default:
+                    BackColor = Color.Transparent;
+                    ForeColor = ThemeManager.TextColor;
+                    borderColor = Color.FromArgb(220, 224, 232);
+                    borderWidth = 1;
+                    break;
+            }
         }
     }
 }

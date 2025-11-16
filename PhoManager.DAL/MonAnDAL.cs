@@ -73,19 +73,56 @@ namespace PhoManager.DAL
             }
         }
 
-        public bool XoaMonAn(int maMon)
+        public string XoaMonAn(int maMon)
         {
             using (var db = new QLQuanPhoDataContext())
             {
-                var entity = db.MonAns.SingleOrDefault(m => m.MaMon == maMon);
-                if (entity == null)
+                var monAn = db.MonAns.SingleOrDefault(m => m.MaMon == maMon);
+                if (monAn == null)
                 {
-                    return false;
+                    return "Món ãn không t?n t?i.";
                 }
 
-                db.MonAns.DeleteOnSubmit(entity);
+                bool dangDuocSuDung = db.ChiTietHoaDons.Any(ct => ct.MaMon == maMon);
+                if (dangDuocSuDung)
+                {
+                    return "Món ãn này ð? ðý?c s? d?ng trong hóa ðõn, không th? xóa!";
+                }
+
+                db.MonAns.DeleteOnSubmit(monAn);
                 db.SubmitChanges();
-                return true;
+                return "Xóa món ãn thành công.";
+            }
+        }
+
+        public string NgungBanMonAn(int maMon)
+        {
+            using (var db = new QLQuanPhoDataContext())
+            {
+                var monAn = db.MonAns.SingleOrDefault(m => m.MaMon == maMon);
+                if (monAn == null)
+                    return "Món ãn không t?n t?i.";
+
+                monAn.TrangThai = false; 
+                db.SubmitChanges();
+                return "Ð? chuy?n món ãn sang tr?ng thái ng?ng bán.";
+            }
+        }
+
+        public List<MonAnDTO> LayDanhSachMonAnDangBan()
+        {
+            using (var db = new QLQuanPhoDataContext())
+            {
+                return db.MonAns
+                         .Where(m => m.TrangThai == true)
+                         .Select(m => new MonAnDTO
+                         {
+                             MaMon = m.MaMon,
+                             TenMon = m.TenMon,
+                             GiaNho = m.GiaNho,
+                             GiaLon = m.GiaLon,
+                             TrangThai = m.TrangThai
+                         }).ToList();
             }
         }
 

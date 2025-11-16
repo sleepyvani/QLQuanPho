@@ -7,21 +7,35 @@ namespace PhoManager.DAL
 {
     public class NhanVienDAL
     {
+        /// <summary>
+        /// Thực hiện đăng nhập dựa trên tài khoản và mật khẩu. Mật khẩu được so khớp qua hàm kiểm tra hash.
+        /// </summary>
+        /// <param name="taiKhoan">Tài khoản đăng nhập.</param>
+        /// <param name="matKhau">Mật khẩu thuần nhập vào.</param>
+        /// <returns>Đối tượng NhanVienDTO nếu thông tin đúng, ngược lại null.</returns>
         public NhanVienDTO DangNhap(string taiKhoan, string matKhau)
         {
             using (var db = new QLQuanPhoDataContext())
             {
-                return db.NhanViens
-                    .Where(n => n.TaiKhoan == taiKhoan && n.MatKhau == matKhau && n.TrangThai)
-                    .Select(n => new NhanVienDTO
-                    {
-                        MaNV = n.MaNV,
-                        HoTen = n.HoTen,
-                        TaiKhoan = n.TaiKhoan,
-                        ChucVu = n.ChucVu,
-                        TrangThai = n.TrangThai
-                    })
-                    .FirstOrDefault();
+                // Truy xuất nhân viên theo tài khoản và trạng thái còn hoạt động
+                var entity = db.NhanViens.FirstOrDefault(n => n.TaiKhoan == taiKhoan && n.TrangThai);
+                if (entity == null)
+                {
+                    return null;
+                }
+                // So khớp mật khẩu bằng cách kiểm tra hash
+                if (!PhoManager.Utilities.PasswordHelper.VerifyPassword(matKhau, entity.MatKhau))
+                {
+                    return null;
+                }
+                return new NhanVienDTO
+                {
+                    MaNV = entity.MaNV,
+                    HoTen = entity.HoTen,
+                    TaiKhoan = entity.TaiKhoan,
+                    ChucVu = entity.ChucVu,
+                    TrangThai = entity.TrangThai
+                };
             }
         }
 
@@ -50,21 +64,32 @@ namespace PhoManager.DAL
         {
             using (var db = new QLQuanPhoDataContext())
             {
-                var entity = new NhanVien
+                try
                 {
-                    HoTen = nhanVien.HoTen,
-                    TaiKhoan = nhanVien.TaiKhoan,
-                    MatKhau = nhanVien.MatKhau,
-                    ChucVu = nhanVien.ChucVu,
-                    TrangThai = nhanVien.TrangThai,
-                    NgayTao = DateTime.Now
-                };
-
-                db.NhanViens.InsertOnSubmit(entity);
-                db.SubmitChanges();
-                nhanVien.MaNV = entity.MaNV;
-                nhanVien.NgayTao = entity.NgayTao;
-                return true;
+                    var entity = new NhanVien
+                    {
+                        HoTen = nhanVien.HoTen,
+                        TaiKhoan = nhanVien.TaiKhoan,
+                        // Lưu mật khẩu dưới dạng hash để tăng bảo mật
+                        MatKhau = PhoManager.Utilities.PasswordHelper.IsHashed(nhanVien.MatKhau)
+                            ? nhanVien.MatKhau
+                            : PhoManager.Utilities.PasswordHelper.HashPassword(nhanVien.MatKhau),
+                        ChucVu = nhanVien.ChucVu,
+                        TrangThai = nhanVien.TrangThai,
+                        NgayTao = DateTime.Now
+                    };
+                    db.NhanViens.InsertOnSubmit(entity);
+                    db.SubmitChanges();
+                    nhanVien.MaNV = entity.MaNV;
+                    nhanVien.NgayTao = entity.NgayTao;
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    // Ghi log lỗi và trả về false
+                    PhoManager.Utilities.Logger.Error($"ThemNhanVien thất bại: {ex.Message}");
+                    return false;
+                }
             }
         }
 
@@ -72,20 +97,29 @@ namespace PhoManager.DAL
         {
             using (var db = new QLQuanPhoDataContext())
             {
-                var entity = db.NhanViens.SingleOrDefault(n => n.MaNV == nhanVien.MaNV);
-                if (entity == null)
+                try
                 {
+                    var entity = db.NhanViens.SingleOrDefault(n => n.MaNV == nhanVien.MaNV);
+                    if (entity == null)
+                    {
+                        return false;
+                    }
+                    entity.HoTen = nhanVien.HoTen;
+                    entity.TaiKhoan = nhanVien.TaiKhoan;
+                    // Nếu mật khẩu truyền vào chưa băm thì băm trước khi lưu
+                    entity.MatKhau = PhoManager.Utilities.PasswordHelper.IsHashed(nhanVien.MatKhau)
+                        ? nhanVien.MatKhau
+                        : PhoManager.Utilities.PasswordHelper.HashPassword(nhanVien.MatKhau);
+                    entity.ChucVu = nhanVien.ChucVu;
+                    entity.TrangThai = nhanVien.TrangThai;
+                    db.SubmitChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    PhoManager.Utilities.Logger.Error($"CapNhatNhanVien thất bại: {ex.Message}");
                     return false;
                 }
-
-                entity.HoTen = nhanVien.HoTen;
-                entity.TaiKhoan = nhanVien.TaiKhoan;
-                entity.MatKhau = nhanVien.MatKhau;
-                entity.ChucVu = nhanVien.ChucVu;
-                entity.TrangThai = nhanVien.TrangThai;
-
-                db.SubmitChanges();
-                return true;
             }
         }
 
@@ -109,15 +143,25 @@ namespace PhoManager.DAL
         {
             using (var db = new QLQuanPhoDataContext())
             {
-                var entity = db.NhanViens.SingleOrDefault(n => n.MaNV == maNV);
-                if (entity == null)
+                try
                 {
+                    var entity = db.NhanViens.SingleOrDefault(n => n.MaNV == maNV);
+                    if (entity == null)
+                    {
+                        return false;
+                    }
+                    // Băm mật khẩu mới trước khi lưu
+                    entity.MatKhau = PhoManager.Utilities.PasswordHelper.IsHashed(matKhauMoi)
+                        ? matKhauMoi
+                        : PhoManager.Utilities.PasswordHelper.HashPassword(matKhauMoi);
+                    db.SubmitChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    PhoManager.Utilities.Logger.Error($"DoiMatKhau thất bại: {ex.Message}");
                     return false;
                 }
-
-                entity.MatKhau = matKhauMoi;
-                db.SubmitChanges();
-                return true;
             }
         }
 

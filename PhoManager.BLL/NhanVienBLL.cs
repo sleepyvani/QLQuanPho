@@ -7,13 +7,18 @@ namespace PhoManager.BLL
     public class NhanVienBLL
     {
         private NhanVienDAL nhanVienDAL = new NhanVienDAL();
+        /// <summary>
+        /// Đăng nhập dựa trên tài khoản và mật khẩu. Kiểm tra đầu vào và ủy thác cho DAL xử lý.
+        /// </summary>
+        /// <param name="taiKhoan">Tên tài khoản.</param>
+        /// <param name="matKhau">Mật khẩu thuần.</param>
+        /// <returns>Đối tượng NhanVienDTO nếu đăng nhập thành công, ngược lại null.</returns>
         public NhanVienDTO DangNhap(string taiKhoan, string matKhau)
         {
             if (string.IsNullOrWhiteSpace(taiKhoan) || string.IsNullOrWhiteSpace(matKhau))
             {
                 return null;
             }
-
             return nhanVienDAL.DangNhap(taiKhoan, matKhau);
         }
 
@@ -98,23 +103,26 @@ namespace PhoManager.BLL
             {
                 return "Mật khẩu mới không được để trống!";
             }
-
             if (matKhauMoi != xacNhanMatKhau)
             {
                 return "Mật khẩu xác nhận không khớp!";
             }
-
+            // Lấy thông tin nhân viên từ cơ sở dữ liệu
             NhanVienDTO nhanVien = nhanVienDAL.LayNhanVienTheoMa(maNV);
-            if (nhanVien == null || nhanVien.MatKhau != matKhauCu)
+            if (nhanVien == null)
+            {
+                return "Nhân viên không tồn tại!";
+            }
+            // Kiểm tra mật khẩu cũ có trùng khớp không
+            if (!PhoManager.Utilities.PasswordHelper.VerifyPassword(matKhauCu, nhanVien.MatKhau))
             {
                 return "Mật khẩu cũ không đúng!";
             }
-
+            // Gọi DAL để đổi mật khẩu (sẽ tự băm mật khẩu nếu cần)
             if (nhanVienDAL.DoiMatKhau(maNV, matKhauMoi))
             {
                 return "Đổi mật khẩu thành công!";
             }
-
             return "Đổi mật khẩu thất bại!";
         }
     }
