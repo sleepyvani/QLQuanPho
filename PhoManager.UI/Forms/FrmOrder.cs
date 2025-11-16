@@ -6,6 +6,8 @@ using PhoManager.DTO;
 using System.Linq;
 using System.Collections.Generic;
 using PhoManager.UI.Helpers;
+using System.Drawing.Printing;
+
 
 namespace PhoManager.UI.Forms
 {
@@ -17,7 +19,6 @@ namespace PhoManager.UI.Forms
         private HoaDonBLL hoaDonBLL = new HoaDonBLL();
         private int maBanHienTai = 0;
         private HoaDonDTO hoaDonHienTai;
-        // Dictionary to remember sort direction (ascending/descending) for each column
         private Dictionary<string, bool> sortDirections;
 
         public FrmOrder()
@@ -32,22 +33,10 @@ namespace PhoManager.UI.Forms
             ThemeManager.StyleTextBox(txtGhiChuMon);
             ThemeManager.StyleButton(btnThemMon, ButtonVariant.Primary);
             ThemeManager.StyleButton(btnXoaMon, ButtonVariant.Danger);
-            
-            // Maintain critical properties after StyleButton - remove icons and ensure no wrapping
-            btnThemMon.AutoSize = false;
-            btnThemMon.TextAlign = ContentAlignment.MiddleCenter;
-            btnThemMon.UseCompatibleTextRendering = false;
-            btnThemMon.Image = null;
-            btnThemMon.Width = 150;
-            btnXoaMon.AutoSize = false;
-            btnXoaMon.TextAlign = ContentAlignment.MiddleCenter;
-            btnXoaMon.UseCompatibleTextRendering = false;
-            btnXoaMon.Image = null;
-            btnXoaMon.Width = 150;
-            
+            ThemeManager.StyleButton(btnThanhToan, ButtonVariant.Primary);
+
             LoadDanhSachBan();
             LoadDanhSachMonAn();
-            btnXoaMon.Click += btnXoaMon_Click;
 
             // Initialize sorting direction dictionary
             sortDirections = new Dictionary<string, bool>();
@@ -252,6 +241,147 @@ namespace PhoManager.UI.Forms
             var prop = obj.GetType().GetProperty(propertyName);
             return prop != null ? prop.GetValue(obj) : null;
         }
+
+        private void btnThanhToan_Click(object sender, EventArgs e)
+        {
+            if (hoaDonHienTai == null || hoaDonHienTai.ChiTietHoaDon == null || hoaDonHienTai.ChiTietHoaDon.Count == 0)
+            {
+                MessageBox.Show("Không có hóa đơn nào cần thanh toán.",
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var confirm = MessageBox.Show(
+                "Bạn có chắc chắn muốn thanh toán hóa đơn hiện tại?",
+                "Xác nhận thanh toán",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (confirm != DialogResult.Yes)
+                return;
+
+            bool ok = hoaDonBLL.ThanhToanHoaDon(hoaDonHienTai);
+            if (!ok)
+            {
+                MessageBox.Show("Thanh toán thất bại. Vui lòng thử lại.",
+                    "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                PrintInvoice(hoaDonHienTai);
+            }
+            catch (Exception ex)
+            {
+                PhoManager.Utilities.Logger.Error("Lỗi khi in hóa đơn: " + ex);
+            }
+
+            MessageBox.Show("Thanh toán thành công!",
+                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            LoadChiTietHoaDon(maBanHienTai);
+        }
+        private void PrintInvoice(HoaDonDTO invoice)
+        {
+            if (invoice == null) return;
+
+            using (PrintDocument printDoc = new PrintDocument())
+            {
+                printDoc.DocumentName = $"HoaDon_{invoice.MaHD}";
+                printDoc.PrintPage += (s, e) =>
+                {
+                    float y = e.MarginBounds.Top;
+                    float x = e.MarginBounds.Left;
+
+                    using (Font headerFont = new Font("Segoe UI", 14, FontStyle.Bold))
+                    using (Font subHeaderFont = new Font("Segoe UI", 10, FontStyle.Regular))
+                    using (Font tableHeaderFont = new Font("Segoe UI", 10, FontStyle.Bold))
+                    using (Font tableFont = new Font("Segoe UI", 10, FontStyle.Regular))
+                    {
+                        // ===== Header hóa đơn =====
+                        e.Graphics.DrawString("HÓA ĐƠN THANH TOÁN", headerFont, Brushes.Black, x, y);
+                        y += headerFont.GetHeight(e.Graphics) + 10;
+
+                        e.Graphics.DrawString($"Mã hóa đơn: {invoice.MaHD}", subHeaderFont, Brushes.Black, x, y);
+                        y += subHeaderFont.GetHeight(e.Graphics) + 2;
+
+                        e.Graphics.DrawString($"Ngày lập: {invoice.NgayLap:dd/MM/yyyy HH:mm}", subHeaderFont, Brushes.Black, x, y);
+                        y += subHeaderFont.GetHeight(e.Graphics) + 2;
+
+                        e.Graphics.DrawString($"Bàn: {invoice.TenBan}", subHeaderFont, Brushes.Black, x, y);
+                        y += subHeaderFont.GetHeight(e.Graphics) + 2;
+
+                        e.Graphics.DrawString($"Nhân viên: {invoice.TenNhanVien}", subHeaderFont, Brushes.Black, x, y);
+                        y += subHeaderFont.GetHeight(e.Graphics) + 10;
+
+                        // ===== Bảng chi tiết món =====
+                        float col1 = 220;  // Tên món
+                        float col2 = 60;   // SL
+                        float col3 = 100;  // Đơn giá
+                        float col4 = 110;  // Thành tiền
+
+                        e.Graphics.DrawString("Món", tableHeaderFont, Brushes.Black, x, y);
+                        e.Graphics.DrawString("SL", tableHeaderFont, Brushes.Black, x + col1, y);
+                        e.Graphics.DrawString("Đơn giá", tableHeaderFont, Brushes.Black, x + col1 + col2, y);
+                        e.Graphics.DrawString("Thành tiền", tableHeaderFont, Brushes.Black, x + col1 + col2 + col3, y);
+
+                        y += tableHeaderFont.GetHeight(e.Graphics) + 4;
+                        e.Graphics.DrawLine(Pens.Black, x, y, x + col1 + col2 + col3 + col4, y);
+                        y += 4;
+
+                        foreach (var ct in invoice.ChiTietHoaDon)
+                        {
+                            e.Graphics.DrawString(ct.TenMon, tableFont, Brushes.Black, x, y);
+                            e.Graphics.DrawString(ct.SoLuong.ToString(), tableFont, Brushes.Black, x + col1, y);
+                            e.Graphics.DrawString(ct.DonGia.ToString("#,##0"), tableFont, Brushes.Black, x + col1 + col2, y);
+                            e.Graphics.DrawString(ct.ThanhTien.ToString("#,##0"), tableFont, Brushes.Black, x + col1 + col2 + col3, y);
+
+                            y += tableFont.GetHeight(e.Graphics) + 2;
+
+                            // Nếu vượt quá 1 trang, báo in tiếp trang sau
+                            if (y > e.MarginBounds.Bottom - 80)
+                            {
+                                e.HasMorePages = true;
+                                return;
+                            }
+                        }
+
+                        y += 10;
+                        e.Graphics.DrawLine(Pens.Black, x, y, x + col1 + col2 + col3 + col4, y);
+                        y += 6;
+
+                        // ===== Tổng kết =====
+                        e.Graphics.DrawString($"Tổng tiền: {invoice.TongTien:#,##0} VNĐ", tableFont, Brushes.Black, x, y);
+                        y += tableFont.GetHeight(e.Graphics) + 2;
+
+                        if (invoice.GiamGia != 0)
+                        {
+                            e.Graphics.DrawString($"Giảm giá: {invoice.GiamGia:#,##0} VNĐ", tableFont, Brushes.Black, x, y);
+                            y += tableFont.GetHeight(e.Graphics) + 2;
+                        }
+
+                        if (invoice.Thue != 0)
+                        {
+                            e.Graphics.DrawString($"Thuế: {invoice.Thue:#,##0} VNĐ", tableFont, Brushes.Black, x, y);
+                            y += tableFont.GetHeight(e.Graphics) + 2;
+                        }
+
+                        e.Graphics.DrawString($"Thành tiền: {invoice.ThanhTien:#,##0} VNĐ", tableHeaderFont, Brushes.Black, x, y);
+                    }
+
+                    e.HasMorePages = false;
+                };
+
+                using (PrintPreviewDialog preview = new PrintPreviewDialog())
+                {
+                    preview.Document = printDoc;
+                    preview.WindowState = FormWindowState.Maximized;
+                    preview.ShowDialog();
+                }
+            }
+        }
+
     }
 }
 

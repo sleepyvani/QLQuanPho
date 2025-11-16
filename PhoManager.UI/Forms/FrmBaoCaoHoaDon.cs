@@ -34,30 +34,12 @@ namespace PhoManager.UI.Forms
         {
             InitializeComponent();
 
-            // Áp dụng theme và style các control
             ThemeManager.ApplyBaseFormStyle(this);
             if (this.dgvHoaDon != null)
             {
                 ThemeManager.StyleDataGridView(dgvHoaDon);
-            }
-            if (this.btnXem != null)
-            {
-                ThemeManager.StyleButton(btnXem, ButtonVariant.Primary);
-                btnXem.AutoSize = false;
-                btnXem.TextAlign = ContentAlignment.MiddleCenter;
-                btnXem.UseCompatibleTextRendering = false;
-                btnXem.Image = null;
-                btnXem.Width = 150;
-            }
-            if (this.btnExport != null)
-            {
-                ThemeManager.StyleButton(btnExport, ButtonVariant.Secondary);
-                btnExport.AutoSize = false;
-                btnExport.TextAlign = ContentAlignment.MiddleCenter;
-                btnExport.UseCompatibleTextRendering = false;
-                btnExport.Image = null;
-                btnExport.Width = 150;
-            }
+            }          
+            
             if (this.btnPrint != null)
             {
                 ThemeManager.StyleButton(btnPrint, ButtonVariant.Secondary);
@@ -66,6 +48,15 @@ namespace PhoManager.UI.Forms
                 btnPrint.UseCompatibleTextRendering = false;
                 btnPrint.Image = null;
                 btnPrint.Width = 150;
+            }
+            var today = DateTime.Today;
+            if (dtpDenNgay != null && dtpTuNgay != null)
+            {
+                dtpDenNgay.MaxDate = today;
+                dtpTuNgay.MaxDate = today;
+
+                dtpDenNgay.Value = today;
+                dtpTuNgay.Value = today.AddDays(-7); 
             }
 
             // Khởi tạo PrintDocument và gắn sự kiện PrintPage để vẽ nội dung hóa đơn khi in.
@@ -83,44 +74,63 @@ namespace PhoManager.UI.Forms
 
         private void btnXem_Click(object sender, EventArgs e)
         {
+            DateTime today = DateTime.Today;
             DateTime tu = dtpTuNgay.Value.Date;
             DateTime den = dtpDenNgay.Value.Date;
+
+            // Không cho ĐẾN NGÀY lớn hơn hôm nay
+            if (den > today)
+            {
+                den = today;
+                dtpDenNgay.Value = today;
+            }
+
+            // Không cho TỪ NGÀY > ĐẾN NGÀY
             if (tu > den)
             {
-                MessageBox.Show("Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc.");
+                MessageBox.Show("Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc.",
+                    "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dtpTuNgay.Focus();
                 return;
             }
+
+            // Giới hạn khoảng thời gian tối đa 1 năm (có thể chỉnh theo yêu cầu GV)
+            if ((den - tu).TotalDays > 365)
+            {
+                MessageBox.Show("Khoảng thời gian tra cứu tối đa là 1 năm.\nVui lòng chọn lại.",
+                    "Giới hạn thời gian", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
                 List<HoaDonDTO> list = hoaDonBLL.LayDanhSachHoaDon(tu, den);
                 dgvHoaDon.DataSource = list;
+
                 if (list != null && list.Count > 0)
                 {
-                    // Đặt header và định dạng cột nếu tồn tại
                     if (dgvHoaDon.Columns.Contains("MaHD"))
-                    {
                         dgvHoaDon.Columns["MaHD"].HeaderText = "Mã HĐ";
-                    }
+
                     if (dgvHoaDon.Columns.Contains("TenBan"))
-                    {
                         dgvHoaDon.Columns["TenBan"].HeaderText = "Bàn";
-                    }
+
                     if (dgvHoaDon.Columns.Contains("TenNhanVien"))
-                    {
                         dgvHoaDon.Columns["TenNhanVien"].HeaderText = "Nhân viên";
-                    }
+
                     if (dgvHoaDon.Columns.Contains("NgayLap"))
                     {
                         dgvHoaDon.Columns["NgayLap"].HeaderText = "Ngày lập";
                         dgvHoaDon.Columns["NgayLap"].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm";
                     }
+
                     if (dgvHoaDon.Columns.Contains("ThanhTien"))
                     {
                         dgvHoaDon.Columns["ThanhTien"].HeaderText = "Thành tiền";
                         dgvHoaDon.Columns["ThanhTien"].DefaultCellStyle.Format = "#,##0";
                     }
                 }
-                // Tính tổng số hóa đơn và tổng doanh thu
+
                 int totalCount = list?.Count ?? 0;
                 decimal totalRevenue = list?.Sum(hd => hd.ThanhTien) ?? 0m;
                 lblTong.Text = $"Số hóa đơn: {totalCount} | Tổng doanh thu: {totalRevenue:#,##0} đ";
@@ -129,6 +139,7 @@ namespace PhoManager.UI.Forms
             {
                 MessageBox.Show("Lỗi khi tải báo cáo: " + ex.Message);
             }
+
         }
 
         /// <summary>

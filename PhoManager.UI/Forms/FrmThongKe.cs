@@ -10,7 +10,6 @@ namespace PhoManager.UI.Forms
     {
         private ThongKeBLL thongKeBLL = new ThongKeBLL();
 
-        // Dictionary lưu trạng thái sắp xếp cho DataGridView thống kê
         private readonly System.Collections.Generic.Dictionary<string, bool> sortDirections = new System.Collections.Generic.Dictionary<string, bool>();
 
         public FrmThongKe()
@@ -29,8 +28,43 @@ namespace PhoManager.UI.Forms
 
         private void btnXemThongKe_Click(object sender, EventArgs e)
         {
-            DateTime tuNgay = dtpTuNgay.Value;
-            DateTime denNgay = dtpDenNgay.Value;
+            DateTime tuNgay = dtpTuNgay.Value.Date;
+            DateTime denNgay = dtpDenNgay.Value.Date;
+
+            if (tuNgay > denNgay)
+            {
+                MessageBox.Show(
+                    "Ngày bắt đầu không được lớn hơn ngày kết thúc.",
+                    "Khoảng ngày không hợp lệ",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                dtpTuNgay.Focus();
+                return;
+            }
+
+            DateTime homNay = DateTime.Today;
+            if (denNgay > homNay)
+            {
+                MessageBox.Show(
+                    "Ngày kết thúc không được lớn hơn ngày hiện tại.",
+                    "Khoảng ngày không hợp lệ",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                dtpDenNgay.Value = homNay;
+                return;
+            }
+
+            if ((denNgay - tuNgay).TotalDays > 365)
+            {
+                MessageBox.Show(
+                    "Khoảng thời gian thống kê không nên dài quá 1 năm. Vui lòng chọn lại.",
+                    "Khoảng ngày quá lớn",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
             dgvThongKe.DataSource = thongKeBLL.ThongKeDoanhThu(tuNgay, denNgay);
         }
 

@@ -33,7 +33,6 @@ namespace PhoManager.UI.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.layoutMain = new System.Windows.Forms.TableLayoutPanel();
             this.panelFilter = new System.Windows.Forms.FlowLayoutPanel();
             this.lblTu = new System.Windows.Forms.Label();
@@ -61,10 +60,10 @@ namespace PhoManager.UI.Forms
             this.layoutMain.Location = new System.Drawing.Point(0, 0);
             this.layoutMain.Name = "layoutMain";
             this.layoutMain.RowCount = 3;
-            this.layoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.layoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 85F));
             this.layoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.layoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.layoutMain.Size = new System.Drawing.Size(782, 453);
+            this.layoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
+            this.layoutMain.Size = new System.Drawing.Size(1053, 483);
             this.layoutMain.TabIndex = 0;
             // 
             // panelFilter
@@ -78,12 +77,10 @@ namespace PhoManager.UI.Forms
             this.panelFilter.Controls.Add(this.btnExport);
             this.panelFilter.Controls.Add(this.btnPrint);
             this.panelFilter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelFilter.FlowDirection = System.Windows.Forms.FlowDirection.LeftToRight;
             this.panelFilter.Location = new System.Drawing.Point(3, 3);
-            this.panelFilter.Margin = new System.Windows.Forms.Padding(3);
             this.panelFilter.Name = "panelFilter";
-            this.panelFilter.Padding = new System.Windows.Forms.Padding(5);
-            this.panelFilter.Size = new System.Drawing.Size(776, 74);
+            this.panelFilter.Padding = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.panelFilter.Size = new System.Drawing.Size(1047, 79);
             this.panelFilter.TabIndex = 0;
             this.panelFilter.WrapContents = false;
             // 
@@ -91,10 +88,10 @@ namespace PhoManager.UI.Forms
             // 
             this.lblTu.AutoSize = true;
             this.lblTu.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.lblTu.Location = new System.Drawing.Point(8, 9);
+            this.lblTu.Location = new System.Drawing.Point(9, 11);
             this.lblTu.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
             this.lblTu.Name = "lblTu";
-            this.lblTu.Size = new System.Drawing.Size(61, 17);
+            this.lblTu.Size = new System.Drawing.Size(68, 21);
             this.lblTu.TabIndex = 0;
             this.lblTu.Text = "Từ ngày:";
             this.lblTu.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -103,20 +100,20 @@ namespace PhoManager.UI.Forms
             // 
             this.dtpTuNgay.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.dtpTuNgay.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpTuNgay.Location = new System.Drawing.Point(75, 6);
-            this.dtpTuNgay.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
+            this.dtpTuNgay.Location = new System.Drawing.Point(83, 8);
+            this.dtpTuNgay.Margin = new System.Windows.Forms.Padding(3, 3, 11, 3);
             this.dtpTuNgay.Name = "dtpTuNgay";
-            this.dtpTuNgay.Size = new System.Drawing.Size(110, 24);
+            this.dtpTuNgay.Size = new System.Drawing.Size(125, 29);
             this.dtpTuNgay.TabIndex = 1;
             // 
             // lblDen
             // 
             this.lblDen.AutoSize = true;
             this.lblDen.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.lblDen.Location = new System.Drawing.Point(198, 9);
+            this.lblDen.Location = new System.Drawing.Point(222, 11);
             this.lblDen.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
             this.lblDen.Name = "lblDen";
-            this.lblDen.Size = new System.Drawing.Size(69, 17);
+            this.lblDen.Size = new System.Drawing.Size(79, 21);
             this.lblDen.TabIndex = 2;
             this.lblDen.Text = "Đến ngày:";
             this.lblDen.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -125,57 +122,48 @@ namespace PhoManager.UI.Forms
             // 
             this.dtpDenNgay.Font = new System.Drawing.Font("Segoe UI", 9.5F);
             this.dtpDenNgay.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDenNgay.Location = new System.Drawing.Point(273, 6);
-            this.dtpDenNgay.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
+            this.dtpDenNgay.Location = new System.Drawing.Point(307, 8);
+            this.dtpDenNgay.Margin = new System.Windows.Forms.Padding(3, 3, 11, 3);
             this.dtpDenNgay.Name = "dtpDenNgay";
-            this.dtpDenNgay.Size = new System.Drawing.Size(110, 24);
+            this.dtpDenNgay.Size = new System.Drawing.Size(125, 29);
             this.dtpDenNgay.TabIndex = 3;
             // 
             // btnXem
             // 
-            this.btnXem.AutoSize = false;
             this.btnXem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnXem.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnXem.Location = new System.Drawing.Point(396, 5);
-            this.btnXem.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
+            this.btnXem.Location = new System.Drawing.Point(443, 10);
+            this.btnXem.Margin = new System.Windows.Forms.Padding(0, 5, 6, 5);
             this.btnXem.Name = "btnXem";
-            this.btnXem.Size = new System.Drawing.Size(150, 42);
+            this.btnXem.Size = new System.Drawing.Size(171, 45);
             this.btnXem.TabIndex = 4;
             this.btnXem.Text = "Xem báo cáo";
-            this.btnXem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnXem.UseCompatibleTextRendering = false;
             this.btnXem.UseVisualStyleBackColor = true;
             this.btnXem.Click += new System.EventHandler(this.btnXem_Click);
-
             // 
             // btnExport
             // 
-            this.btnExport.AutoSize = false;
             this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExport.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnExport.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
+            this.btnExport.Location = new System.Drawing.Point(620, 10);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(0, 5, 6, 5);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(150, 42);
+            this.btnExport.Size = new System.Drawing.Size(171, 45);
             this.btnExport.TabIndex = 5;
             this.btnExport.Text = "Xuất hóa đơn";
-            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnExport.UseCompatibleTextRendering = false;
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
-
             // 
             // btnPrint
             // 
-            this.btnPrint.AutoSize = false;
             this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrint.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnPrint.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
+            this.btnPrint.Location = new System.Drawing.Point(797, 10);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(0, 5, 6, 5);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(150, 42);
+            this.btnPrint.Size = new System.Drawing.Size(171, 45);
             this.btnPrint.TabIndex = 6;
             this.btnPrint.Text = "In hóa đơn";
-            this.btnPrint.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnPrint.UseCompatibleTextRendering = false;
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
@@ -186,13 +174,14 @@ namespace PhoManager.UI.Forms
             this.dgvHoaDon.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvHoaDon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHoaDon.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvHoaDon.Location = new System.Drawing.Point(3, 83);
+            this.dgvHoaDon.Location = new System.Drawing.Point(3, 88);
             this.dgvHoaDon.MultiSelect = false;
             this.dgvHoaDon.Name = "dgvHoaDon";
             this.dgvHoaDon.ReadOnly = true;
             this.dgvHoaDon.RowHeadersVisible = false;
+            this.dgvHoaDon.RowHeadersWidth = 51;
             this.dgvHoaDon.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvHoaDon.Size = new System.Drawing.Size(776, 327);
+            this.dgvHoaDon.Size = new System.Drawing.Size(1047, 349);
             this.dgvHoaDon.TabIndex = 1;
             // 
             // lblTong
@@ -200,19 +189,19 @@ namespace PhoManager.UI.Forms
             this.lblTong.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTong.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.lblTong.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(96)))), ((int)(((byte)(67)))));
-            this.lblTong.Location = new System.Drawing.Point(3, 413);
+            this.lblTong.Location = new System.Drawing.Point(3, 440);
             this.lblTong.Name = "lblTong";
-            this.lblTong.Size = new System.Drawing.Size(776, 40);
+            this.lblTong.Size = new System.Drawing.Size(1047, 43);
             this.lblTong.TabIndex = 2;
             this.lblTong.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FrmBaoCaoHoaDon
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(782, 453);
+            this.ClientSize = new System.Drawing.Size(1053, 483);
             this.Controls.Add(this.layoutMain);
-            this.MinimumSize = new System.Drawing.Size(800, 500);
+            this.MinimumSize = new System.Drawing.Size(912, 530);
             this.Name = "FrmBaoCaoHoaDon";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Báo cáo Hóa đơn";
@@ -222,6 +211,7 @@ namespace PhoManager.UI.Forms
             this.panelFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHoaDon)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         #endregion

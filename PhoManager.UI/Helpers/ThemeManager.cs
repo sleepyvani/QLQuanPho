@@ -275,9 +275,9 @@ namespace PhoManager.UI.Helpers
         private static readonly ConditionalWeakTable<Button, ButtonStyleState> ButtonStates =
             new ConditionalWeakTable<Button, ButtonStyleState>();
 
-        public static void StyleButton(Button button, ButtonVariant variant, string glyph = null)
+        public static void StyleButton(Button btn, ButtonVariant variant, string glyph = null)
         {
-            if (button == null) return;
+            if (btn == null) return;
 
             Color backColor;
             Color foreColor;
@@ -312,52 +312,52 @@ namespace PhoManager.UI.Helpers
                     break;
             }
 
-            button.FlatStyle = FlatStyle.Flat;
-            button.UseVisualStyleBackColor = false;
-            button.AutoSize = false; // Prevent text wrapping
-            button.FlatAppearance.BorderSize = variant == ButtonVariant.Secondary || variant == ButtonVariant.Ghost ? 1 : 0;
-            if (button.FlatAppearance.BorderSize > 0)
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.UseVisualStyleBackColor = false;
+            btn.AutoSize = false; // Prevent text wrapping
+            btn.FlatAppearance.BorderSize = variant == ButtonVariant.Secondary || variant == ButtonVariant.Ghost ? 1 : 0;
+            if (btn.FlatAppearance.BorderSize > 0)
             {
-                button.FlatAppearance.BorderColor = variant == ButtonVariant.Secondary ? BorderColor : BorderColor;
+                btn.FlatAppearance.BorderColor = variant == ButtonVariant.Secondary ? BorderColor : BorderColor;
             }
             // Note: Flat buttons don't have rounded corners by default in WinForms
-            button.BackColor = backColor;
-            button.ForeColor = foreColor;
+            btn.BackColor = backColor;
+            btn.ForeColor = foreColor;
             // Preserve font size if button already has a smaller font (e.g., navbar buttons with 8.5F)
             // Only set default font if button doesn't have a custom font size smaller than 10F
-            float currentFontSize = button.Font.Size;
-            if (currentFontSize >= 10F || (currentFontSize < 8.5F && button.Font.Name != "Segoe UI Semibold"))
+            float currentFontSize = btn.Font.Size;
+            if (currentFontSize >= 10F || (currentFontSize < 8.5F && btn.Font.Name != "Segoe UI Semibold"))
             {
-                button.Font = new Font("Segoe UI Semibold", 10F);
+                btn.Font = new Font("Segoe UI Semibold", 10F);
             }
             // If font size is between 8.5F and 10F, preserve it but ensure font name is correct
             else if (currentFontSize < 10F && currentFontSize >= 8F)
             {
-                button.Font = new Font("Segoe UI Semibold", currentFontSize);
+                btn.Font = new Font("Segoe UI Semibold", currentFontSize);
             }
             
             // Adjust height only for regular buttons (not large quick action buttons)
-            if (button.Height < 50)
+            if (btn.Height < 50)
             {
-                button.Height = Math.Max(button.Height, 42);
+                btn.Height = Math.Max(btn.Height, 30);
             }
             
             // Adjust padding and alignment based on button size and glyph
-            if (button.Height >= 80)
+            if (btn.Height >= 80)
             {
                 // Large buttons: vertical layout with icon above text
                 // CRITICAL: Set these properties in correct order
-                button.TextImageRelation = TextImageRelation.ImageAboveText;
+                btn.TextImageRelation = TextImageRelation.ImageAboveText;
                 // Icon at top center - horizontally centered at top
-                button.ImageAlign = ContentAlignment.TopCenter;
+                btn.ImageAlign = ContentAlignment.TopCenter;
                 // Text at bottom center - horizontally centered in bottom portion
-                button.TextAlign = ContentAlignment.BottomCenter;
+                btn.TextAlign = ContentAlignment.BottomCenter;
                 // Padding: symmetric left/right (8px), top for icon space (32px), bottom for text (8px)
-                button.Padding = new Padding(8, 32, 8, 8);
+                btn.Padding = new Padding(8, 32, 8, 8);
                 if (!string.IsNullOrEmpty(glyph))
                 {
                     // Create icon with exact size
-                    button.Image = CreateGlyphIcon(glyph, foreColor, 28);
+                    btn.Image = CreateGlyphIcon(glyph, foreColor, 28);
                 }
             }
             else
@@ -367,28 +367,28 @@ namespace PhoManager.UI.Helpers
                 {
                     // Button with icon: icon on left, text centered horizontally
                     // Padding: left for icon space (18px icon + 8px margin), right for balance
-                    button.Padding = new Padding(32, 0, 10, 0);
-                    button.TextAlign = ContentAlignment.MiddleCenter;
-                    button.ImageAlign = ContentAlignment.MiddleLeft;
-                    button.TextImageRelation = TextImageRelation.ImageBeforeText;
-                    button.Image = CreateGlyphIcon(glyph, foreColor, 18);
+                    btn.Padding = new Padding(32, 0, 10, 0);
+                    btn.TextAlign = ContentAlignment.MiddleCenter;
+                    btn.ImageAlign = ContentAlignment.MiddleLeft;
+                    btn.TextImageRelation = TextImageRelation.ImageBeforeText;
+                    btn.Image = CreateGlyphIcon(glyph, foreColor, 18);
                 }
                 else
                 {
                     // Button without icon: text centered, symmetric padding
-                    button.Padding = new Padding(10, 0, 10, 0);
-                    button.TextAlign = ContentAlignment.MiddleCenter;
-                    button.ImageAlign = ContentAlignment.MiddleCenter;
-                    button.TextImageRelation = TextImageRelation.Overlay;
+                    btn.Padding = new Padding(10, 0, 10, 0);
+                    btn.TextAlign = ContentAlignment.MiddleCenter;
+                    btn.ImageAlign = ContentAlignment.MiddleCenter;
+                    btn.TextImageRelation = TextImageRelation.Overlay;
                 }
             }
 
-            ButtonStates.Remove(button);
-            ButtonStates.Add(button, new ButtonStyleState(backColor, hoverColor));
-            button.MouseEnter -= ButtonMouseEnter;
-            button.MouseLeave -= ButtonMouseLeave;
-            button.MouseEnter += ButtonMouseEnter;
-            button.MouseLeave += ButtonMouseLeave;
+            ButtonStates.Remove(btn);
+            ButtonStates.Add(btn, new ButtonStyleState(backColor, hoverColor));
+            btn.MouseEnter -= ButtonMouseEnter;
+            btn.MouseLeave -= ButtonMouseLeave;
+            btn.MouseEnter += ButtonMouseEnter;
+            btn.MouseLeave += ButtonMouseLeave;
         }
 
         private static void ButtonMouseEnter(object sender, EventArgs e)

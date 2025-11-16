@@ -27,7 +27,7 @@ namespace PhoManager.UI.Forms
             ThemeManager.StyleButton(btnThem, ButtonVariant.Primary);
             ThemeManager.StyleButton(btnSua, ButtonVariant.Secondary);
             ThemeManager.StyleButton(btnXoa, ButtonVariant.Danger);
-            
+
             // Maintain critical properties after StyleButton - remove icons and ensure no wrapping
             btnTimKiem.AutoSize = false;
             btnTimKiem.TextAlign = ContentAlignment.MiddleCenter;
@@ -54,7 +54,7 @@ namespace PhoManager.UI.Forms
             btnXoa.UseCompatibleTextRendering = false;
             btnXoa.Image = null;
             btnXoa.Width = 120;
-            
+
             ThemeManager.StyleTextBox(txtTimKiem);
             ConfigureGrid();
             LoadDanhSachMonAn();
@@ -88,9 +88,9 @@ namespace PhoManager.UI.Forms
             };
 
             string result = monAnBLL.ThemMonAn(monAn);
-            MessageBox.Show(result, "Thông báo", MessageBoxButtons.OK, 
+            MessageBox.Show(result, "Thông báo", MessageBoxButtons.OK,
                 result.Contains("thành công") ? MessageBoxIcon.Information : MessageBoxIcon.Error);
-            
+
             if (result.Contains("thành công"))
             {
                 ClearForm();
@@ -102,7 +102,7 @@ namespace PhoManager.UI.Forms
         {
             if (dgvMonAn.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Vui lòng chọn món ăn cần sửa!", "Thông báo", 
+                MessageBox.Show("Vui lòng chọn món ăn cần sửa!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
@@ -122,9 +122,9 @@ namespace PhoManager.UI.Forms
             monAn.TrangThai = chkTrangThai.Checked;
 
             string result = monAnBLL.CapNhatMonAn(monAn);
-            MessageBox.Show(result, "Thông báo", MessageBoxButtons.OK, 
+            MessageBox.Show(result, "Thông báo", MessageBoxButtons.OK,
                 result.Contains("thành công") ? MessageBoxIcon.Information : MessageBoxIcon.Error);
-            
+
             if (result.Contains("thành công"))
             {
                 ClearForm();
@@ -136,19 +136,19 @@ namespace PhoManager.UI.Forms
         {
             if (dgvMonAn.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Vui lòng chọn món ăn cần xóa!", "Thông báo", 
+                MessageBox.Show("Vui lòng chọn món ăn cần xóa!", "Thông báo",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (MessageBox.Show("Bạn có chắc chắn muốn xóa món ăn này?", "Xác nhận", 
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa món ăn này?", "Xác nhận",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 MonAnDTO monAn = (MonAnDTO)dgvMonAn.SelectedRows[0].DataBoundItem;
                 string result = monAnBLL.XoaMonAn(monAn.MaMon);
-                MessageBox.Show(result, "Thông báo", MessageBoxButtons.OK, 
+                MessageBox.Show(result, "Thông báo", MessageBoxButtons.OK,
                     result.Contains("thành công") ? MessageBoxIcon.Information : MessageBoxIcon.Error);
-                
+
                 if (result.Contains("thành công"))
                 {
                     ClearForm();
@@ -311,11 +311,6 @@ namespace PhoManager.UI.Forms
                 Width = 80
             });
         }
-
-        private void actionPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-    }
+    }        
 }
 

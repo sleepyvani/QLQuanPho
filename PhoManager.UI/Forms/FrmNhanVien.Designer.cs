@@ -35,56 +35,11 @@ namespace PhoManager.UI.Forms
             this.btnXoa = new System.Windows.Forms.Button();
             this.txtTimKiemNV = new System.Windows.Forms.TextBox();
             this.btnTimKiemNV = new System.Windows.Forms.Button();
-            //
-            // lblHoTen
-            //
             this.lblHoTen = new System.Windows.Forms.Label();
-            this.lblHoTen.AutoSize = true;
-            this.lblHoTen.Location = new System.Drawing.Point(1000, 40);
-            this.lblHoTen.Name = "lblHoTen";
-            this.lblHoTen.Size = new System.Drawing.Size(56, 17);
-            this.lblHoTen.TabIndex = 11;
-            this.lblHoTen.Text = "Họ tên";
-            //
-            // lblTaiKhoan
-            //
             this.lblTaiKhoan = new System.Windows.Forms.Label();
-            this.lblTaiKhoan.AutoSize = true;
-            this.lblTaiKhoan.Location = new System.Drawing.Point(1000, 89);
-            this.lblTaiKhoan.Name = "lblTaiKhoan";
-            this.lblTaiKhoan.Size = new System.Drawing.Size(74, 17);
-            this.lblTaiKhoan.TabIndex = 12;
-            this.lblTaiKhoan.Text = "Tài khoản";
-            //
-            // lblMatKhau
-            //
             this.lblMatKhau = new System.Windows.Forms.Label();
-            this.lblMatKhau.AutoSize = true;
-            this.lblMatKhau.Location = new System.Drawing.Point(1000, 138);
-            this.lblMatKhau.Name = "lblMatKhau";
-            this.lblMatKhau.Size = new System.Drawing.Size(71, 17);
-            this.lblMatKhau.TabIndex = 13;
-            this.lblMatKhau.Text = "Mật khẩu";
-            //
-            // lblChucVu
-            //
             this.lblChucVu = new System.Windows.Forms.Label();
-            this.lblChucVu.AutoSize = true;
-            this.lblChucVu.Location = new System.Drawing.Point(1000, 187);
-            this.lblChucVu.Name = "lblChucVu";
-            this.lblChucVu.Size = new System.Drawing.Size(62, 17);
-            this.lblChucVu.TabIndex = 14;
-            this.lblChucVu.Text = "Chức vụ";
-            //
-            // lblTrangThai
-            //
             this.lblTrangThai = new System.Windows.Forms.Label();
-            this.lblTrangThai.AutoSize = true;
-            this.lblTrangThai.Location = new System.Drawing.Point(1000, 236);
-            this.lblTrangThai.Name = "lblTrangThai";
-            this.lblTrangThai.Size = new System.Drawing.Size(76, 17);
-            this.lblTrangThai.TabIndex = 15;
-            this.lblTrangThai.Text = "Trạng thái";
             ((System.ComponentModel.ISupportInitialize)(this.dgvNhanVien)).BeginInit();
             this.SuspendLayout();
             // 
@@ -93,7 +48,7 @@ namespace PhoManager.UI.Forms
             this.dgvNhanVien.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvNhanVien.ColumnHeadersHeight = 45;
             this.dgvNhanVien.Location = new System.Drawing.Point(27, 25);
-            this.dgvNhanVien.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvNhanVien.Margin = new System.Windows.Forms.Padding(4);
             this.dgvNhanVien.Name = "dgvNhanVien";
             this.dgvNhanVien.RowHeadersWidth = 51;
             this.dgvNhanVien.Size = new System.Drawing.Size(933, 492);
@@ -101,24 +56,24 @@ namespace PhoManager.UI.Forms
             // 
             // txtHoTen
             // 
-            this.txtHoTen.Location = new System.Drawing.Point(1000, 62);
-            this.txtHoTen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtHoTen.Location = new System.Drawing.Point(1000, 78);
+            this.txtHoTen.Margin = new System.Windows.Forms.Padding(4);
             this.txtHoTen.Name = "txtHoTen";
             this.txtHoTen.Size = new System.Drawing.Size(265, 22);
             this.txtHoTen.TabIndex = 1;
             // 
             // txtTaiKhoan
             // 
-            this.txtTaiKhoan.Location = new System.Drawing.Point(1000, 111);
-            this.txtTaiKhoan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTaiKhoan.Location = new System.Drawing.Point(1000, 127);
+            this.txtTaiKhoan.Margin = new System.Windows.Forms.Padding(4);
             this.txtTaiKhoan.Name = "txtTaiKhoan";
             this.txtTaiKhoan.Size = new System.Drawing.Size(265, 22);
             this.txtTaiKhoan.TabIndex = 2;
             // 
             // txtMatKhau
             // 
-            this.txtMatKhau.Location = new System.Drawing.Point(1000, 160);
-            this.txtMatKhau.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMatKhau.Location = new System.Drawing.Point(1000, 176);
+            this.txtMatKhau.Margin = new System.Windows.Forms.Padding(4);
             this.txtMatKhau.Name = "txtMatKhau";
             this.txtMatKhau.PasswordChar = '*';
             this.txtMatKhau.Size = new System.Drawing.Size(265, 22);
@@ -130,8 +85,8 @@ namespace PhoManager.UI.Forms
             "Quản lý",
             "Thu ngân",
             "Bếp"});
-            this.cboChucVu.Location = new System.Drawing.Point(1000, 209);
-            this.cboChucVu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboChucVu.Location = new System.Drawing.Point(1000, 225);
+            this.cboChucVu.Margin = new System.Windows.Forms.Padding(4);
             this.cboChucVu.Name = "cboChucVu";
             this.cboChucVu.Size = new System.Drawing.Size(265, 24);
             this.cboChucVu.TabIndex = 4;
@@ -140,8 +95,8 @@ namespace PhoManager.UI.Forms
             // 
             this.chkTrangThai.Checked = true;
             this.chkTrangThai.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkTrangThai.Location = new System.Drawing.Point(1000, 258);
-            this.chkTrangThai.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkTrangThai.Location = new System.Drawing.Point(1000, 274);
+            this.chkTrangThai.Margin = new System.Windows.Forms.Padding(4);
             this.chkTrangThai.Name = "chkTrangThai";
             this.chkTrangThai.Size = new System.Drawing.Size(139, 30);
             this.chkTrangThai.TabIndex = 5;
@@ -149,49 +104,40 @@ namespace PhoManager.UI.Forms
             // 
             // btnThem
             // 
-            this.btnThem.AutoSize = false;
             this.btnThem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThem.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnThem.Location = new System.Drawing.Point(1000, 308);
-            this.btnThem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnThem.Location = new System.Drawing.Point(1000, 324);
+            this.btnThem.Margin = new System.Windows.Forms.Padding(4);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(110, 42);
+            this.btnThem.Size = new System.Drawing.Size(120, 42);
             this.btnThem.TabIndex = 6;
             this.btnThem.Text = "Thêm";
-            this.btnThem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnThem.UseCompatibleTextRendering = false;
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnSua
             // 
-            this.btnSua.AutoSize = false;
             this.btnSua.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSua.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnSua.Location = new System.Drawing.Point(1118, 308);
-            this.btnSua.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSua.Location = new System.Drawing.Point(1145, 324);
+            this.btnSua.Margin = new System.Windows.Forms.Padding(4);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(110, 42);
+            this.btnSua.Size = new System.Drawing.Size(120, 42);
             this.btnSua.TabIndex = 7;
             this.btnSua.Text = "Sửa";
-            this.btnSua.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnSua.UseCompatibleTextRendering = false;
             this.btnSua.UseVisualStyleBackColor = true;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
             // 
-            this.btnXoa.AutoSize = false;
             this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnXoa.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnXoa.Location = new System.Drawing.Point(1000, 358);
-            this.btnXoa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnXoa.Location = new System.Drawing.Point(1000, 374);
+            this.btnXoa.Margin = new System.Windows.Forms.Padding(4);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(110, 42);
+            this.btnXoa.Size = new System.Drawing.Size(120, 42);
             this.btnXoa.TabIndex = 8;
             this.btnXoa.Text = "Xóa";
-            this.btnXoa.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnXoa.UseCompatibleTextRendering = false;
             this.btnXoa.UseVisualStyleBackColor = true;
             // 
             // txtTimKiemNV
@@ -204,7 +150,6 @@ namespace PhoManager.UI.Forms
             // 
             // btnTimKiemNV
             // 
-            this.btnTimKiemNV.AutoSize = false;
             this.btnTimKiemNV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTimKiemNV.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
             this.btnTimKiemNV.Location = new System.Drawing.Point(1192, 24);
@@ -212,21 +157,63 @@ namespace PhoManager.UI.Forms
             this.btnTimKiemNV.Size = new System.Drawing.Size(140, 32);
             this.btnTimKiemNV.TabIndex = 10;
             this.btnTimKiemNV.Text = "Tìm kiếm";
-            this.btnTimKiemNV.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnTimKiemNV.UseCompatibleTextRendering = false;
             this.btnTimKiemNV.UseVisualStyleBackColor = true;
             this.btnTimKiemNV.Click += new System.EventHandler(this.btnTimKiemNV_Click);
+            // 
+            // lblHoTen
+            // 
+            this.lblHoTen.AutoSize = true;
+            this.lblHoTen.Location = new System.Drawing.Point(1000, 56);
+            this.lblHoTen.Name = "lblHoTen";
+            this.lblHoTen.Size = new System.Drawing.Size(46, 16);
+            this.lblHoTen.TabIndex = 11;
+            this.lblHoTen.Text = "Họ tên";
+            // 
+            // lblTaiKhoan
+            // 
+            this.lblTaiKhoan.AutoSize = true;
+            this.lblTaiKhoan.Location = new System.Drawing.Point(1000, 105);
+            this.lblTaiKhoan.Name = "lblTaiKhoan";
+            this.lblTaiKhoan.Size = new System.Drawing.Size(67, 16);
+            this.lblTaiKhoan.TabIndex = 12;
+            this.lblTaiKhoan.Text = "Tài khoản";
+            // 
+            // lblMatKhau
+            // 
+            this.lblMatKhau.AutoSize = true;
+            this.lblMatKhau.Location = new System.Drawing.Point(1000, 154);
+            this.lblMatKhau.Name = "lblMatKhau";
+            this.lblMatKhau.Size = new System.Drawing.Size(61, 16);
+            this.lblMatKhau.TabIndex = 13;
+            this.lblMatKhau.Text = "Mật khẩu";
+            // 
+            // lblChucVu
+            // 
+            this.lblChucVu.AutoSize = true;
+            this.lblChucVu.Location = new System.Drawing.Point(1000, 203);
+            this.lblChucVu.Name = "lblChucVu";
+            this.lblChucVu.Size = new System.Drawing.Size(54, 16);
+            this.lblChucVu.TabIndex = 14;
+            this.lblChucVu.Text = "Chức vụ";
+            // 
+            // lblTrangThai
+            // 
+            this.lblTrangThai.AutoSize = true;
+            this.lblTrangThai.Location = new System.Drawing.Point(1000, 252);
+            this.lblTrangThai.Name = "lblTrangThai";
+            this.lblTrangThai.Size = new System.Drawing.Size(67, 16);
+            this.lblTrangThai.TabIndex = 15;
+            this.lblTrangThai.Text = "Trạng thái";
             // 
             // FrmNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = ThemeManager.BackgroundColor;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
             this.ClientSize = new System.Drawing.Size(1333, 554);
             this.Controls.Add(this.btnTimKiemNV);
             this.Controls.Add(this.txtTimKiemNV);
             this.Controls.Add(this.dgvNhanVien);
-            // add labels for user inputs before controls
             this.Controls.Add(this.lblHoTen);
             this.Controls.Add(this.lblTaiKhoan);
             this.Controls.Add(this.lblMatKhau);
@@ -240,7 +227,7 @@ namespace PhoManager.UI.Forms
             this.Controls.Add(this.btnThem);
             this.Controls.Add(this.btnSua);
             this.Controls.Add(this.btnXoa);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmNhanVien";
             this.Text = "Quản lý Nhân viên";
             ((System.ComponentModel.ISupportInitialize)(this.dgvNhanVien)).EndInit();

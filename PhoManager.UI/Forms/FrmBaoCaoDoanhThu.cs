@@ -54,24 +54,45 @@ namespace PhoManager.UI.Forms
         {
             DateTime tu = dtpTuNgay.Value.Date;
             DateTime den = dtpDenNgay.Value.Date;
-            if (rdoThang.Checked)
-            {
-                // nếu chọn theo tháng: set từ ngày = ngày đầu tháng, đến ngày = cuối tháng
-                tu = new DateTime(tu.Year, tu.Month, 1);
-                den = tu.AddMonths(1).AddSeconds(-1);
-            }
+
             if (tu > den)
             {
-                MessageBox.Show("Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc.");
+                MessageBox.Show(
+                    "Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc.",
+                    "Khoảng ngày không hợp lệ",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                dtpTuNgay.Focus();
                 return;
             }
+
+            DateTime homNay = DateTime.Today;
+            if (den > homNay)
+            {
+                MessageBox.Show(
+                    "Ngày kết thúc không được lớn hơn ngày hiện tại.",
+                    "Khoảng ngày không hợp lệ",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                dtpDenNgay.Value = homNay;
+                return;
+            }
+
+            bool theoThang = rdoThang.Checked;
+            if (theoThang)
+            {
+                tu = new DateTime(tu.Year, tu.Month, 1);
+                DateTime denMonthStart = new DateTime(den.Year, den.Month, 1);
+                den = denMonthStart.AddMonths(1).AddSeconds(-1);
+            }
+
             try
             {
                 DataTable dt = thongKeBLL.ThongKeDoanhThu(tu, den);
                 dgvBaoCao.DataSource = dt;
+
                 if (dt != null)
                 {
-                    // Định dạng cột doanh thu theo tên cột phù hợp
                     if (dt.Columns.Contains("TongDoanhThu"))
                     {
                         dgvBaoCao.Columns["TongDoanhThu"].HeaderText = "Doanh thu";
@@ -82,33 +103,39 @@ namespace PhoManager.UI.Forms
                         dgvBaoCao.Columns["DoanhThu"].HeaderText = "Doanh thu";
                         dgvBaoCao.Columns["DoanhThu"].DefaultCellStyle.Format = "#,##0";
                     }
+
                     if (dt.Columns.Contains("Ngay"))
                     {
-                        dgvBaoCao.Columns["Ngay"].HeaderText = rdoThang.Checked ? "Tháng" : "Ngày";
-                        dgvBaoCao.Columns["Ngay"].DefaultCellStyle.Format = rdoThang.Checked ? "MM/yyyy" : "dd/MM/yyyy";
+                        dgvBaoCao.Columns["Ngay"].HeaderText = theoThang ? "Tháng" : "Ngày";
+                        dgvBaoCao.Columns["Ngay"].DefaultCellStyle.Format = theoThang ? "MM/yyyy" : "dd/MM/yyyy";
                     }
-                    // Cập nhật biểu đồ
+
                     chartBaoCao.Series.Clear();
-                    var series = new Series("Doanh thu");
-                    series.ChartType = SeriesChartType.Column;
+                    var series = new Series("Doanh thu")
+                    {
+                        ChartType = SeriesChartType.Column
+                    };
+
                     foreach (DataRow row in dt.Rows)
                     {
                         DateTime ngay = Convert.ToDateTime(row["Ngay"]);
                         decimal doanhThu = 0m;
-                        // Tên cột có thể khác nhau tùy theo truy vấn, thử đọc cả hai tên phổ biến
+
                         if (dt.Columns.Contains("TongDoanhThu"))
-                        {
                             doanhThu = Convert.ToDecimal(row["TongDoanhThu"]);
-                        }
                         else if (dt.Columns.Contains("DoanhThu"))
-                        {
                             doanhThu = Convert.ToDecimal(row["DoanhThu"]);
-                        }
-                        string xLabel = rdoThang.Checked ? ngay.ToString("MM/yyyy") : ngay.ToString("dd/MM");
+
+                        string xLabel = theoThang
+                            ? ngay.ToString("MM/yyyy") 
+                            : ngay.ToString("dd/MM");  
+
                         series.Points.AddXY(xLabel, doanhThu);
                     }
+
                     chartBaoCao.Series.Add(series);
                 }
+
                 decimal total = thongKeBLL.LayTongDoanhThu(tu, den);
                 lblTong.Text = $"Tổng doanh thu: {total:#,##0} đ";
             }
@@ -116,6 +143,7 @@ namespace PhoManager.UI.Forms
             {
                 MessageBox.Show("Lỗi khi thống kê: " + ex.Message);
             }
+
         }
 
         /// <summary>

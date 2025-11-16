@@ -76,7 +76,7 @@ namespace PhoManager.UI.Forms
             ThemeManager.StyleButton(btnNavInvoices, ButtonVariant.Ghost);
             ThemeManager.StyleButton(btnNavAnalytics, ButtonVariant.Ghost);
             ThemeManager.StyleButton(btnNavSettings, ButtonVariant.Ghost);
-            ThemeManager.StyleButton(btnNavLogout, ButtonVariant.Ghost);
+            ThemeManager.StyleButton(btnNavLogout, ButtonVariant.Danger);
             
             // CRITICAL: Force proper alignment AFTER StyleButton - NO ICONS, just text centered
             foreach (var btn in navButtons)
