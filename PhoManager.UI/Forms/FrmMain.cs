@@ -394,6 +394,15 @@ namespace PhoManager.UI.Forms
             }
         }
 
+        private void btnGioiThieu_Click(object sender, EventArgs e)
+        {
+            using (var f = new FrmGioiThieu())
+            {
+                f.ShowDialog();  
+            }
+        }
+
+
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!isLoggingOut)

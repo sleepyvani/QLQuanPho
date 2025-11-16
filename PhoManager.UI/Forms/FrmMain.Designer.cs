@@ -70,7 +70,6 @@ namespace PhoManager.UI.Forms
         {
             this.components = new System.ComponentModel.Container();
             this.pnlTopBar = new System.Windows.Forms.Panel();
-            this.lblCurrentTime = new System.Windows.Forms.Label();
             this.navBar = new System.Windows.Forms.FlowLayoutPanel();
             this.btnNavOrder = new System.Windows.Forms.Button();
             this.btnNavTables = new System.Windows.Forms.Button();
@@ -85,6 +84,7 @@ namespace PhoManager.UI.Forms
             this.btnNavSettings = new System.Windows.Forms.Button();
             this.btnNavLogout = new System.Windows.Forms.Button();
             this.lblBrand = new System.Windows.Forms.Label();
+            this.lblCurrentTime = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.quickActionPanel = new System.Windows.Forms.TableLayoutPanel();
             this.btnQuanLyMonAn = new System.Windows.Forms.Button();
@@ -117,6 +117,7 @@ namespace PhoManager.UI.Forms
             this.statusSpacer = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusUser = new System.Windows.Forms.ToolStripStatusLabel();
             this.timerClock = new System.Windows.Forms.Timer(this.components);
+            this.btnGioiThieu = new System.Windows.Forms.Button();
             this.pnlTopBar.SuspendLayout();
             this.navBar.SuspendLayout();
             this.ctxBaoCao.SuspendLayout();
@@ -139,21 +140,8 @@ namespace PhoManager.UI.Forms
             this.pnlTopBar.Location = new System.Drawing.Point(0, 0);
             this.pnlTopBar.Name = "pnlTopBar";
             this.pnlTopBar.Padding = new System.Windows.Forms.Padding(27, 17, 27, 17);
-            this.pnlTopBar.Size = new System.Drawing.Size(1361, 68);
+            this.pnlTopBar.Size = new System.Drawing.Size(1383, 68);
             this.pnlTopBar.TabIndex = 0;
-            // 
-            // lblCurrentTime
-            // 
-            this.lblCurrentTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCurrentTime.AutoSize = true;
-            this.lblCurrentTime.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblCurrentTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
-            this.lblCurrentTime.Location = new System.Drawing.Point(1005, 15);
-            this.lblCurrentTime.Name = "lblCurrentTime";
-            this.lblCurrentTime.Size = new System.Drawing.Size(143, 20);
-            this.lblCurrentTime.TabIndex = 2;
-            this.lblCurrentTime.Text = "00:00:00 01/01/2000";
-            this.lblCurrentTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // navBar
             // 
@@ -166,9 +154,9 @@ namespace PhoManager.UI.Forms
             this.navBar.Controls.Add(this.btnNavAnalytics);
             this.navBar.Controls.Add(this.btnNavSettings);
             this.navBar.Controls.Add(this.btnNavLogout);
-            this.navBar.Location = new System.Drawing.Point(224, 17);
+            this.navBar.Location = new System.Drawing.Point(235, 17);
             this.navBar.Name = "navBar";
-            this.navBar.Size = new System.Drawing.Size(1143, 34);
+            this.navBar.Size = new System.Drawing.Size(1120, 34);
             this.navBar.TabIndex = 1;
             this.navBar.WrapContents = false;
             // 
@@ -327,6 +315,19 @@ namespace PhoManager.UI.Forms
             this.lblBrand.TabIndex = 0;
             this.lblBrand.Text = "Pho Manager";
             // 
+            // lblCurrentTime
+            // 
+            this.lblCurrentTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCurrentTime.AutoSize = true;
+            this.lblCurrentTime.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblCurrentTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
+            this.lblCurrentTime.Location = new System.Drawing.Point(1027, 15);
+            this.lblCurrentTime.Name = "lblCurrentTime";
+            this.lblCurrentTime.Size = new System.Drawing.Size(143, 20);
+            this.lblCurrentTime.TabIndex = 2;
+            this.lblCurrentTime.Text = "00:00:00 01/01/2000";
+            this.lblCurrentTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // pnlMain
             // 
             this.pnlMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
@@ -338,7 +339,7 @@ namespace PhoManager.UI.Forms
             this.pnlMain.Location = new System.Drawing.Point(0, 68);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Padding = new System.Windows.Forms.Padding(27, 26, 27, 0);
-            this.pnlMain.Size = new System.Drawing.Size(1361, 700);
+            this.pnlMain.Size = new System.Drawing.Size(1383, 700);
             this.pnlMain.TabIndex = 1;
             // 
             // quickActionPanel
@@ -362,13 +363,14 @@ namespace PhoManager.UI.Forms
             this.quickActionPanel.Controls.Add(this.btnThongKe, 0, 1);
             this.quickActionPanel.Controls.Add(this.btnCauHinh, 1, 1);
             this.quickActionPanel.Controls.Add(this.btnDangXuat, 2, 1);
+            this.quickActionPanel.Controls.Add(this.btnGioiThieu, 3, 1);
             this.quickActionPanel.Location = new System.Drawing.Point(27, 341);
             this.quickActionPanel.Name = "quickActionPanel";
             this.quickActionPanel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 21);
             this.quickActionPanel.RowCount = 2;
             this.quickActionPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.quickActionPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.quickActionPanel.Size = new System.Drawing.Size(1307, 331);
+            this.quickActionPanel.Size = new System.Drawing.Size(1329, 331);
             this.quickActionPanel.TabIndex = 3;
             // 
             // btnQuanLyMonAn
@@ -379,7 +381,7 @@ namespace PhoManager.UI.Forms
             this.btnQuanLyMonAn.Location = new System.Drawing.Point(11, 11);
             this.btnQuanLyMonAn.Margin = new System.Windows.Forms.Padding(11);
             this.btnQuanLyMonAn.Name = "btnQuanLyMonAn";
-            this.btnQuanLyMonAn.Size = new System.Drawing.Size(239, 133);
+            this.btnQuanLyMonAn.Size = new System.Drawing.Size(243, 133);
             this.btnQuanLyMonAn.TabIndex = 0;
             this.btnQuanLyMonAn.Text = "Quản lý Món";
             this.btnQuanLyMonAn.UseVisualStyleBackColor = true;
@@ -390,10 +392,10 @@ namespace PhoManager.UI.Forms
             this.btnQuanLyNhanVien.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnQuanLyNhanVien.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuanLyNhanVien.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnQuanLyNhanVien.Location = new System.Drawing.Point(272, 11);
+            this.btnQuanLyNhanVien.Location = new System.Drawing.Point(276, 11);
             this.btnQuanLyNhanVien.Margin = new System.Windows.Forms.Padding(11);
             this.btnQuanLyNhanVien.Name = "btnQuanLyNhanVien";
-            this.btnQuanLyNhanVien.Size = new System.Drawing.Size(239, 133);
+            this.btnQuanLyNhanVien.Size = new System.Drawing.Size(243, 133);
             this.btnQuanLyNhanVien.TabIndex = 1;
             this.btnQuanLyNhanVien.Text = "Nhân viên";
             this.btnQuanLyNhanVien.UseVisualStyleBackColor = true;
@@ -404,10 +406,10 @@ namespace PhoManager.UI.Forms
             this.btnQuanLyBanAn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnQuanLyBanAn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuanLyBanAn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnQuanLyBanAn.Location = new System.Drawing.Point(533, 11);
+            this.btnQuanLyBanAn.Location = new System.Drawing.Point(541, 11);
             this.btnQuanLyBanAn.Margin = new System.Windows.Forms.Padding(11);
             this.btnQuanLyBanAn.Name = "btnQuanLyBanAn";
-            this.btnQuanLyBanAn.Size = new System.Drawing.Size(239, 133);
+            this.btnQuanLyBanAn.Size = new System.Drawing.Size(243, 133);
             this.btnQuanLyBanAn.TabIndex = 2;
             this.btnQuanLyBanAn.Text = "Quản lý Bàn";
             this.btnQuanLyBanAn.UseVisualStyleBackColor = true;
@@ -418,10 +420,10 @@ namespace PhoManager.UI.Forms
             this.btnOrder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnOrder.Location = new System.Drawing.Point(794, 11);
+            this.btnOrder.Location = new System.Drawing.Point(806, 11);
             this.btnOrder.Margin = new System.Windows.Forms.Padding(11);
             this.btnOrder.Name = "btnOrder";
-            this.btnOrder.Size = new System.Drawing.Size(239, 133);
+            this.btnOrder.Size = new System.Drawing.Size(243, 133);
             this.btnOrder.TabIndex = 3;
             this.btnOrder.Text = "Gọi món";
             this.btnOrder.UseVisualStyleBackColor = true;
@@ -432,10 +434,10 @@ namespace PhoManager.UI.Forms
             this.btnHoaDon.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnHoaDon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHoaDon.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnHoaDon.Location = new System.Drawing.Point(1055, 11);
+            this.btnHoaDon.Location = new System.Drawing.Point(1071, 11);
             this.btnHoaDon.Margin = new System.Windows.Forms.Padding(11);
             this.btnHoaDon.Name = "btnHoaDon";
-            this.btnHoaDon.Size = new System.Drawing.Size(241, 133);
+            this.btnHoaDon.Size = new System.Drawing.Size(247, 133);
             this.btnHoaDon.TabIndex = 4;
             this.btnHoaDon.Text = "Hóa đơn";
             this.btnHoaDon.UseVisualStyleBackColor = true;
@@ -449,7 +451,7 @@ namespace PhoManager.UI.Forms
             this.btnThongKe.Location = new System.Drawing.Point(11, 166);
             this.btnThongKe.Margin = new System.Windows.Forms.Padding(11);
             this.btnThongKe.Name = "btnThongKe";
-            this.btnThongKe.Size = new System.Drawing.Size(239, 133);
+            this.btnThongKe.Size = new System.Drawing.Size(243, 133);
             this.btnThongKe.TabIndex = 5;
             this.btnThongKe.Text = "Thống kê";
             this.btnThongKe.UseVisualStyleBackColor = true;
@@ -460,10 +462,10 @@ namespace PhoManager.UI.Forms
             this.btnCauHinh.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnCauHinh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCauHinh.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnCauHinh.Location = new System.Drawing.Point(272, 166);
+            this.btnCauHinh.Location = new System.Drawing.Point(276, 166);
             this.btnCauHinh.Margin = new System.Windows.Forms.Padding(11);
             this.btnCauHinh.Name = "btnCauHinh";
-            this.btnCauHinh.Size = new System.Drawing.Size(239, 133);
+            this.btnCauHinh.Size = new System.Drawing.Size(243, 133);
             this.btnCauHinh.TabIndex = 6;
             this.btnCauHinh.Text = "Cấu hình";
             this.btnCauHinh.UseVisualStyleBackColor = true;
@@ -474,10 +476,10 @@ namespace PhoManager.UI.Forms
             this.btnDangXuat.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnDangXuat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDangXuat.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnDangXuat.Location = new System.Drawing.Point(533, 166);
+            this.btnDangXuat.Location = new System.Drawing.Point(541, 166);
             this.btnDangXuat.Margin = new System.Windows.Forms.Padding(11);
             this.btnDangXuat.Name = "btnDangXuat";
-            this.btnDangXuat.Size = new System.Drawing.Size(239, 133);
+            this.btnDangXuat.Size = new System.Drawing.Size(243, 133);
             this.btnDangXuat.TabIndex = 7;
             this.btnDangXuat.Text = "Đăng xuất";
             this.btnDangXuat.UseVisualStyleBackColor = true;
@@ -493,7 +495,7 @@ namespace PhoManager.UI.Forms
             this.cardContainer.Location = new System.Drawing.Point(27, 154);
             this.cardContainer.Margin = new System.Windows.Forms.Padding(0);
             this.cardContainer.Name = "cardContainer";
-            this.cardContainer.Size = new System.Drawing.Size(1307, 188);
+            this.cardContainer.Size = new System.Drawing.Size(1329, 188);
             this.cardContainer.TabIndex = 2;
             // 
             // cardRevenue
@@ -643,7 +645,7 @@ namespace PhoManager.UI.Forms
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(27, 26);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Size = new System.Drawing.Size(1307, 128);
+            this.pnlHeader.Size = new System.Drawing.Size(1329, 128);
             this.pnlHeader.TabIndex = 0;
             // 
             // btnQuickOrder
@@ -651,7 +653,7 @@ namespace PhoManager.UI.Forms
             this.btnQuickOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnQuickOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnQuickOrder.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
-            this.btnQuickOrder.Location = new System.Drawing.Point(1009, 62);
+            this.btnQuickOrder.Location = new System.Drawing.Point(1031, 62);
             this.btnQuickOrder.Name = "btnQuickOrder";
             this.btnQuickOrder.Size = new System.Drawing.Size(297, 49);
             this.btnQuickOrder.TabIndex = 3;
@@ -691,7 +693,7 @@ namespace PhoManager.UI.Forms
             this.statusStrip.Location = new System.Drawing.Point(27, 674);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1307, 26);
+            this.statusStrip.Size = new System.Drawing.Size(1329, 26);
             this.statusStrip.TabIndex = 4;
             // 
             // statusDatabase
@@ -705,7 +707,7 @@ namespace PhoManager.UI.Forms
             // statusSpacer
             // 
             this.statusSpacer.Name = "statusSpacer";
-            this.statusSpacer.Size = new System.Drawing.Size(994, 20);
+            this.statusSpacer.Size = new System.Drawing.Size(1016, 20);
             this.statusSpacer.Spring = true;
             // 
             // statusUser
@@ -722,11 +724,25 @@ namespace PhoManager.UI.Forms
             this.timerClock.Interval = 1000;
             this.timerClock.Tick += new System.EventHandler(this.timerClock_Tick);
             // 
+            // btnGioiThieu
+            // 
+            this.btnGioiThieu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnGioiThieu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGioiThieu.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnGioiThieu.Location = new System.Drawing.Point(806, 166);
+            this.btnGioiThieu.Margin = new System.Windows.Forms.Padding(11);
+            this.btnGioiThieu.Name = "btnGioiThieu";
+            this.btnGioiThieu.Size = new System.Drawing.Size(243, 133);
+            this.btnGioiThieu.TabIndex = 8;
+            this.btnGioiThieu.Text = "Giới thiệu";
+            this.btnGioiThieu.UseVisualStyleBackColor = true;
+            this.btnGioiThieu.Click += new System.EventHandler(this.btnGioiThieu_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1361, 768);
+            this.ClientSize = new System.Drawing.Size(1383, 768);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.pnlTopBar);
             this.Name = "FrmMain";
@@ -754,5 +770,7 @@ namespace PhoManager.UI.Forms
             this.ResumeLayout(false);
 
         }
+
+        private Button btnGioiThieu;
     }
 }
