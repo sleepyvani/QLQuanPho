@@ -83,5 +83,14 @@
       <Association Name="FK_MonAn_NguyenLieu_NguyenLieu" Member="NguyenLieu" ThisKey="MaNL" OtherKey="MaNL" Type="NguyenLieu" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.THANH_VIEN_NHOM" Member="THANH_VIEN_NHOMs">
+    <Type Name="THANH_VIEN_NHOM">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="HoTen" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="VaiTro" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MoTa" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="ThuTu" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>
 

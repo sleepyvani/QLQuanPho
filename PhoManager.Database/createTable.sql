@@ -150,6 +150,22 @@ END
 GO
 
 -- =============================================
+-- Bảng: THANH_VIEN_NHOM (Thành viên nhóm)
+-- =============================================
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[THANH_VIEN_NHOM]') AND type in (N'U'))
+BEGIN
+    CREATE TABLE [dbo].[THANH_VIEN_NHOM](
+        [Id] [int] IDENTITY(1,1) NOT NULL,
+        [HoTen] [nvarchar](100) NOT NULL,
+        [VaiTro] [nvarchar](100) NULL,
+        [MoTa] [nvarchar](500) NULL,
+        [ThuTu] [int] NULL,
+        CONSTRAINT [PK_THANH_VIEN_NHOM] PRIMARY KEY CLUSTERED ([Id] ASC)
+    );
+END
+GO
+
+-- =============================================
 -- Tạo Index để tối ưu truy vấn
 -- =============================================
 IF NOT EXISTS (SELECT * FROM sys.indexes WHERE name = 'IX_HoaDon_NgayLap' AND object_id = OBJECT_ID('HoaDon'))

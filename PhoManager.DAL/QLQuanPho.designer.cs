@@ -49,6 +49,9 @@ namespace PhoManager.DAL
         partial void InsertMonAn_NguyenLieu(MonAn_NguyenLieu instance);
         partial void UpdateMonAn_NguyenLieu(MonAn_NguyenLieu instance);
         partial void DeleteMonAn_NguyenLieu(MonAn_NguyenLieu instance);
+        partial void InsertTHANH_VIEN_NHOM(THANH_VIEN_NHOM instance);
+        partial void UpdateTHANH_VIEN_NHOM(THANH_VIEN_NHOM instance);
+        partial void DeleteTHANH_VIEN_NHOM(THANH_VIEN_NHOM instance);
         #endregion
         
         public QLQuanPhoDataContext() : 
@@ -134,6 +137,14 @@ namespace PhoManager.DAL
             get
             {
                 return this.GetTable<MonAn_NguyenLieu>();
+            }
+        }
+        
+        public System.Data.Linq.Table<THANH_VIEN_NHOM> THANH_VIEN_NHOMs
+        {
+            get
+            {
+                return this.GetTable<THANH_VIEN_NHOM>();
             }
         }
         
@@ -1955,6 +1966,163 @@ namespace PhoManager.DAL
                         this._MaNL = default(int);
                     }
                     this.SendPropertyChanged("NguyenLieu");
+                }
+            }
+        }
+        
+        public event PropertyChangingEventHandler PropertyChanging;
+        
+        public event PropertyChangedEventHandler PropertyChanged;
+        
+        protected virtual void SendPropertyChanging()
+        {
+            if ((this.PropertyChanging != null))
+            {
+                this.PropertyChanging(this, emptyChangingEventArgs);
+            }
+        }
+        
+        protected virtual void SendPropertyChanged(String propertyName)
+        {
+            if ((this.PropertyChanged != null))
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.THANH_VIEN_NHOM")]
+    public partial class THANH_VIEN_NHOM : INotifyPropertyChanging, INotifyPropertyChanged
+    {
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        
+        private int _Id;
+        
+        private string _HoTen;
+        
+        private string _VaiTro;
+        
+        private string _MoTa;
+        
+        private System.Nullable<int> _ThuTu;
+        
+        #region Extensibility Method Definitions
+        partial void OnLoaded();
+        partial void OnValidate(System.Data.Linq.ChangeAction action);
+        partial void OnCreated();
+        partial void OnIdChanging(int value);
+        partial void OnIdChanged();
+        partial void OnHoTenChanging(string value);
+        partial void OnHoTenChanged();
+        partial void OnVaiTroChanging(string value);
+        partial void OnVaiTroChanged();
+        partial void OnMoTaChanging(string value);
+        partial void OnMoTaChanged();
+        partial void OnThuTuChanging(System.Nullable<int> value);
+        partial void OnThuTuChanged();
+        #endregion
+        
+        public THANH_VIEN_NHOM()
+        {
+            OnCreated();
+        }
+        
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+        public int Id
+        {
+            get
+            {
+                return this._Id;
+            }
+            set
+            {
+                if ((this._Id != value))
+                {
+                    this.OnIdChanging(value);
+                    this.SendPropertyChanging();
+                    this._Id = value;
+                    this.SendPropertyChanged("Id");
+                    this.OnIdChanged();
+                }
+            }
+        }
+        
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HoTen", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+        public string HoTen
+        {
+            get
+            {
+                return this._HoTen;
+            }
+            set
+            {
+                if ((this._HoTen != value))
+                {
+                    this.OnHoTenChanging(value);
+                    this.SendPropertyChanging();
+                    this._HoTen = value;
+                    this.SendPropertyChanged("HoTen");
+                    this.OnHoTenChanged();
+                }
+            }
+        }
+        
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VaiTro", DbType="NVarChar(100)")]
+        public string VaiTro
+        {
+            get
+            {
+                return this._VaiTro;
+            }
+            set
+            {
+                if ((this._VaiTro != value))
+                {
+                    this.OnVaiTroChanging(value);
+                    this.SendPropertyChanging();
+                    this._VaiTro = value;
+                    this.SendPropertyChanged("VaiTro");
+                    this.OnVaiTroChanged();
+                }
+            }
+        }
+        
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MoTa", DbType="NVarChar(500)")]
+        public string MoTa
+        {
+            get
+            {
+                return this._MoTa;
+            }
+            set
+            {
+                if ((this._MoTa != value))
+                {
+                    this.OnMoTaChanging(value);
+                    this.SendPropertyChanging();
+                    this._MoTa = value;
+                    this.SendPropertyChanged("MoTa");
+                    this.OnMoTaChanged();
+                }
+            }
+        }
+        
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ThuTu", DbType="Int")]
+        public System.Nullable<int> ThuTu
+        {
+            get
+            {
+                return this._ThuTu;
+            }
+            set
+            {
+                if ((this._ThuTu != value))
+                {
+                    this.OnThuTuChanging(value);
+                    this.SendPropertyChanging();
+                    this._ThuTu = value;
+                    this.SendPropertyChanged("ThuTu");
+                    this.OnThuTuChanged();
                 }
             }
         }
