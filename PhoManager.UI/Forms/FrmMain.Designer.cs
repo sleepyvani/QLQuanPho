@@ -47,6 +47,7 @@ namespace PhoManager.UI.Forms
         private System.Windows.Forms.Button btnThongKe;
         private System.Windows.Forms.Button btnCauHinh;
         private System.Windows.Forms.Button btnDangXuat;
+        private System.Windows.Forms.Button btnQuanLyNguyenLieu;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel statusDatabase;
         private System.Windows.Forms.ToolStripStatusLabel statusSpacer;
@@ -95,6 +96,7 @@ namespace PhoManager.UI.Forms
             this.btnThongKe = new System.Windows.Forms.Button();
             this.btnCauHinh = new System.Windows.Forms.Button();
             this.btnDangXuat = new System.Windows.Forms.Button();
+            this.btnQuanLyNguyenLieu = new System.Windows.Forms.Button();
             this.cardContainer = new System.Windows.Forms.FlowLayoutPanel();
             this.cardRevenue = new System.Windows.Forms.Panel();
             this.lblRevenueSub = new System.Windows.Forms.Label();
@@ -364,6 +366,7 @@ namespace PhoManager.UI.Forms
             this.quickActionPanel.Controls.Add(this.btnCauHinh, 1, 1);
             this.quickActionPanel.Controls.Add(this.btnDangXuat, 2, 1);
             this.quickActionPanel.Controls.Add(this.btnGioiThieu, 3, 1);
+            this.quickActionPanel.Controls.Add(this.btnQuanLyNguyenLieu, 4, 1);
             this.quickActionPanel.Location = new System.Drawing.Point(27, 341);
             this.quickActionPanel.Name = "quickActionPanel";
             this.quickActionPanel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 21);
@@ -737,6 +740,20 @@ namespace PhoManager.UI.Forms
             this.btnGioiThieu.Text = "Giới thiệu";
             this.btnGioiThieu.UseVisualStyleBackColor = true;
             this.btnGioiThieu.Click += new System.EventHandler(this.btnGioiThieu_Click);
+            // 
+            // btnQuanLyNguyenLieu
+            // 
+            this.btnQuanLyNguyenLieu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnQuanLyNguyenLieu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnQuanLyNguyenLieu.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnQuanLyNguyenLieu.Location = new System.Drawing.Point(1071, 166);
+            this.btnQuanLyNguyenLieu.Margin = new System.Windows.Forms.Padding(11);
+            this.btnQuanLyNguyenLieu.Name = "btnQuanLyNguyenLieu";
+            this.btnQuanLyNguyenLieu.Size = new System.Drawing.Size(247, 133);
+            this.btnQuanLyNguyenLieu.TabIndex = 9;
+            this.btnQuanLyNguyenLieu.Text = "Nguyên liệu";
+            this.btnQuanLyNguyenLieu.UseVisualStyleBackColor = true;
+            this.btnQuanLyNguyenLieu.Click += new System.EventHandler(this.btnQuanLyNguyenLieu_Click);
             // 
             // FrmMain
             // 

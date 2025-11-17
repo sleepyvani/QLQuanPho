@@ -51,6 +51,7 @@ namespace PhoManager.UI.Forms
             this.rdoNgay = new System.Windows.Forms.RadioButton();
             this.rdoThang = new System.Windows.Forms.RadioButton();
             this.btnXem = new System.Windows.Forms.Button();
+            this.btnXemRDLC = new System.Windows.Forms.Button();
             this.dgvBaoCao = new System.Windows.Forms.DataGridView();
             this.chartBaoCao = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.lblTong = new System.Windows.Forms.Label();
@@ -89,6 +90,7 @@ namespace PhoManager.UI.Forms
             this.panelFilter.Controls.Add(this.rdoNgay);
             this.panelFilter.Controls.Add(this.rdoThang);
             this.panelFilter.Controls.Add(this.btnXem);
+            this.panelFilter.Controls.Add(this.btnXemRDLC);
             this.panelFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelFilter.FlowDirection = System.Windows.Forms.FlowDirection.LeftToRight;
             this.panelFilter.Location = new System.Drawing.Point(3, 3);
@@ -185,6 +187,22 @@ namespace PhoManager.UI.Forms
             this.btnXem.UseVisualStyleBackColor = true;
             this.btnXem.Click += new System.EventHandler(this.btnXem_Click);
             // 
+            // btnXemRDLC
+            // 
+            this.btnXemRDLC.AutoSize = false;
+            this.btnXemRDLC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnXemRDLC.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnXemRDLC.Location = new System.Drawing.Point(750, 5);
+            this.btnXemRDLC.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
+            this.btnXemRDLC.Name = "btnXemRDLC";
+            this.btnXemRDLC.Size = new System.Drawing.Size(171, 42);
+            this.btnXemRDLC.TabIndex = 7;
+            this.btnXemRDLC.Text = "Xem báo cáo RDLC";
+            this.btnXemRDLC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnXemRDLC.UseCompatibleTextRendering = false;
+            this.btnXemRDLC.UseVisualStyleBackColor = true;
+            this.btnXemRDLC.Click += new System.EventHandler(this.btnXemRDLC_Click);
+            // 
             // dgvBaoCao
             // 
             this.dgvBaoCao.AllowUserToAddRows = false;
@@ -256,6 +274,7 @@ namespace PhoManager.UI.Forms
         private System.Windows.Forms.RadioButton rdoNgay;
         private System.Windows.Forms.RadioButton rdoThang;
         private System.Windows.Forms.Button btnXem;
+        private System.Windows.Forms.Button btnXemRDLC;
         private System.Windows.Forms.DataGridView dgvBaoCao;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartBaoCao;
         private System.Windows.Forms.Label lblTong;

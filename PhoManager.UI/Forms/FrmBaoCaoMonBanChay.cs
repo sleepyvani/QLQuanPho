@@ -160,5 +160,32 @@ namespace PhoManager.UI.Forms
                 dgvBaoCao.DataSource = newList;
             }
         }
+
+        private void btnXemRDLC_Click(object sender, EventArgs e)
+        {
+            DateTime tu = dtpTuNgay.Value.Date;
+            DateTime den = dtpDenNgay.Value.Date;
+
+            if (tu > den)
+            {
+                MessageBox.Show("Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc.",
+                    "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                int top = (int)nudTop.Value;
+                using (var frm = new FrmBaoCaoMonBanChayRDLC(tu, den, top))
+                {
+                    frm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở báo cáo: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

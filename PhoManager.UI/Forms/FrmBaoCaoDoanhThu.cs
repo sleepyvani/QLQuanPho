@@ -191,5 +191,39 @@ namespace PhoManager.UI.Forms
                 dgvBaoCao.DataSource = newList;
             }
         }
+
+        private void btnXemRDLC_Click(object sender, EventArgs e)
+        {
+            DateTime tu = dtpTuNgay.Value.Date;
+            DateTime den = dtpDenNgay.Value.Date;
+
+            if (tu > den)
+            {
+                MessageBox.Show("Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc.",
+                    "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            bool theoThang = rdoThang.Checked;
+            if (theoThang)
+            {
+                tu = new DateTime(tu.Year, tu.Month, 1);
+                DateTime denMonthStart = new DateTime(den.Year, den.Month, 1);
+                den = denMonthStart.AddMonths(1).AddSeconds(-1);
+            }
+
+            try
+            {
+                using (var frm = new FrmBaoCaoDoanhThuRDLC(tu, den))
+                {
+                    frm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở báo cáo: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

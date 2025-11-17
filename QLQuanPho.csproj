@@ -33,6 +33,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.ReportViewer.WinForms.10.0.40219.1\lib\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.OracleClient" />
@@ -184,6 +191,24 @@
     <Compile Include="PhoManager.UI\Forms\FrmBaoCaoHoaDon.Designer.cs">
       <DependentUpon>FrmBaoCaoHoaDon.cs</DependentUpon>
     </Compile>
+    <Compile Include="PhoManager.UI\Forms\FrmBaoCaoHoaDonRDLC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhoManager.UI\Forms\FrmBaoCaoHoaDonRDLC.Designer.cs">
+      <DependentUpon>FrmBaoCaoHoaDonRDLC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhoManager.UI\Forms\FrmBaoCaoDoanhThuRDLC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhoManager.UI\Forms\FrmBaoCaoDoanhThuRDLC.Designer.cs">
+      <DependentUpon>FrmBaoCaoDoanhThuRDLC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PhoManager.UI\Forms\FrmBaoCaoMonBanChayRDLC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PhoManager.UI\Forms\FrmBaoCaoMonBanChayRDLC.Designer.cs">
+      <DependentUpon>FrmBaoCaoMonBanChayRDLC.cs</DependentUpon>
+    </Compile>
     <Compile Include="PhoManager.UI\Forms\FrmGioiThieu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -207,6 +232,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PhoManager.UI\Forms\FrmBaoCaoHoaDon.resx">
       <DependentUpon>FrmBaoCaoHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhoManager.UI\Forms\FrmBaoCaoHoaDonRDLC.resx">
+      <DependentUpon>FrmBaoCaoHoaDonRDLC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhoManager.UI\Forms\FrmBaoCaoDoanhThuRDLC.resx">
+      <DependentUpon>FrmBaoCaoDoanhThuRDLC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhoManager.UI\Forms\FrmBaoCaoMonBanChayRDLC.resx">
+      <DependentUpon>FrmBaoCaoMonBanChayRDLC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhoManager.UI\Forms\FrmBaoCaoMonBanChay.resx">
       <DependentUpon>FrmBaoCaoMonBanChay.cs</DependentUpon>
@@ -267,6 +301,24 @@
     <None Include="PhoManager.DAL\QLQuanPho.dbml.layout">
       <DependentUpon>QLQuanPho.dbml</DependentUpon>
     </None>
+    <Content Include="Reports\RptHoaDon.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\RptDoanhThu.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\RptMonBanChay.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\RptNguyenLieu.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\RptNhanVien.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\RptBanAn.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

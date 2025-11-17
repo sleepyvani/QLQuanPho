@@ -42,6 +42,7 @@ namespace PhoManager.UI.Forms
             this.btnXem = new System.Windows.Forms.Button();
             this.btnExport = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.btnXemRDLC = new System.Windows.Forms.Button();
             this.dgvHoaDon = new System.Windows.Forms.DataGridView();
             this.lblTong = new System.Windows.Forms.Label();
             this.layoutMain.SuspendLayout();
@@ -76,6 +77,7 @@ namespace PhoManager.UI.Forms
             this.panelFilter.Controls.Add(this.btnXem);
             this.panelFilter.Controls.Add(this.btnExport);
             this.panelFilter.Controls.Add(this.btnPrint);
+            this.panelFilter.Controls.Add(this.btnXemRDLC);
             this.panelFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelFilter.Location = new System.Drawing.Point(3, 3);
             this.panelFilter.Name = "panelFilter";
@@ -167,6 +169,19 @@ namespace PhoManager.UI.Forms
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
+            // btnXemRDLC
+            // 
+            this.btnXemRDLC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnXemRDLC.Font = new System.Drawing.Font("Segoe UI Semibold", 10F);
+            this.btnXemRDLC.Location = new System.Drawing.Point(974, 10);
+            this.btnXemRDLC.Margin = new System.Windows.Forms.Padding(0, 5, 6, 5);
+            this.btnXemRDLC.Name = "btnXemRDLC";
+            this.btnXemRDLC.Size = new System.Drawing.Size(171, 45);
+            this.btnXemRDLC.TabIndex = 7;
+            this.btnXemRDLC.Text = "Xem báo cáo RDLC";
+            this.btnXemRDLC.UseVisualStyleBackColor = true;
+            this.btnXemRDLC.Click += new System.EventHandler(this.btnXemRDLC_Click);
+            // 
             // dgvHoaDon
             // 
             this.dgvHoaDon.AllowUserToAddRows = false;
@@ -227,5 +242,6 @@ namespace PhoManager.UI.Forms
         private System.Windows.Forms.Label lblTong;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnPrint;
+        private System.Windows.Forms.Button btnXemRDLC;
     }
 }

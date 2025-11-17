@@ -99,7 +99,7 @@ namespace PhoManager.UI.Forms
 
         private void StyleQuickActionButtons()
         {
-            var quickActions = new[] { btnQuanLyMonAn, btnQuanLyNhanVien, btnQuanLyBanAn, btnOrder, btnHoaDon, btnThongKe, btnCauHinh, btnDangXuat };
+            var quickActions = new[] { btnQuanLyMonAn, btnQuanLyNhanVien, btnQuanLyBanAn, btnOrder, btnHoaDon, btnThongKe, btnCauHinh, btnDangXuat, btnQuanLyNguyenLieu };
             
             // Apply styling with icons - StyleButton will detect Height >= 80 and apply large button style
             ThemeManager.StyleButton(btnQuanLyMonAn, ButtonVariant.Tertiary, IconGlyphs.Bowl);
@@ -110,6 +110,7 @@ namespace PhoManager.UI.Forms
             ThemeManager.StyleButton(btnThongKe, ButtonVariant.Tertiary, IconGlyphs.Chart);
             ThemeManager.StyleButton(btnCauHinh, ButtonVariant.Tertiary, IconGlyphs.Settings);
             ThemeManager.StyleButton(btnDangXuat, ButtonVariant.Danger, IconGlyphs.Logout);
+            ThemeManager.StyleButton(btnQuanLyNguyenLieu, ButtonVariant.Tertiary, IconGlyphs.Bowl);
             
             // Force proper alignment for large buttons - CRITICAL for icon/text positioning
             foreach (var btn in quickActions)
@@ -149,6 +150,7 @@ namespace PhoManager.UI.Forms
 
             btnQuanLyMonAn.Enabled = isManager;
             btnQuanLyNhanVien.Enabled = isManager;
+            btnQuanLyNguyenLieu.Enabled = isManager;
             btnThongKe.Enabled = isManager;
             btnCauHinh.Enabled = isManager;
         }
@@ -399,6 +401,14 @@ namespace PhoManager.UI.Forms
             using (var f = new FrmGioiThieu())
             {
                 f.ShowDialog();  
+            }
+        }
+
+        private void btnQuanLyNguyenLieu_Click(object sender, EventArgs e)
+        {
+            using (var frm = new FrmNguyenLieu())
+            {
+                frm.ShowDialog();
             }
         }
 

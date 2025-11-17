@@ -49,6 +49,13 @@ namespace PhoManager.UI.Forms
                 btnPrint.Image = null;
                 btnPrint.Width = 150;
             }
+            if (this.btnXemRDLC != null)
+            {
+                ThemeManager.StyleButton(btnXemRDLC, ButtonVariant.Primary);
+                btnXemRDLC.AutoSize = false;
+                btnXemRDLC.TextAlign = ContentAlignment.MiddleCenter;
+                btnXemRDLC.UseCompatibleTextRendering = false;
+            }
             var today = DateTime.Today;
             if (dtpDenNgay != null && dtpTuNgay != null)
             {
@@ -71,6 +78,33 @@ namespace PhoManager.UI.Forms
         }
 
         // The InitializeComponent method has been moved to the designer file (FrmBaoCaoHoaDon.Designer.cs).
+
+        private void btnXemRDLC_Click(object sender, EventArgs e)
+        {
+            DateTime tu = dtpTuNgay.Value.Date;
+            DateTime den = dtpDenNgay.Value.Date;
+
+            // Kiểm tra ngày hợp lệ
+            if (tu > den)
+            {
+                MessageBox.Show("Ngày bắt đầu phải nhỏ hơn hoặc bằng ngày kết thúc.",
+                    "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                using (var frm = new FrmBaoCaoHoaDonRDLC(tu, den))
+                {
+                    frm.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi mở báo cáo: {ex.Message}", "Lỗi", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void btnXem_Click(object sender, EventArgs e)
         {
