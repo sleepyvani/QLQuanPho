@@ -16,32 +16,59 @@ namespace PhoManager.UI.Forms
             this.btnXemThongKe = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongKe)).BeginInit();
             this.SuspendLayout();
-            
-            this.dtpTuNgay.Location = new System.Drawing.Point(20, 20);
-            this.dtpTuNgay.Size = new System.Drawing.Size(200, 20);
-            
-            this.dtpDenNgay.Location = new System.Drawing.Point(240, 20);
-            this.dtpDenNgay.Size = new System.Drawing.Size(200, 20);
-            
-            this.btnXemThongKe.Location = new System.Drawing.Point(460, 18);
+            // 
+            // dgvThongKe
+            // 
+            this.dgvThongKe.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvThongKe.ColumnHeadersHeight = 29;
+            this.dgvThongKe.Location = new System.Drawing.Point(27, 74);
+            this.dgvThongKe.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvThongKe.Name = "dgvThongKe";
+            this.dgvThongKe.RowHeadersWidth = 51;
+            this.dgvThongKe.Size = new System.Drawing.Size(1067, 492);
+            this.dgvThongKe.TabIndex = 0;
+            // 
+            // dtpTuNgay
+            // 
+            this.dtpTuNgay.Location = new System.Drawing.Point(27, 25);
+            this.dtpTuNgay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpTuNgay.Name = "dtpTuNgay";
+            this.dtpTuNgay.Size = new System.Drawing.Size(265, 22);
+            this.dtpTuNgay.TabIndex = 1;
+            // 
+            // dtpDenNgay
+            // 
+            this.dtpDenNgay.Location = new System.Drawing.Point(320, 25);
+            this.dtpDenNgay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dtpDenNgay.Name = "dtpDenNgay";
+            this.dtpDenNgay.Size = new System.Drawing.Size(265, 22);
+            this.dtpDenNgay.TabIndex = 2;
+            // 
+            // btnXemThongKe
+            // 
+            this.btnXemThongKe.Location = new System.Drawing.Point(613, 22);
+            this.btnXemThongKe.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnXemThongKe.Name = "btnXemThongKe";
+            this.btnXemThongKe.Size = new System.Drawing.Size(100, 28);
+            this.btnXemThongKe.TabIndex = 3;
             this.btnXemThongKe.Text = "Xem thống kê";
             this.btnXemThongKe.Click += new System.EventHandler(this.btnXemThongKe_Click);
-            
-            this.dgvThongKe.Location = new System.Drawing.Point(20, 60);
-            this.dgvThongKe.Size = new System.Drawing.Size(800, 400);
-            this.dgvThongKe.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            // 
+            // FrmThongKe
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(900, 500);
+            this.ClientSize = new System.Drawing.Size(1200, 615);
             this.Controls.Add(this.dgvThongKe);
             this.Controls.Add(this.dtpTuNgay);
             this.Controls.Add(this.dtpDenNgay);
             this.Controls.Add(this.btnXemThongKe);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FrmThongKe";
             this.Text = "Thống kê";
             ((System.ComponentModel.ISupportInitialize)(this.dgvThongKe)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         protected override void Dispose(bool disposing)
