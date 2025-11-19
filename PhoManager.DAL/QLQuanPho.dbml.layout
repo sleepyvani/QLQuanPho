@@ -1,35 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram>
-  <object type="System.Data.Linq.Mapping.DatabaseAttribute" name="QLQuanPhoDataContext">
-    <property name="Name" value="QLQuanPho" />
-  </object>
-  <object type="System.Data.Linq.Mapping.TableAttribute" name="MonAn">
-    <property name="Name" value="dbo.MonAn" />
-    <property name="Member" value="MonAns" />
-  </object>
-  <object type="System.Data.Linq.Mapping.TableAttribute" name="NhanVien">
-    <property name="Name" value="dbo.NhanVien" />
-    <property name="Member" value="NhanViens" />
-  </object>
-  <object type="System.Data.Linq.Mapping.TableAttribute" name="BanAn">
-    <property name="Name" value="dbo.BanAn" />
-    <property name="Member" value="BanAns" />
-  </object>
-  <object type="System.Data.Linq.Mapping.TableAttribute" name="HoaDon">
-    <property name="Name" value="dbo.HoaDon" />
-    <property name="Member" value="HoaDons" />
-  </object>
-  <object type="System.Data.Linq.Mapping.TableAttribute" name="ChiTietHoaDon">
-    <property name="Name" value="dbo.ChiTietHoaDon" />
-    <property name="Member" value="ChiTietHoaDons" />
-  </object>
-  <object type="System.Data.Linq.Mapping.TableAttribute" name="NguyenLieu">
-    <property name="Name" value="dbo.NguyenLieu" />
-    <property name="Member" value="NguyenLieus" />
-  </object>
-  <object type="System.Data.Linq.Mapping.TableAttribute" name="MonAn_NguyenLieu">
-    <property name="Name" value="dbo.MonAn_NguyenLieu" />
-    <property name="Member" value="MonAn_NguyenLieus" />
-  </object>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 10.5" name="QLQuanPho">
+  <DataContextMoniker Name="/QLQuanPhoDataContext" />
+  <nestedChildShapes>
+    <classShape Id="110d27fa-4ece-4966-abb4-d52d5533acc6" absoluteBounds="0.5, 0.875, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/QLQuanPhoDataContext/ChiTietHoaDon" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e594450d-90b2-4af0-831f-4d617d5ba1f0" absoluteBounds="0.515, 1.335, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="563f5a1f-94b8-4875-a7e4-112b36c17990" absoluteBounds="0.625, 5.25, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/QLQuanPhoDataContext/BanAn" />
+      <nestedChildShapes>
+        <elementListCompartment Id="eb3a2cdb-3d91-484c-99b1-7fa251297c89" absoluteBounds="0.64000000000000012, 5.71, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7192c9b8-08db-49c8-8365-18c67af9bf53" absoluteBounds="3.75, 5.625, 2, 2.9247054036458331">
+      <DataClassMoniker Name="/QLQuanPhoDataContext/HoaDon" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0ed62762-6a3c-4322-8e9b-c92bad20744a" absoluteBounds="3.765, 6.085, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.46875 : 5.625); (4.46875 : 2.2968775); (2.5 : 2.2968775)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/QLQuanPhoDataContext/HoaDon/HoaDon_ChiTietHoaDon" />
+      <nodes>
+        <classShapeMoniker Id="7192c9b8-08db-49c8-8365-18c67af9bf53" />
+        <classShapeMoniker Id="110d27fa-4ece-4966-abb4-d52d5533acc6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.625 : 6.32294840494792); (3.75 : 6.32294840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/QLQuanPhoDataContext/BanAn/BanAn_HoaDon" />
+      <nodes>
+        <classShapeMoniker Id="563f5a1f-94b8-4875-a7e4-112b36c17990" />
+        <classShapeMoniker Id="7192c9b8-08db-49c8-8365-18c67af9bf53" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="eb330acf-c6ce-429f-b847-fc89ddd6e102" absoluteBounds="8.125, 0.75, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/QLQuanPhoDataContext/MonAn" />
+      <nestedChildShapes>
+        <elementListCompartment Id="951366f5-069c-499c-89a2-a975f9b43d26" absoluteBounds="8.14, 1.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.125 : 1.59375); (2.5 : 1.59375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/QLQuanPhoDataContext/MonAn/MonAn_ChiTietHoaDon" />
+      <nodes>
+        <classShapeMoniker Id="eb330acf-c6ce-429f-b847-fc89ddd6e102" />
+        <classShapeMoniker Id="110d27fa-4ece-4966-abb4-d52d5533acc6" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="92cd6a25-c777-4504-88df-f7e9f8324ad4" absoluteBounds="8, 3.5, 2, 1.9631982421875">
+      <DataClassMoniker Name="/QLQuanPhoDataContext/NguyenLieu" />
+      <nestedChildShapes>
+        <elementListCompartment Id="380e154d-e7d6-4a6d-9dc7-6a0e7d509c8a" absoluteBounds="8.015, 3.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="969675dc-db7b-4a5b-82b9-198a476c1125" absoluteBounds="5.25, 3, 2, 1.3862939453125">
+      <DataClassMoniker Name="/QLQuanPhoDataContext/MonAn_NguyenLieu" />
+      <nestedChildShapes>
+        <elementListCompartment Id="08a39e81-e1e0-4bd1-b952-2b8df61e1f39" absoluteBounds="5.2650000000000006, 3.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.125 : 2.328127); (6.25 : 2.328127); (6.25 : 3)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/QLQuanPhoDataContext/MonAn/MonAn_MonAn_NguyenLieu" />
+      <nodes>
+        <classShapeMoniker Id="eb330acf-c6ce-429f-b847-fc89ddd6e102" />
+        <classShapeMoniker Id="969675dc-db7b-4a5b-82b9-198a476c1125" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8 : 3.94314697265625); (7.25 : 3.94314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/QLQuanPhoDataContext/NguyenLieu/NguyenLieu_MonAn_NguyenLieu" />
+      <nodes>
+        <classShapeMoniker Id="92cd6a25-c777-4504-88df-f7e9f8324ad4" />
+        <classShapeMoniker Id="969675dc-db7b-4a5b-82b9-198a476c1125" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="ad63b75c-cdab-447d-8bd6-9b66b6e69124" absoluteBounds="8, 5.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/QLQuanPhoDataContext/NhanVien" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6e4cb2d9-d8d7-485a-9e59-2bb29900aec0" absoluteBounds="8.015, 6.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8 : 6.82774983723958); (5.75 : 6.82774983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/QLQuanPhoDataContext/NhanVien/NhanVien_HoaDon" />
+      <nodes>
+        <classShapeMoniker Id="ad63b75c-cdab-447d-8bd6-9b66b6e69124" />
+        <classShapeMoniker Id="7192c9b8-08db-49c8-8365-18c67af9bf53" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="e81b3b79-a909-486e-a656-f39eeb9dc96b" absoluteBounds="0.625, 8.5, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/QLQuanPhoDataContext/THANH_VIEN_NHOM" />
+      <nestedChildShapes>
+        <elementListCompartment Id="bb9f3087-beaf-4fd7-bc6b-0fc4c1fbe52f" absoluteBounds="0.64000000000000012, 8.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
 </ordesignerObjectsDiagram>
+
 

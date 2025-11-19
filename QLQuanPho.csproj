@@ -74,6 +74,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PhoManager.BLL\ThanhVienNhomBLL.cs" />
+    <Compile Include="PhoManager.DAL\QLQuanPho.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLQuanPho.dbml</DependentUpon>
+    </Compile>
     <Compile Include="PhoManager.DAL\ThanhVienNhomDAL.cs" />
     <Compile Include="PhoManager.DTO\ThanhVienNhomDTO.cs" />
     <Compile Include="Program.cs" />
@@ -282,6 +287,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="packages.config" />
+    <None Include="PhoManager.DAL\QLQuanPho.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>QLQuanPho.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="PhoManager.DAL\QLQuanPho.dbml.layout">
+      <DependentUpon>QLQuanPho.dbml</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -319,6 +332,9 @@
     <Content Include="Reports\RptBanAn.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
